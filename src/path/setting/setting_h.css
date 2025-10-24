@@ -1,0 +1,82 @@
+.light-mode .prc-inf::after,
+.light-mode .ln-ctx,
+.light-mode .sm-inf::after {
+  background-color: var(--gray-color-00);
+}
+.dark-mode .prc-inf::after,
+.dark-mode .ln-ctx,
+.dark-mode .sm-inf::after {
+  background-color: var(--gray-color-02);
+}
+.sm-inf:nth-last-child(1)::after {
+  background-color: var(--transparent-color) !important;
+}
+.navigation-bg,
+.prc-inf,
+.sm-inf,
+.name-br,
+.ctr-lst-stk,
+.user-name,
+.pg-tx,
+.entr-ot > button {
+  position: relative;
+}
+.bg-mask,
+.ln-ctx,
+.prc-inf::after,
+.user-info-value,
+.sm-inf::after {
+  position: absolute;
+}
+.fs-nm > h1,
+.bs-vl > h3,
+.sm-plc > h3,
+.sm-ct > h1,
+.ls-m > h2 {
+  font-size: 18px;
+}
+.prc-inf,
+.sm-inf,
+.wp-rx {
+  display: flex;
+  align-items: center;
+}
+@media only screen and (max-width: 885px) {
+  .stg-nv > h1 {
+    font-size: 20px;
+  }
+  .fs-nm > h1,
+  .bs-vl > h3,
+  .sm-plc > h3,
+  .sm-ct > h1,
+  .ls-m > h2 {
+    font-size: 16px;
+  }
+  .name-br {
+    margin-bottom: 7px;
+    padding-bottom: 15px;
+  }
+
+  .cn-headl span {
+    font-size: 16px;
+  }
+  .entr-ot > button {
+    font-size: 15px;
+  }
+}
+@media only screen and (max-width: 501px) {
+  .wp-rx {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 90%;
+  }
+  .cn-headl span {
+    font-size: 18px;
+  }
+  .bs-vl > h3 {
+    font-size: 17px;
+  }
+  .cn-head {
+    line-height: 35px;
+  }
+}

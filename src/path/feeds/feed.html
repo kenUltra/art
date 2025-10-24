@@ -1,0 +1,19 @@
+<style>
+  .headline > h2 {
+    font-size: 17px;
+  }
+</style>
+<section class="section">
+  <div class="feed-root">
+    <div class="headline">
+      <h2>Posts</h2>
+    </div>
+    <div class="content">
+      <post-ui [postData]="sample()"></post-ui>
+    </div>
+    <div class="remove-ts">
+      <button (click)="updateValue()">update signal</button>
+      <button (click)="settingValue()">setting signal</button>
+    </div>
+  </div>
+</section>

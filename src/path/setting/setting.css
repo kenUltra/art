@@ -1,0 +1,144 @@
+.nav-setting {
+  position: sticky;
+  top: 0;
+  z-index: 520;
+}
+.user-info-value,
+.bg-mask {
+  inset: 0;
+}
+.navigation-bg {
+  padding-left: 25px;
+  padding-right: 25px;
+}
+.stg-nv {
+  padding-left: 10px;
+  text-transform: uppercase;
+}
+.stg-nv > h1 {
+  font-size: 25px;
+  line-height: 50px;
+  letter-spacing: 0.0189em;
+}
+.pg-tx {
+  padding: 15px 40px;
+}
+.light-mode .entr-ot > button {
+  color: var(--color-red-00);
+}
+.dark-mode .entr-ot > button {
+  color: var(--color-red-01);
+}
+.entr-ot {
+  margin-top: 15px;
+}
+.light-mode .entr-ot > button:hover,
+.dark-mode .entr-ot > button:hover {
+  transition: background-color 320ms ease;
+}
+.light-mode .entr-ot > button:hover {
+  color: var(--color-light);
+  background-color: var(--color-red-00);
+}
+.dark-mode .entr-ot > button:hover {
+  color: var(--color-dark);
+  background-color: var(--color-red-01);
+}
+.entr-ot > button,
+.btn-lg {
+  width: 185px;
+  padding: 10px 0px;
+  border-radius: 40px;
+}
+.name-br {
+  margin-bottom: 10px;
+  padding-bottom: 26px;
+}
+.light-mode .btn-lg {
+  background-color: var(--gray-color-00);
+}
+.dark-mode .btn-lg {
+  background-color: var(--gray-color-02);
+}
+.btn-lg.err {
+  background-color: var(--color-red-00);
+}
+.btn-lg {
+  height: 25px;
+}
+.entr-ot > button {
+  font-size: 17px;
+  text-transform: uppercase;
+  border: 1px solid;
+  outline: 1px solid;
+  font-weight: 700;
+  cursor: pointer;
+  background-color: var(--transparent-color);
+}
+.sm-plc,
+.cn-headl {
+  line-height: 30px;
+}
+.cn-headl span {
+  font-size: 17px;
+}
+.sm-plc > h3 {
+  font-weight: 100;
+}
+.name-pl,
+.sm-plc {
+  margin-right: 5px;
+}
+.wp-rx {
+  gap: 3px 3px;
+  flex-wrap: wrap;
+}
+.dark-mode .ls-m > h2 {
+  color: var(--yellow-02);
+}
+.light-mode .ls-m > h2 {
+  color: var(--yellow-01);
+}
+.bs-vl > h3 {
+  font-weight: 400;
+}
+.fs-nm {
+  margin-right: 5px;
+}
+.prc-inf,
+.sm-inf {
+  padding-right: 12px;
+}
+.prc-inf::after,
+.sm-inf::after {
+  content: '';
+  top: 0;
+  bottom: 0;
+  right: 3px;
+  width: 2px;
+}
+.ln-ctx {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+}
+.wp-rf-lst {
+  display: grid;
+  grid-row-gap: 5px;
+  grid-column-gap: 5px;
+  grid-auto-rows: 45px;
+  align-items: center;
+  grid-template-columns: repeat(12, minmax(45px, 1fr));
+}
+.ctr-lst-stk {
+  height: 100%;
+  border-radius: 10px;
+  grid-column: auto / span 4;
+  grid-row: span 2 / auto;
+}
+@supports ((backdrop-filter: initial) or (-webkit-backdrop-filter: initial)) {
+  .stg-nv {
+    backdrop-filter: blur(4px) saturate(70%);
+  }
+}

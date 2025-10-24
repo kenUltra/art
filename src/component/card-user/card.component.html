@@ -1,0 +1,77 @@
+<style>
+  .name-stc,
+  .fs-name {
+    position: relative;
+  }
+  .fs-name {
+    padding-bottom: 10px;
+  }
+  .dark-mode .prf-line {
+    background-color: var(--gray-color-01);
+  }
+  .light-mode .prf-line {
+    background-color: var(--gray-color-02);
+  }
+  .st-bg {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  .st-bg > span {
+    padding: 10px 0px;
+  }
+  .light-mode .st-bg a {
+    color: var(--gray-color-03);
+    background-color: var(--color-red-00);
+  }
+  .dark-mode .st-bg a {
+    color: var(--color-dark);
+    background-color: var(--color-red-01);
+  }
+  .light-mode .st-bg a:hover {
+    color: var(--color-red-00);
+    background-color: var(--gray-color-03);
+  }
+  .light-mode .st-bg a:hover,
+  .dark-mode .st-bg a:hover {
+    border: 1px solid;
+    transition: background-color 410ms ease, color 350ms ease;
+  }
+  .dark-mode .st-bg a:hover {
+    color: var(--color-red-01);
+    background-color: var(--color-dark);
+  }
+</style>
+<div class="card-section {{ themeSignal() }}">
+  <div class="main-card">
+    <div class="user-dt">
+      <div class="wrap-user">
+        <div class="name-stc">
+          <div class="fs-name">
+            <div class="pf-dt">
+              <div class="txt-bar">
+                <h2>{{ userCard().firstName + ' ' + userCard().lastName }}</h2>
+                <h4>{{ userCard().userName }}</h4>
+              </div>
+            </div>
+            <div class="line-dt">
+              <div class="ln-br">
+                <div class="prf-line"></div>
+              </div>
+            </div>
+            <span class="pst-ct"
+              >You have {{ userCard().post.length }}
+              {{ userCard().post.length + userCard().post.length > 1 ? ' Posts' : ' Post' }}</span
+            >
+          </div>
+          <div class="st-stck">
+            <div class="st-bg">
+              <span>
+                <a routerLink="setting">Settings</a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

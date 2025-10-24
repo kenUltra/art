@@ -1,0 +1,478 @@
+<style lang="css">
+  .header {
+    position: sticky;
+  }
+  .header {
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 45px;
+    z-index: 750;
+  }
+  .main-nav,
+  .content-th > .theme-btn-ent,
+  .toggle-theme > .wrapper-theme,
+  .nav,
+  .badge-ent,
+  .links .nav > ul > li,
+  .art-container {
+    position: relative;
+  }
+  .main-nav {
+    width: 815px;
+    margin: var(--zero) var(--auto-text);
+  }
+  .badge-ent {
+    top: -10px;
+    right: 5px;
+    border-radius: 40px;
+    background-color: var(--color-red-00);
+  }
+  .badge-ent > span {
+    font-size: 0px;
+  }
+  .badge-ent > span > p {
+    font-weight: bold;
+    font-size: 11px;
+    padding: 0px 6px;
+  }
+  .nav > ul,
+  .container-tx > .ui-dt,
+  .menu-mb,
+  .load-lg,
+  .content-th > .theme-btn-ent,
+  .main-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .badge-cmp {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .main-nav {
+    justify-content: space-between;
+  }
+  .art-container {
+    width: 85px;
+  }
+  .light-mode .logo-ent > svg {
+    fill: var(--color-dark);
+  }
+  .dark-mode .logo-ent > svg {
+    fill: var(--color-light);
+  }
+  .badge-ent > span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 40px;
+    text-align: center;
+  }
+  .nav > ul {
+    list-style: none;
+    position: relative;
+  }
+  .links .nav > ul > li {
+    font-size: var(--base-value);
+    margin: var(--base-value) 5px;
+  }
+  .links .nav > ul > li > a {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 6px 22px;
+    border-radius: 40px;
+    transition: background-color 0.52s ease;
+  }
+  .content-th > .theme-btn-ent {
+    justify-content: flex-start;
+  }
+  .theme-plc span {
+    font-size: 0px;
+    letter-spacing: 0.0458em;
+  }
+  .theme-plc span > p {
+    font-size: 11px;
+    font-weight: bold;
+    padding: 1px 8px;
+  }
+  .menu-mb {
+    flex-direction: column;
+    gap: 4px 0px;
+  }
+  .light-mode .controls {
+    background-color: var(--color-dark);
+  }
+  .dark-mode .controls {
+    background-color: var(--color-light);
+  }
+  .light-mode .logo-iu-lg {
+    background-color: var(--gray-color-00);
+  }
+  .dark-mode .logo-iu-lg {
+    background-color: var(--gray-color-01);
+  }
+  .main-lst {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    transition: height 0.34s ease;
+    z-index: -1;
+  }
+  .op-mn-ctx .main-lst {
+    position: fixed;
+    height: 100%;
+  }
+  .op-mn-ctx .menu-mb > .controls:nth-child(1) {
+    transform: translate(0px, 7px) rotate(45deg);
+  }
+  .op-mn-ctx .menu-mb > .controls:nth-child(2) {
+    width: 0px;
+    opacity: 0;
+  }
+  .op-mn-ctx .menu-mb > .controls:nth-child(3) {
+    transform: translate(0px, -7px) rotate(-45deg);
+  }
+  .op-mn-ctx ul {
+    top: 50px;
+    position: fixed;
+    left: 50%;
+    width: 90%;
+    display: flex !important;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px 0px;
+    transform: translate(-50%, 0%);
+  }
+  .op-mn-ctx ul > li {
+    width: 100%;
+    border-bottom: 1px solid;
+  }
+  .op-mn-ctx ul > li > a {
+    line-height: 30px;
+    display: block;
+  }
+  .entry-nav .op-mn-ctx ul > li > a {
+    font-size: 18px;
+    border-radius: 0px;
+  }
+  .load-lg {
+    width: 100%;
+    height: 40px;
+  }
+  .dark-mode .loading-bg {
+    background-color: var(--gray-color-01);
+  }
+  .light-mode .loading-bg {
+    background-color: var(--gray-color-02);
+  }
+  @supports ((backdrop-filter: initial) or (-webkit-backdrop-filter: initial)) {
+    .op-mn-ctx .main-lst {
+      backdrop-filter: blur(10px) saturate(115%) brightness(80%);
+      -webkit-backdrop-filter: blur(10px) saturate(115%) brightness(80%);
+      background-color: var(--transparent-color);
+    }
+  }
+  @media only screen and (max-width: 840px) {
+    .art-logo {
+      width: 85px;
+    }
+    .main-nav {
+      width: 490px;
+    }
+    .theme-plc span > p {
+      font-size: 12px;
+    }
+    .things-br > .show-ctx .theme {
+      width: 200px;
+    }
+    .theme-plc span > p {
+      font-size: 12px;
+    }
+    .toggle-theme {
+      width: 50px;
+      height: 27px;
+    }
+    .content-th > .theme-btn-ent {
+      height: 35px;
+    }
+    .toggle-theme .circle-bar {
+      width: 20px;
+      height: 20px;
+    }
+    @media only screen and (max-width: 505px) {
+      .sun-tb {
+        display: none;
+      }
+      .main-nav {
+        width: 95%;
+      }
+      .mb-content {
+        display: block;
+      }
+      .things-br > .show-ctx .theme,
+      .container-tx {
+        position: fixed;
+        top: unset;
+        right: 15px;
+      }
+      .badge-cmp {
+        top: 50%;
+        transform: translate(0%, -50%);
+      }
+      .container-tx {
+        bottom: 25px;
+      }
+      .badge-ent {
+        top: 0;
+        right: 10px;
+      }
+      .badge-ent > span > p {
+        font-size: 17px;
+        padding: 0px 10px;
+      }
+      .things-br > .show-ctx .theme {
+        bottom: 80px;
+      }
+      .nav > ul {
+        display: none;
+      }
+      .light-mode .focus-page > a {
+        color: var(--color-blue-02);
+        background-color: var(--color-deep-blue);
+      }
+      .dark-mode .focus-page > a {
+        color: var(--color-blue-01);
+        background-color: var(--color-deep-blue);
+      }
+    }
+  }
+</style>
+<header [class]="schemeClass()">
+  <div
+    class="wrapper"
+    nav-link-tracker
+    [capsuleSelector]="sliderNavConfig().capsuleSelector"
+    [linkSelector]="sliderNavConfig().linkSelector"
+  >
+    <div class="entry-nav">
+      <div class="main-nav">
+        <div class="logo">
+          <div class="art-logo">
+            @defer (on viewport) {
+            <div class="art-container">
+              <div class="logo-ent">
+                <svg
+                  width="250px"
+                  height="150px"
+                  viewBox="0 0 686 686"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  xml:space="preserve"
+                  xmlns:serif="http://www.serif.com/"
+                  style="
+                    fill-rule: evenodd;
+                    clip-rule: evenodd;
+                    stroke-linejoin: round;
+                    stroke-miterlimit: 2;
+                  "
+                >
+                  @for (pathArt of pathArt(); track $index) {
+                  <path [id]="pathArt.id" [attr.d]="pathArt.d" />
+                  }
+                </svg>
+              </div>
+              <div class="links-home">
+                <div class="home-log">
+                  <div class="logo-link">
+                    <a routerLink="/"></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            } @placeholder {
+            <div class="load-lg">
+              <div class="logo-iu-lg"></div>
+            </div>
+            } @loading {
+            <div class="load-lg">
+              <div class="logo-iu-lg"></div>
+            </div>
+            } @error {
+            <div class="load-lg">
+              <div class="logo-iu-lg err-logo"></div>
+            </div>
+            }
+          </div>
+        </div>
+        <div class="links">
+          <div class="mb-nav">
+            <div class="parent-mb-nav">
+              <div [class]="menuclass()">
+                <div class="menu-mb">
+                  @for (navs of [1,2,3]; track $index) {
+                  <div class="controls"></div>
+                  }
+                </div>
+                <div class="menu-links">
+                  <div class="mn-btn">
+                    <div class="wrapper-btn-ctx">
+                      <button (click)="openMenuBtn()" class="slc-lnk"></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <nav [class]="menuclass('nav')">
+            <ul
+              role="navigation"
+              aria-roledescription="parent navigation bar"
+              aria-label="parent naviation"
+              #parentRef
+            >
+              @for( nav of navLinks(); track $index) {
+              <li
+                [routerLink]="nav.path"
+                [tabIndex]="$index"
+                [attr.data-tabLocation]="$index"
+                class="li-tab"
+                [routerLinkActive]="nameActiveClass()"
+              >
+                <a
+                  [routerLink]="nav.path"
+                  aria-roledescription="navigation links"
+                  role="navigation"
+                  >{{ nav.placeholder }}</a
+                >
+                @if (nav.path == '/task') {
+                <div class="badge-prt">
+                  <div class="badge-cmp">
+                    <div class="content-db">
+                      <div class="badge-container">
+                        <div class="badge-ent">
+                          <span>
+                            <p>{{ badgeCount() == 0 ? '' : badgeCount() }}</p>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mask-badge">
+                      <div class="ms-bdg">
+                        <div class="dbg-ui"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                }
+              </li>
+              }
+            </ul>
+            <div class="tracker-sg">
+              <div class="tracker-tb">
+                <div class="sun-tb">
+                  <div class="links-bt"></div>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+        <div class="contols">
+          <div class="controls-bx">
+            <div class="markup-br">
+              <div class="parent-control">
+                @defer(on viewport) {
+                <div [class]="navControlButton('container-tx')">
+                  <div class="ui-dt">
+                    @for (dors of [1,2,3]; track $index) {
+                    <div class="dots-bar"></div>
+                    }
+                  </div>
+                  <div class="dt-bx">
+                    <div [class]="navControlButton()">
+                      <div class="md-pop">
+                        <button
+                          (click)="openSchemeMenu()"
+                          role="banner"
+                          aria-roledescription="scheme color button"
+                        ></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                } @loading {
+                <div class="loading-bg"></div>
+                } @placeholder {
+                <div class="loading-bg"></div>
+                } @error {
+                <div class="loading-bg err"></div>
+                }
+              </div>
+              <div class="things-br">
+                <div [class]="navControlButton('nav-contol')">
+                  <div class="hd-pop">
+                    <div class="theme">
+                      <div class="content-th">
+                        <div class="theme-btn-ent">
+                          <div class="theme-plc">
+                            <span>
+                              <p>
+                                {{
+                                  themeServices.themeResolver.value.replaceAll('-', ' ') | uppercase
+                                }}
+                              </p>
+                            </span>
+                          </div>
+                          <div class="contols-thm">
+                            <div class="toggle-wp">
+                              <div class="toggle-theme">
+                                <div [class]="schemeClass('wrapper-theme')">
+                                  <div class="circle-bar" (click)="toggleTheme()"></div>
+                                  <button class="scheme-btn-ent" (click)="toggleTheme()">
+                                    <span>toggle theme</span>
+                                  </button>
+                                </div>
+                              </div>
+                              <div class="mask-ms">
+                                <div class="tn-ctx">
+                                  <div class="wp-th"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="main-wp">
+      <div class="mbl-lst">
+        <div [class]="menuclass('pop-mb')">
+          <div (click)="closeMenuBtn()" class="main-lst"></div>
+        </div>
+      </div>
+    </div>
+    <div class="mask-ctx">
+      <div class="ctx"></div>
+    </div>
+  </div>
+  <div class="back-ctx">
+    <div class="wh-msk">
+      <div class="modal-bc">
+        @if (isModalOpen()) {
+        <div class="exit-mdl"></div>
+        }
+      </div>
+    </div>
+  </div>
+</header>

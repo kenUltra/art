@@ -1,0 +1,462 @@
+<style lang="css">
+  .task-root,
+  .frst-ctx,
+  .btn-wp,
+  .wrapper-ctrl,
+  .task-ui {
+    position: relative;
+  }
+  .main-ctrl,
+  .ctr-btn,
+  .tm-entry,
+  .parent-ps,
+  .rm-wrapper,
+  .task-wp .task,
+  .mask-ui .task,
+  .rem-dt,
+  .upt-br,
+  .remove-bt,
+  .mark-pg,
+  .point,
+  .update-bt,
+  .lg-ui,
+  .whole-bar {
+    position: absolute;
+  }
+  .whole-bar {
+    z-index: 5;
+  }
+  .parent-ps,
+  .sw-ln .task,
+  .task-wp .task,
+  .remove-bt,
+  .update-bt,
+  .point,
+  .ctr-btn {
+    inset: 0;
+  }
+  .ctr-btn > button {
+    cursor: pointer;
+    border: 1px solid var(--transparent-color);
+    background-color: var(--transparent-color);
+  }
+  .task-root,
+  .play-btn,
+  .ctr-btn > button,
+  .play-context > svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .mark-pg {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 4px;
+  }
+  .dark-mode .mark-pg {
+    background-color: var(--color-red-01);
+  }
+  .light-mode .mark-pg {
+    background-color: var(--color-red-00);
+  }
+  .main-ui {
+    padding-left: 35px;
+  }
+  .rem-dt,
+  .upt-br {
+    --shard-module: 50%;
+    top: var(--shard-module);
+    left: var(--shard-module);
+    transform: translate(-50%, -50%);
+  }
+  .rem-dt > h3,
+  .upt-br > h3 {
+    font-size: 16px;
+    text-transform: uppercase;
+  }
+  .dark-mode .rm-tx {
+    background-color: var(--color-red-01);
+  }
+  .light-mode .rm-tx {
+    background-color: var(--color-red-00);
+  }
+  .dark-mode .upd {
+    background-color: var(--green-color-dark);
+  }
+  .light-mode .upd {
+    background-color: var(--green-color-00);
+  }
+  .headline {
+    width: 410px;
+  }
+  .btn-wp {
+    top: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(0px, -50%);
+  }
+  .wrapper-ctrl {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  .main-ctrl {
+    top: 50%;
+    left: 5px;
+    transform: translate(0%, -50%);
+  }
+  .pz-ctrl .pause-btn,
+  .pz-ctrl .play-btn,
+  .py-ctrl .pause-btn,
+  .py-ctrl .play-btn {
+    transition: opacity 0.21s cubic-bezier(0.39, 0.575, 0.565, 1);
+  }
+  .parent-ps,
+  .cg-task {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .pause-bar {
+    width: 4px;
+    height: 19px;
+    border-radius: 5px;
+  }
+  .dark-mode .play-context > svg {
+    fill: var(--color-light);
+  }
+  .light-mode .play-context > svg {
+    fill: var(--color-dark);
+  }
+  .dark-mode .pause-bar {
+    background-color: var(--color-light);
+  }
+  .light-mode .pause-bar {
+    background-color: var(--color-dark);
+  }
+  .parent-ps {
+    gap: 5px;
+  }
+  .tm-entry {
+    right: 15px;
+    top: 50%;
+    transform: translate(0%, -50%);
+  }
+  .time-int {
+    font-size: 0px;
+    font-weight: 700;
+  }
+  .time-int p {
+    font-size: 20px;
+    letter-spacing: 1.488px;
+  }
+  .sw-ln .task {
+    top: unset;
+    height: 2px;
+    border-radius: 5px;
+  }
+  .task-root {
+    margin-bottom: 4px;
+    overflow: hidden;
+  }
+  .rm-wrapper {
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 10;
+  }
+  .cg-task {
+    width: 0px;
+    overflow: hidden;
+    height: 100%;
+    transition: width 0.24s cubic-bezier(0.19, 0.575, 0.85, 1);
+  }
+  .opn-bsx-tx {
+    width: 275px;
+  }
+  .rm-tx,
+  .upd {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    text-align: center;
+  }
+  .light-mode .sw-ln .task {
+    background-color: var(--gray-color-00);
+  }
+  .dark-mode .sw-ln .task {
+    background-color: var(--gray-color-01);
+  }
+  .remove-bt,
+  .update-bt {
+    cursor: pointer;
+    background-color: var(--transparent-color);
+    border: 1px solid var(--transparent-color);
+  }
+  .lg-ui:nth-child(1) {
+    top: 0;
+    left: -100%;
+    transition: left 1.5s ease;
+  }
+  .lg-ui:nth-child(2) {
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    transition: top 1.5s ease;
+    background: linear-gradient(180deg, transparent, lightgreen);
+  }
+  .lg-ui:nth-child(3) {
+    bottom: 0;
+    right: -100%;
+    transition: right 1.5s ease;
+    background: linear-gradient(270deg, transparent, lightgreen);
+  }
+  .lg-ui:nth-child(4) {
+    bottom: -100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(360deg, transparent, lightgreen);
+  }
+
+  @media only screen and (max-width: 890px) {
+    .description {
+      width: 335px;
+    }
+    .opn-bsx-tx {
+      width: 240px;
+    }
+    .description > p {
+      font-size: 17px;
+    }
+    .headline {
+      width: 250px;
+    }
+    .headline > h3 {
+      font-size: 22px;
+    }
+    .rem-dt > h3,
+    .upt-br > h3 {
+      font-size: 14px;
+    }
+    .frst-ctx {
+      width: 140px;
+      height: 35px;
+    }
+    .time-int p {
+      font-size: 17px;
+      letter-spacing: 1.48px;
+    }
+  }
+  @media only screen and (max-width: 560px) {
+    .description {
+      width: 85%;
+    }
+    .headline {
+      width: 50%;
+    }
+    .whole-bar {
+      top: 0px;
+      transform: translate(0%, 0%);
+    }
+    .main-ui {
+      padding-left: 10px;
+    }
+    .rem-dt > h3,
+    .upt-br > h3 {
+      font-size: 14px;
+    }
+    .time-int p {
+      font-size: 14px;
+    }
+    .description > p {
+      font-size: 15px;
+    }
+    .frst-ctx {
+      width: 120px;
+    }
+    .play-context {
+      width: 20px;
+      height: 20px;
+      transform: translate(6px, 4px);
+    }
+    .opn-bsx-tx {
+      width: 190px;
+    }
+    .pause-bar {
+      width: 3px;
+      height: 15px;
+    }
+    .wrapper-ctrl {
+      width: 27px;
+      height: 27px;
+    }
+  }
+</style>
+
+<div class="task-root {{ currentTheme() == null ? '' : currentTheme() }}">
+  <div class="container-bar">
+    <div class="parent-bar">
+      <div class="whole-bar">
+        <div class="frst-ctx">
+          <div class="display-container">
+            <div class="timer-wrap">
+              <div class="tm-entry">
+                <div class="time-int">
+                  <p>{{ timer().hour + ':' + timer().min + ':' + timer().sec }}</p>
+                </div>
+              </div>
+              <div class="mask-ts">
+                <div class="task-wp">
+                  <div class="task"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="control-bar">
+            <div class="control-ctx">
+              <div class="main-ctrl">
+                <div class="wrapper-ctrl">
+                  <div [class]="playClass()">
+                    <div class="play-btn">
+                      <div class="play-entry">
+                        <div class="wrapper-btn">
+                          <div class="play-context">
+                            <svg
+                              width="25"
+                              height="25"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              xml:space="preserve"
+                              viewBox="0 0 2134 2134"
+                              style="
+                                fill-rule: evenodd;
+                                clip-rule: evenodd;
+                                stroke-linejoin: round;
+                                stroke-miterlimit: 2;
+                              "
+                            >
+                              <path id="play_btn" [attr.d]="playIcon" />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="pause-btn">
+                      <div class="pause-entry">
+                        <div class="wrapper-btn">
+                          <div class="parent-ps">
+                            <div class="pause-bar"></div>
+                            <div class="pause-bar"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ev-pg">
+                    <div class="main-pg-ev">
+                      <div class="ctr-btn">
+                        <button class="timer-btn" (click)="toggleControl()"></button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="interface-wp"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="no-ctx">
+    <div class="part-content">
+      <div [class]="showLine()">
+        <div class="task"></div>
+      </div>
+    </div>
+  </div>
+  <div class="tsk">
+    <div class="task-ui">
+      <div class="main-ui">
+        <div class="ui-bar">
+          <div class="headline">
+            <h3>{{ taskData().title }}</h3>
+          </div>
+          <div class="description">
+            <p>{{ taskData().description }}</p>
+          </div>
+          <div class="range-task">
+            <div class="task-proper">
+              <div class="tsk-im">
+                @if (taskData().isPriority) {
+                <div class="mark-pg"></div>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="task-hand">
+    <div class="hnd">
+      <div class="rm-wrapper">
+        <div [class]="showControlLn()">
+          <div class="rm-tx">
+            <div class="rem-dt">
+              <h3>Remove</h3>
+            </div>
+            <div class="rm-btn-wp">
+              <button
+                (keypress.enter)="removeTaskEvent()"
+                (click)="removeTaskEvent()"
+                class="remove-bt"
+              ></button>
+            </div>
+          </div>
+          <div class="upd">
+            <div class="upd-entry">
+              <div class="upt-br">
+                <h3>Update</h3>
+              </div>
+              <div class="update-tb">
+                <button
+                  (click)="updateTaskEvent()"
+                  (keypress)="updateTaskEvent()"
+                  class="update-bt"
+                ></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="fs-task"
+    task-directive
+    [parentLightSelector]="parentLight"
+    [timerRef]="initialSecond()"
+  >
+    <div class="task-cp">
+      <div class="cpt-task">
+        <div class="light-wp">
+          <div [class]="taskFinishedCls()" #parentLight>
+            <div class="lg-ui"></div>
+            <div class="lg-ui"></div>
+            <div class="lg-ui"></div>
+            <div class="lg-ui"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="nl-bar">
+    <div class="start-pt">
+      <div class="point"></div>
+    </div>
+  </div>
+</div>

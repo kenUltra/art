@@ -1,0 +1,113 @@
+<style></style>
+<section class="section settings">
+  <div class="parent-setting {{ themeSignal() }}">
+    <div class="nav-setting">
+      <div class="navigation-bg">
+        <div class="line-head">
+          <div class="stg-nv" #navTitle>
+            <h1>Setting</h1>
+          </div>
+        </div>
+        <div class="msk-bg">
+          <div class="bg-tk">
+            <div class="bg-mask"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="lst-stg">
+      <div class="lst-bg">
+        <div class="pg-tx">
+          <div class="all-lst-stg">
+            <div class="user-name">
+              <div class="name-br">
+                <div class="headline-nm">
+                  <div class="cn-headl">
+                    <span>Your current info</span>
+                  </div>
+                </div>
+                <div class="ln-hd">
+                  <div class="head-line">
+                    <div class="ln-ctx"></div>
+                  </div>
+                </div>
+                <div class="mn-wrapper">
+                  <div class="wp-rx">
+                    <div class="prc-inf">
+                      <div class="name-pl">
+                        <div class="bs-vl">
+                          <h3>Name:</h3>
+                        </div>
+                      </div>
+                      <div class="fs-nm">
+                        <h1>{{ userValue().firstName }}</h1>
+                      </div>
+                      <div class="ls-m">
+                        <h2>{{ userValue().lastName }}</h2>
+                      </div>
+                    </div>
+                    <div class="sm-inf">
+                      <div class="sm-plc">
+                        <h3>User Name:</h3>
+                      </div>
+                      <div class="sm-ct">
+                        <h1>{{ userValue().userName }}</h1>
+                      </div>
+                    </div>
+                    <div class="sm-inf">
+                      <div class="sm-plc">
+                        <h3>Age:</h3>
+                      </div>
+                      <div class="sm-ct">
+                        <h1>{{ userValue().age }}</h1>
+                      </div>
+                    </div>
+                    <div class="sm-inf">
+                      <div class="sm-plc">
+                        <h3>Email:</h3>
+                      </div>
+                      <div class="sm-ct">
+                        <h1>{{ userValue().email }}</h1>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="th-ctx">
+                <div class="msk-nm">
+                  <div class="user-info-value"></div>
+                </div>
+              </div>
+            </div>
+            <div class="ex-ft">
+              <div class="wp-rf-lst">
+                <div class="ctr-lst-stk">
+                  <stack-app
+                    [stackValue]="{ headline: 'change user Name', isEditable: true }"
+                  ></stack-app>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="out-pf">
+            <div class="wrp-out">
+              <div class="entr-ot">
+                @defer(on viewport(navTitle)){
+                <button class="log-out" (click)="logout()" role="button">Sign out</button>
+                } @loading {
+                <div class="btn-lg"></div>
+                } @placeholder {
+                <div class="btn-lg"></div>
+                } @error {
+                <div class="btn-lg err"></div>
+
+                }
+              </div>
+              <div class="ent-msk"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,109 @@
+<style lang="css">
+  .dgp {
+    position: fixed;
+  }
+  .modal-content-lg,
+  .content-ent {
+    position: absolute;
+  }
+  .prt-md {
+    --center-x: 50%;
+    --intial-value: unset;
+  }
+  .content-ent {
+    top: 25px;
+    bottom: var(--intial-value);
+    right: var(--intial-value);
+    left: var(--center-x);
+    transform: translate(var(--center-x), calc(var(--center-x) - var(--center-x)));
+    z-index: 850;
+  }
+  .dgp,
+  .modal-content-lg {
+    inset: 0;
+  }
+  .dgp {
+    --eff-bg: 20px;
+    z-index: 800;
+  }
+  .ui-mdl-bc {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .ui-mdl-bc {
+    backdrop-filter: blur(var(--eff-bg));
+  }
+  .ctx-mdl .title h1 {
+    font-size: 25px;
+  }
+  .ctx-mdl .subtitle h2 {
+    color: lightgray;
+  }
+  .ctx-mdl .content > p {
+    font-weight: lighter;
+  }
+</style>
+
+<div class="modal-root {{ themeSignal() }}">
+  <div class="prt-md {{ customClass() }}">
+    <div class="content-ent">
+      <div class="ctx-mdl">
+        <div class="title">
+          <h1>{{ modalData().title }}</h1>
+        </div>
+        <div class="subtitle">
+          @if (modalData().subtitle) {
+          <h2>{{ modalData().subtitle }}</h2>
+          }
+        </div>
+        <div class="content">
+          <p>
+            {{ modalData().content }}
+          </p>
+        </div>
+        <div class="ctrl">
+          @if (modalData().hasControl) {
+          <div class="contlr">
+            <div class="ctx-head">
+              <div class="til">
+                @if(modalControl()?.title){
+                <h4>{{ modalControl()?.title }}</h4>
+                }
+              </div>
+              <div class="vl-ctrl">
+                <div class="block">
+                  <input
+                    type="text"
+                    [(ngModel)]="inputValue"
+                    [name]="modalControl()?.name ?? ''"
+                    [id]="modalControl()?.id"
+                    [placeholder]="modalControl()?.placeholder"
+                  />
+                </div>
+                <div class="btn-in">
+                  <div class="type-stl">
+                    <button (click)="getInputValue()" class="btn">Send</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+      <div class="msk-tl">
+        <div class="detail-modal">
+          <div class="modal-content-lg"></div>
+        </div>
+      </div>
+    </div>
+    <div class="bdp">
+      <div class="rm-bdp">
+        <div class="dgp">
+          <div class="ui-mdl-bc"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

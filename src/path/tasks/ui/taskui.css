@@ -1,0 +1,53 @@
+.entry-stack {
+  display: block;
+}
+.header-ln {
+  width: 840px;
+  margin: var(--zero) var(--auto-text);
+}
+.dark-mode .task-tl .nav-tsk {
+  background-color: var(--gray-color-01);
+}
+.light-mode .task-tl .nav-tsk {
+  background-color: var(--gray-color-02);
+}
+.entry-ctrl,
+.et-things {
+  width: 33px;
+  height: 33px;
+}
+.entry-ctrl {
+  top: 50%;
+  right: 5px;
+  transform: translate(0%, -50%);
+  z-index: 60;
+}
+.et-things {
+  border-radius: 50%;
+  border: 1px solid;
+  cursor: pointer;
+  background-color: var(--transparent-color);
+}
+.dark-mode .et-things {
+  border-color: var(--gray-color-00);
+}
+.light-mode .et-things {
+  border-color: var(--gray-color-02);
+}
+.line-bt:nth-child(2) {
+  width: 9px;
+}
+.line-bt:nth-child(3) {
+  width: 5px;
+}
+.opn-mdl .btn-lst > ul {
+  width: 260px;
+  opacity: 1;
+  transition-delay: 0.35s, 0.23s;
+}
+@supports ((-webkit-backdrop-filter: initial) or (backdrop-filter: initial)) {
+  .leading-ber {
+    backdrop-filter: blur(6px) saturate(180%);
+    -webkit-backdrop-filter: blur(6px) saturate(180%);
+  }
+}

@@ -1,0 +1,135 @@
+.content-pg,
+.bg-err,
+.ent-ctx,
+.checked-btn {
+  position: absolute;
+  inset: 0;
+}
+.btn-safety {
+  position: relative;
+}
+.content-pg {
+  z-index: 10;
+}
+.bg-err {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bg-err {
+  flex-direction: column;
+}
+.section-err {
+  text-align: center;
+}
+.headline > h1 {
+  font-size: 40px;
+}
+.light-mode .content-ctx {
+  color: var(--fade-gray);
+}
+.dark-mode .content-ctx {
+  color: var(--gray-cls-01);
+}
+.content-ctx p {
+  font-size: 24px;
+  font-weight: lighter;
+}
+.content-ctx p > span {
+  font-size: 18px;
+}
+.btx-bx {
+  margin-top: 15px;
+}
+.light-mode .btn-safety {
+  color: var(--dark-mode);
+  background-color: var(--light-mode);
+}
+.dark-mode .btn-safety {
+  color: var(--light-mode);
+  background-color: var(--dark-mode);
+}
+.btn-safety {
+  border: 1px solid;
+  padding: 15px 40px;
+  border-radius: 40px;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 15;
+  transition: background-color 0.41s ease, color 0.8s ease;
+}
+.checked-btn {
+  top: var(--y-value);
+  left: var(--x-value);
+  width: 20px;
+  height: 20px;
+  opacity: 0;
+  border-radius: 40px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  background-color: var(--dark-blue-theme);
+  transition: width 0.35s cubic-bezier(0.45, 0.41, 0.95, 0.88),
+    height 0.3s cubic-bezier(0.14, 0.13, 1, 0.97),
+    opacity 0.5s cubic-bezier(0.6, -0.15, 0.25, 1);
+  z-index: -1;
+}
+.clicked-btn .check-btn {
+  width: 200%;
+  height: 200%;
+  background-color: var(--dark-blue-theme);
+}
+
+.visual-btn {
+  width: 500px;
+  height: 500px;
+  opacity: 0.5;
+  transition-delay: 0.2s, 0.17s;
+  background-color: palegreen;
+}
+.light-mode .btn-safety:hover {
+  color: var(--light-mode);
+  background-color: var(--dark-mode);
+}
+.dark-mode .btn-safety:hover {
+  color: var(--dark-mode);
+  background-color: var(--light-mode);
+}
+.btn-safety span {
+  font-size: 15px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.ent-ctx {
+  width: 10px;
+  height: 10px;
+  z-index: -1;
+}
+.dark-mode .load-btn,
+.dark-mode .title-load {
+  background-color: var(--fade-gray);
+}
+.light-mode .load-btn,
+.light-mode .title-load {
+  background-color: var(--black-drop-01);
+}
+.title-load,
+.load-btn {
+  margin: 0 var(--auto-text);
+}
+.title-load {
+  width: 475px;
+  height: 40px;
+  border-radius: 10px;
+}
+.subtitle {
+  width: 525px;
+  margin: 7px 0 7px;
+}
+.content {
+  width: 530px;
+}
+.load-btn {
+  width: 206px;
+  height: 40px;
+  border-radius: 40px;
+}

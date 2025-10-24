@@ -1,0 +1,244 @@
+<style lang="css">
+  .wrapper,
+  .ctx-blk,
+  .btn-ln {
+    position: absolute;
+  }
+  .wrapper {
+    inset: 0;
+  }
+  .in-wrap {
+    position: relative;
+  }
+  .ctx-blk {
+    top: 50%;
+    width: 30px;
+    height: 30px;
+    transform: translate(0%, -50%);
+  }
+  .wrapper > .parent,
+  .chck-blk,
+  .dead-line-db,
+  .msg-txt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .chck-blk,
+  .dead-line-db {
+    margin-top: 2px;
+    justify-content: flex-start;
+  }
+  .wrapper > .parent {
+    height: 100%;
+  }
+  .content-br {
+    width: 735px;
+  }
+  .title-stack {
+    text-align: center;
+  }
+  .crt-db > .msg-txt {
+    text-transform: uppercase;
+  }
+  .light-mode .crt-db > .msg-txt {
+    color: var(--color-light);
+    background-color: var(--green-color-00);
+  }
+  .dark-mode .crt-db > .msg-txt {
+    color: var(--green-color-01);
+    background-color: var(--green-color-dark);
+  }
+  @media only screen and (max-width: 775px) {
+    .content-br {
+      width: 545px;
+    }
+    .input-wraper {
+      width: 85%;
+    }
+    .title-stack > h3 {
+      font-size: 30px;
+    }
+    .title-in > label {
+      font-size: 17px;
+    }
+    .in-wrap > input {
+      font-size: 17px;
+    }
+    .sd-db > input {
+      font-size: 15px;
+      padding: 10px 40px;
+    }
+    .input-content > select {
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .ctx-blk {
+      width: 25px;
+      height: 25px;
+    }
+    .head-blk > label {
+      font-size: 18px;
+    }
+  }
+  @media only screen and (max-width: 570px) {
+    .content-br {
+      margin: var(--zero) var(--auto-text);
+      width: 90%;
+    }
+    .sd-db > input {
+      font-size: 16px;
+      width: 80%;
+      padding: 13px 0px;
+    }
+    .input-wraper {
+      width: 100%;
+    }
+    .dead-line-db .title-in {
+      flex: 1 1 310px;
+    }
+    .title-stack > h3 {
+      font-size: 25px;
+    }
+    .title-in > label {
+      font-size: 15px;
+    }
+    .head-blk > label {
+      font-size: 17px;
+    }
+    .input-content > select {
+      font-size: 16px;
+    }
+    .dead-line-db .in-wrap > input,
+    .dead-line-db .btn-ln {
+      width: 60%;
+    }
+  }
+</style>
+<section class="section {{ windowScheme() }}">
+  <div class="container">
+    <div class="wrapper">
+      <div class="parent">
+        <form [formGroup]="taskData" method="post" (submit)="createTask($event)">
+          <div class="form-wrapper">
+            <div class="content-br">
+              <div class="headline">
+                <div class="title-stack">
+                  <h3>New Task</h3>
+                </div>
+              </div>
+              <div class="message">
+                <div [class]="taskMesgClas()">
+                  <div class="msg-txt">
+                    <h4>
+                      {{ taskResponse().message }}
+                    </h4>
+                  </div>
+                </div>
+              </div>
+              <div class="control-entry">
+                <div class="input-wraper">
+                  <div class="main-wp">
+                    <div class="inpt-st">
+                      <div class="title-in">
+                        <label for="title">Title</label>
+                      </div>
+                      <div class="dta-in">
+                        <div class="in-wrap">
+                          <input
+                            type="text"
+                            placeholder="Enter Title"
+                            formControlName="title"
+                            id="title"
+                          />
+                          <div class="line-wp">
+                            <div class="str-line">
+                              <div class="btn-ln"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="inpt-st dtl-stck">
+                      <div class="title-in">
+                        <label for="description">Description</label>
+                      </div>
+                      <div class="dta-in">
+                        <div class="in-wrap">
+                          <input
+                            type="text"
+                            placeholder="Describe your task"
+                            formControlName="description"
+                            id="description"
+                          />
+                          <div class="line-wp">
+                            <div class="str-line">
+                              <div class="btn-ln"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="inpt-st dead-line-db">
+                      <div class="title-in">
+                        <label for="time">Deadline in minutes:</label>
+                      </div>
+                      <div class="dta-in">
+                        <div class="in-wrap">
+                          <input
+                            type="number"
+                            placeholder="1 to 120"
+                            formControlName="timeCount"
+                            id="time"
+                          />
+                          <div class="line-wp">
+                            <div class="str-line">
+                              <div class="btn-ln"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="chck-bx-en">
+                      <div class="chck-blk">
+                        <div class="head-blk">
+                          <label for="priority">Is emergency:</label>
+                        </div>
+                        <div class="content-blk">
+                          <div class="value-blc">
+                            <div class="ctx-blk">
+                              <input
+                                type="checkbox"
+                                role="checkbox"
+                                formControlName="isPriority"
+                                id="priority"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="ctrl-parent">
+                  <div class="ctrl-sn">
+                    <div class="submit-wp">
+                      <div class="sd-db">
+                        <input type="submit" role="button" value="Add task" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="mask-in">
+      <div class="wp-msk">
+        <div class="ent-pt"></div>
+      </div>
+    </div>
+  </div>
+</section>

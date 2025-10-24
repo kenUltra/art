@@ -1,0 +1,104 @@
+<style lang="css">
+  .msk-bg,
+  .main-bar {
+    position: absolute;
+  }
+  .msk-bg,
+  .main-bar {
+    inset: 0;
+  }
+  .main-pg {
+    position: relative;
+  }
+  .main-pg,
+  .tr-cx,
+  .ctrl-pg > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .main-pg {
+    flex-direction: column;
+    height: 100%;
+  }
+  .title {
+    font-size: 0;
+  }
+  .title > h1 {
+    font-size: 40px;
+  }
+  .ctrl-pg > button > span {
+    font-size: 18px;
+    white-space: nowrap;
+    line-height: 1.23536;
+    font-weight: 600;
+    letter-spacing: -0.022em;
+  }
+
+  .ctrl-pg > button {
+    position: relative;
+    border: 1px solid;
+    z-index: 5;
+    cursor: pointer;
+  }
+  .ctrl-pg > button {
+    height: 45px;
+    padding: 0 45px;
+    width: auto;
+    -webkit-tap-highlight-color: var(--transparent-color);
+    border-radius: 40px;
+    padding-inline-start: 14px;
+    padding-inline-end: 50px;
+  }
+  .ctrl-pg {
+    display: inline-flex;
+  }
+  .spc-stck {
+    width: 12px;
+  }
+  .content {
+    margin-top: 6px;
+  }
+</style>
+
+<section [class]="themeClass()">
+  <div class="whl-bx">
+    <div class="container-ent">
+      <div class="main-bar">
+        <div class="main-pg">
+          <div class="headline">
+            <div class="title">
+              <h1>
+                Welcome <span class="fName">{{ this.userName() }}</span>
+              </h1>
+            </div>
+          </div>
+          <div class="content">
+            <div class="ctrl-pg">
+              <button class="pst">
+                <span class="tr-cx">
+                  <plus-icon></plus-icon>
+                  Check Post
+                </span>
+              </button>
+              <div class="div-sp">
+                <div class="spc-stck"></div>
+              </div>
+              <button class="wrk">
+                <span class="tr-cx">
+                  <plus-icon></plus-icon>
+                  Check Work
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mask">
+      <div class="main-msk">
+        <div class="msk-bg"></div>
+      </div>
+    </div>
+  </div>
+</section>

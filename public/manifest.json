@@ -1,0 +1,45 @@
+{
+  "lang": "en_US",
+  "name": "Art inc",
+  "scope": "/",
+  "display": "standalone",
+  "start_url": "./",
+  "short_name": "Art",
+  "theme_color": "color(display-p3 1 1 1)",
+  "description": "Made for those who want take control of they're life.",
+  "orientation": "Portrait",
+  "background_color": "color(display-p3 0 0 0)",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "./icons/Art_icon_smal.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/Art_inc_64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/Art_inc_94.png",
+      "sizes": "94x94",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/Art_inc_128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/Art_inc_256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/Art_inc.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

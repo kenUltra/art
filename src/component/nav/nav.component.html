@@ -1,0 +1,76 @@
+<style lang="css">
+  .main-nav {
+    position: sticky;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 45px;
+    z-index: 420;
+  }
+  .nav-dt {
+    position: relative;
+    height: 100%;
+  }
+  .nav-dt > ul {
+    width: 785px;
+    height: 100%;
+    justify-content: center;
+    gap: 0px 15px;
+    list-style: none;
+    margin: var(--zero) var(--auto-text);
+  }
+  .list {
+    display: flex;
+    align-items: center;
+  }
+  .nav-dt li > a {
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.018025em;
+  }
+  .list li {
+    font-size: 0px;
+  }
+  .light-mode .nav-dt .act-link {
+    color: var(--color-red-00);
+  }
+  .dark-mode .nav-dt .act-link {
+    color: var(--color-red-01);
+  }
+  @media only screen and (max-width: 850px) {
+    .nav-dt > ul {
+      width: 525px;
+    }
+  }
+  @media only screen and (max-width: 540px) {
+    .nav-dt > ul {
+      width: 100%;
+      max-width: 93%;
+    }
+  }
+</style>
+<div class="nav-prt {{ themeSignal() == null ? '' : themeSignal() }}">
+  <div class="main-nav">
+    <nav class="nav-dt">
+      <ul [class]="badgeClass()">
+        @for (navs of navList(); track $index) {
+        <li>
+          <a [routerLink]="navs.path" [routerLinkActive]="navVisisted">{{ navs.placeholder }}</a>
+          <div class="control-bx">
+            @if (navs.path == 'message') {
+            <div class="badge-message">
+              <div class="badge-ms">
+                <div class="count-bg">
+                  <p>{{ allPost().length }}</p>
+                </div>
+              </div>
+            </div>
+            }
+          </div>
+        </li>
+        }
+      </ul>
+    </nav>
+  </div>
+</div>

@@ -1,0 +1,156 @@
+<style lang="css">
+  .load-headline {
+    width: 450px;
+    height: 45px;
+    border-radius: 5px;
+  }
+  .light-mode .load-headline {
+    background-color: var(--gray-color-00);
+  }
+  .dark-mode .load-headline {
+    background-color: var(--gray-color-02);
+  }
+  .headline-stack {
+    pointer-events: none;
+  }
+  @media only screen and (max-width: 830px) {
+    .load-headline {
+      width: 330px;
+      height: 40px;
+    }
+  }
+  @media only screen and (max-width: 460px) {
+    .load-headline {
+      width: 285px;
+    }
+  }
+</style>
+<section [class]="themeClass().concat(themeSignal())">
+  <div class="main">
+    <div class="root-login">
+      <div class="wrapper">
+        <div class="container-login">
+          <div class="title">
+            @defer (on viewport) {
+            <div class="headline-stack">
+              <h4>{{ headline() }}</h4>
+            </div>
+            } @placeholder {
+            <div class="load-headline"></div>
+            } @loading {
+            <div class="load-headline"></div>
+            }
+          </div>
+          <div class="content-smg">
+            <div class="main-ctx">
+              <div [class]="messageResponse()">
+                <div class="thing-ctx">
+                  <h1>{{ messsageServer() }}</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="message">
+            <div class="wrapper-msg">
+              <div class="main-ms">
+                <div class="sm">
+                  <div class="container-form">
+                    <form method="post" [formGroup]="formControl" (submit)="loginEntry($event)">
+                      <div class="inp-entry">
+                        <div class="wrap-ws">
+                          <div class="placeholder">
+                            <div class="ctx-br">
+                              <label for="emailRef">Email</label>
+                            </div>
+                          </div>
+                          <div class="entry-pt">
+                            <div class="parent-inp">
+                              <div class="content">
+                                <input
+                                  type="email"
+                                  id="emailRef"
+                                  placeholder="name@example.com"
+                                  formControlName="email"
+                                />
+                                <div class="line-btn">
+                                  <div class="ln-ctx"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="inp-entry">
+                        <div class="wrap-ws">
+                          <div class="placeholder">
+                            <div class="ctx-br">
+                              <label for="passKey">Password</label>
+                            </div>
+                          </div>
+                          <div class="entry-pt">
+                            <div class="parent-inp">
+                              <div class="content">
+                                <input
+                                  [type]="showPassword() ? 'password' : 'text'"
+                                  id="passKey"
+                                  placeholder="Your password"
+                                  formControlName="password"
+                                />
+                                <div class="pwd-ctx">
+                                  <div class="pwd-st">
+                                    <div class="wrap-st">
+                                      <div class="circle-bx">
+                                        <button role="button" (click)="pwdBtn()">
+                                          {{ showPassword() ? 'show' : 'hide' }}
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="line-btn">
+                                  <div class="ln-ctx"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="sub-container">
+                        <div class="submit-btn">
+                          <div class="sub-ui">
+                            <input role="submitter" type="submit" value="Sign in" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="other-pg">
+                        <div class="container">
+                          <div class="pl-txt">
+                            <span><p>Don't have Art acoount?</p></span>
+                            <div class="signup-btn">
+                              <div class="entry">
+                                <button (click)="signupPage()" class="btn-bar">
+                                  {{ 'Sign up' | uppercase }}
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mask">
+        <div class="block-sc">
+          <div class="sc-stc"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mask"></div>
+</section>

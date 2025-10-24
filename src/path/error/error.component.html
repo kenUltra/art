@@ -1,0 +1,163 @@
+<style lang="css">
+  @media only screen and (max-width: 720px) {
+    .headline > h1 {
+      font-size: 31px;
+    }
+    .content-ctx p {
+      font-size: 22px;
+    }
+    .content-ctx > .status-msg {
+      line-height: 1.0051em;
+    }
+    .title-load {
+      width: 410px;
+      height: 35px;
+    }
+    .content-ctx p > span {
+      font-size: 14px;
+    }
+    .btn-safety {
+      padding: 12px 25px;
+    }
+    .content-ctx p > span {
+      font-size: 18px;
+    }
+    .subtitle {
+      width: 370px;
+    }
+    .content {
+      width: 380px;
+    }
+    .load-btn {
+      width: 170px;
+    }
+  }
+  @media only screen and (max-width: 520px) {
+    .content-ctx {
+      width: fit-content;
+      max-width: 290px;
+      margin: var(--base-value) var(--auto-text);
+    }
+    .title-load {
+      width: 295px;
+    }
+    .content-ctx p {
+      font-size: 18px;
+    }
+    .headline > h1 {
+      font-size: 25px;
+    }
+    .content-ctx p > span {
+      font-size: 16px;
+    }
+    .btn-safety {
+      padding: 10px 20px;
+    }
+    .btn-safety span {
+      font-size: 13px;
+    }
+    .subtitle {
+      width: 265px;
+    }
+    .content {
+      width: 275px;
+    }
+    .load-btn {
+      width: 130px;
+      height: 35px;
+    }
+  }
+</style>
+
+<section class="section">
+  <div class="error-pg">
+    <div [class]="btnClick()">
+      <div class="error-msg">
+        <div class="bg-err">
+          <div class="section-err">
+            <div class="headline">
+              @defer(on viewport) {
+              <h1>{{ mainMessage() }}</h1>
+              } @placeholder {
+              <div class="title-load"></div>
+              } @loading (after 420ms) {
+              <div class="title-load"></div>
+              }@error {
+              <h2>🔴</h2>
+              }
+            </div>
+            <div class="content-ctx">
+              @defer(on viewport) {
+              <p class="title-msg">The page that you try to get access is not founded.</p>
+              } @placeholder {
+              <div class="title-load subtitle"></div>
+              } @loading (after 420ms) {
+              <div class="title-load subtitle"></div>
+              } @error {
+              <p class="title-msg">Error happen durnig loading.</p>
+
+              } @defer (on viewport) {
+              <p class="status-msg">
+                <span>Status 404, path: {{ typePath() }} is not found.</span>
+              </p>
+              } @placeholder {
+              <div class="title-load content"></div>
+              } @loading (after 420ms) {
+              <div class="title-load subtitle"></div>
+              } @error {
+              <p class="title-msg">Error happen during loading.</p>
+
+              }
+            </div>
+            <div class="safety-bx">
+              <div class="main-ctx">
+                <div class="btx-bx">
+                  @defer (on viewport()) {
+                  <button (click)="backtToSafety()" class="btn-safety">
+                    <span>Back to safety</span>
+                    <div class="clicked-btn">
+                      <div class="clk-bg">
+                        <div class="checked-btn" #btnPath></div>
+                      </div>
+                    </div>
+                    <div class="btn-wrap">
+                      <div class="mask-ctx">
+                        <div class="ent-ctx"></div>
+                      </div>
+                    </div>
+                  </button>
+                  } @placeholder {
+                  <div class="load-btn"></div>
+                  } @loading (after 420ms) {
+                  <div class="load-btn"></div>
+                  } @error {
+                  <h2>Error occured 🔴</h2>
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mask-page">
+      <div class="mask-context"></div>
+    </div>
+  </div>
+  <div class="error-msk">
+    <div class="err">
+      <div class="str-er">
+        <div class="str-err">
+          @defer (on idle) {
+          <div class="content-pg"></div>
+          }@error {
+          <h2>error</h2>
+          }
+        </div>
+      </div>
+    </div>
+    <div class="md-er">
+      <div class="noth"></div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,82 @@
+<section class="section {{ themSignal() }}">
+  <div class="main" #main>
+    <div class="wrapper"></div>
+    <div class="wrapper">
+      <div class="rts-br">
+        <div class="bold-msg">
+          <div class="main-msg">
+            <div class="headline">
+              @defer(on idle) {
+              <h1>{{ mainMessage() }}</h1>
+              } @loading {
+              <div class="load-headline"></div>
+              } @placeholder {
+              <div class="load-headline"></div>
+              } @error {
+              <div class="load-headline err-head"></div>
+              }
+            </div>
+            <div class="navigation-parent">
+              <div class="link-btx">
+                <div class="container-ctx">
+                  <div class="btn-vp">
+                    <div class="btn-cx left">
+                      @defer( on idle) {
+                      <button class="pg-red" buttonEffect queryPath="left .bck" pathPage="task">
+                        <span>
+                          <p>{{ 'Show Tasks' | uppercase }}</p>
+                        </span>
+                        <div class="bck"></div>
+                        <div class="btn-eff">
+                          <div class="wp-tx">
+                            <div class="btn-mask"></div>
+                          </div>
+                        </div>
+                      </button>
+                      } @loading {
+                      <div class="btn-wp-load"></div>
+                      } @placeholder {
+                      <div class="btn-wp-load"></div>
+                      } @error {
+                      <div class="btn-wp-load err-load"></div>
+                      }
+                    </div>
+                    <div class="btn-cx tl-bg">
+                      @defer (on idle) {
+                      <button
+                        class="pg-red"
+                        buttonEffect
+                        pathPage="show-case"
+                        queryPath="tl-bg .bck"
+                      >
+                        <span>
+                          <p>{{ 'Add task' | uppercase }}</p>
+                        </span>
+                        <div class="bck"></div>
+                        <div class="btn-eff">
+                          <div class="wp-tx">
+                            <div class="btn-mask"></div>
+                          </div>
+                        </div>
+                      </button>
+                      } @placeholder {
+                      <div class="btn-wp-load"></div>
+                      } @loading {
+                      <div class="btn-wp-load"></div>
+                      } @error {
+                      <div class="btn-wp-load err-load"></div>
+                      }
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="utl">
+      <div class="phs"></div>
+    </div>
+  </div>
+</section>

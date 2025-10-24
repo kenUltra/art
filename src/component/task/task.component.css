@@ -1,0 +1,52 @@
+.headline > h3 {
+  font-size: 25px;
+  line-height: 40px;
+}
+.description {
+  width: 615px;
+  margin-top: 6px;
+}
+.description > p {
+  font-size: 18px;
+}
+.task-ui {
+  min-height: 110px;
+}
+.whole-bar {
+  top: 50%;
+  right: 10px;
+  transform: translate(0%, -50%);
+}
+.frst-ctx {
+  width: 175px;
+  height: 40px;
+  border-radius: 40px;
+}
+.play-context {
+  width: 25px;
+  height: 25px;
+  transform: translate(7px, 5px);
+}
+.pz-ctrl .pause-btn {
+  visibility: visible;
+  opacity: 1;
+}
+.pz-ctrl .play-btn {
+  opacity: 0;
+  visibility: hidden;
+}
+.py-ctrl .pause-btn {
+  opacity: 0;
+  visibility: hidden;
+}
+.py-ctrl .play-btn {
+  visibility: visible;
+  opacity: 1;
+}
+.lg-ui {
+  width: 100%;
+  height: 2px;
+  opacity: 0;
+  background: linear-gradient(90deg, transparent, lightgreen);
+  transition: bottom 1.5s ease;
+}

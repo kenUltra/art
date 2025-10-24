@@ -1,0 +1,306 @@
+<style lang="css">
+  .main-ctx,
+  .title-bx,
+  .entry-ctrl,
+  .parent-bg,
+  .btn-lst,
+  .nav-tsk {
+    position: absolute;
+  }
+  .leading-ber,
+  .header-ln {
+    position: relative;
+  }
+  .task-tl .nav-tsk {
+    height: 1px;
+    top: unset;
+  }
+  .nav-tsk,
+  .title-bx,
+  .parent-bg,
+  .main-ctx {
+    inset: 0;
+  }
+  .btn-lst {
+    top: 50px;
+    right: 0;
+    z-index: 30;
+  }
+  .light-mode .btn-lst > ul {
+    background-color: var(--color-light);
+    box-shadow: 0px 4px 7px var(--gray-color-00), 5px 0px 7px var(--gray-color-02);
+  }
+  .dark-mode .btn-lst > ul {
+    background-color: var(--color-dark);
+    box-shadow: 0px 4px 7px var(--white-color-00), 5px 0px 7px var(--gray-color-02);
+  }
+  .btn-lst > ul {
+    position: relative;
+    width: 0px;
+    opacity: 0;
+    padding: 7px;
+    text-align: right;
+    border-radius: 10px;
+    overflow: hidden;
+    list-style: none;
+    transition: opacity 0.27s cubic-bezier(0.53, 0.09, 0.45, 0.94),
+      width 0.35s cubic-bezier(0.55, 0.09, 0.49, 1.01);
+  }
+  .btn-lst > ul > li:nth-last-child(1) {
+    margin: 0px;
+  }
+  .btn-lst > ul > li {
+    font-size: 0px;
+    font-weight: 600;
+    line-height: 40px;
+    margin: 0px 0px 3px 0px;
+    transition: line-height 0.2s ease, background-color 0.3s ease-in;
+  }
+  .btn-lst > ul > li:hover {
+    background-color: var(--gray-color-02);
+  }
+  .mn-btn {
+    display: block;
+    width: 100%;
+    font-size: 15px;
+    text-align: left;
+    margin-left: 5px;
+    color: inherit;
+    padding: 9px 0px;
+    cursor: pointer;
+    font-weight: 700;
+    border: 1px solid var(--transparent-color);
+    background-color: var(--transparent-color);
+  }
+  .main-txt,
+  .parent-bg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .parent-bg {
+    flex-direction: column;
+    gap: 3px;
+    z-index: -1;
+  }
+  .main-txt {
+    width: 750px;
+    height: 100%;
+    text-align: center;
+    margin: var(--zero) var(--auto-text);
+  }
+  .main-title > h1 {
+    font-size: 35px;
+  }
+  .sub-title {
+    font-size: 0px;
+    margin-top: 10px;
+  }
+  .sub-title > h4 {
+    font-weight: 100;
+    font-size: 20px;
+  }
+  .start-br {
+    width: 855px;
+    margin: 0px var(--auto-text) var(--zero);
+  }
+  .header-ln > h1 {
+    font-size: 29px;
+    padding-left: 10px;
+    line-height: 50px;
+  }
+  .line-bt {
+    width: 15px;
+    height: 3px;
+    border-radius: 5px;
+  }
+  .leading-ber {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin-bottom: 35px;
+    z-index: 45;
+  }
+  .dark-mode .line-bt {
+    background-color: var(--color-light);
+  }
+  .light-mode .line-bt {
+    background-color: var(--color-dark);
+  }
+  @supports ((-webkit-backdrop-filter: initial) or (backdrop-filter: initial)) {
+    .dark-mode .btn-lst > ul,
+    .light-mode .btn-lst > ul {
+      backdrop-filter: blur(10px) saturate(160%);
+      -webkit-backdrop-filter: blur(10px) saturate(160%);
+      box-shadow: 0px 0px 0px;
+    }
+    .dark-mode .btn-lst > ul {
+      background-color: var(--color-dark);
+      box-shadow: 0px 5px 5px -5px var(--color-blue-01), 0px 5px 5px -5px var(--color-deep-blue),
+        -6px 6px 5px -5px var(--color-deep-blue), 6px 6px 5px -5px var(--color-deep-blue);
+    }
+    .light-mode .btn-lst > ul {
+      background-color: var(--color-light);
+      box-shadow: 0px 5px 5px -5px var(--color-deep-blue), 0px 5px 5px -5px var(--color-deep-blue),
+        -6px 6px 5px -5px var(--color-deep-blue), 6px 6px 5px -5px var(--color-deep-blue);
+    }
+  }
+  @media only screen and (max-width: 890px) {
+    .start-br {
+      width: 530px;
+    }
+    .header-ln {
+      width: 525px;
+    }
+    .header-ln > h1 {
+      font-size: 25px;
+    }
+    .mn-btn {
+      font-size: 13px;
+    }
+  }
+  @media only screen and (max-width: 780px) {
+    .main-txt {
+      width: 495px;
+    }
+    .main-title > h1 {
+      font-size: 25px;
+    }
+    .sub-title {
+      width: 370px;
+      line-height: 25px;
+    }
+    .sub-title > h4 {
+      font-size: 17px;
+    }
+  }
+  @media only screen and (max-width: 560px) {
+    .start-br {
+      width: 95%;
+    }
+    .opn-mdl .btn-lst > ul {
+      width: 225px;
+    }
+    .opn-mdl .btn-lst > ul > li {
+      line-height: 30px;
+    }
+  }
+  @media only screen and (max-width: 540px) {
+    .header-ln {
+      width: 95%;
+    }
+    .header-ln > h1 {
+      font-size: 21px;
+    }
+  }
+  @media only screen and (max-width: 505px) {
+    .main-txt {
+      width: 95%;
+    }
+    .main-title > h1 {
+      font-size: 19px;
+    }
+    .header-ln > h1 {
+      font-size: 25px;
+    }
+    .sub-title {
+      width: 85%;
+      line-height: 20px;
+      margin: 10px var(--auto-text) var(--zero);
+    }
+    .sub-title > h4 {
+      font-size: 15px;
+    }
+  }
+</style>
+<section [class]="themeClass()">
+  <div class="main">
+    <div class="content">
+      <div class="entry-stack">
+        @if (taskTracker().length !== 0) {
+        <div class="leading-ber">
+          <div class="header-ln">
+            <div class="title-stack">
+              <div class="main-title">
+                <div class="title-bx"></div>
+              </div>
+            </div>
+            <div class="thg-sts">
+              <div class="wp-ct">
+                <div class="entry-ctrl">
+                  <div class="wrapper-ln">
+                    <div class="ln-ct">
+                      <div class="parent-bg">
+                        @for (lines of [1,2,3]; track $index) {
+                        <div class="line-bt"></div>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                  <div class="container-th">
+                    <button class="et-things" (click)="menuSetting()"></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h1>All Task</h1>
+            <div class="task-tl">
+              <div class="task-nav">
+                <div class="nav-tsk"></div>
+              </div>
+            </div>
+            <div class="sm-lst">
+              <div [class]="menuClass()">
+                <div class="btn-lst">
+                  <ul>
+                    @for (listMenu of listCtrl(); track $index) {
+                    <li>
+                      <button
+                        class="mn-btn"
+                        (click)="selectMenu(listMenu)"
+                        (keypress.enter)="selectMenu(listMenu)"
+                      >
+                        {{ listMenu | uppercase }}
+                      </button>
+                    </li>
+                    }
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        } @for (task of taskTracker(); track $index) {
+        <div class="tl-bx">
+          <div class="start-br">
+            <div class="content-ber">
+              <task-app
+                [taskData]="task"
+                [locationTask]="taskTracker().length - 1 == $index ? '' : 'sw-ln'"
+                [isControlhiden]="showItemCtx()"
+                (removeTask)="removeTaskValue($event)"
+                (updateTaskPriority)="updateTaskPriority($event)"
+                (updateTimer)="updateTime(task, $event)"
+              ></task-app>
+            </div>
+          </div>
+        </div>
+        } @empty {
+        <div class="main-ctx">
+          <div class="main-txt">
+            <div class="headline">
+              <div class="main-title">
+                <h1>{{ headLine() }}</h1>
+              </div>
+              <div class="sub-title">
+                <h4>{{ body() }}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

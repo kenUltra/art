@@ -1,0 +1,92 @@
+.main-in,
+.input-form {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.parent-ent {
+  display: grid;
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+  grid-template-columns: repeat(6, minmax(115px, 1fr));
+}
+.wrap-bar {
+  display: flex;
+  align-items: center;
+}
+.input-form {
+  grid-column: span 3 / auto;
+}
+.input-form:nth-child(6) {
+  grid-column: span 4 / auto;
+}
+.gd-prt {
+  grid-column: span 2 / auto;
+}
+.ag-part .input-content input[type='number'] {
+  appearance: none;
+  -moz-appearance: none;
+}
+.ag-part .input-content input[type='number']::-webkit-inner-spin-button,
+.ag-part .input-content input[type='number']::-webkit-outer-spin-button {
+  appearance: none;
+}
+.label-fm > label,
+.input-content > input {
+  font-size: 19px;
+  font-weight: 600;
+}
+.input-content > input,
+.log-btn,
+.input-content > select {
+  color: inherit;
+  background-color: var(--transparent-color);
+  border: 1px solid var(--transparent-color);
+  outline: 1px solid var(--transparent-color);
+}
+.input-content > input {
+  width: 100%;
+  line-height: 35px;
+}
+.label-fm {
+  flex: 1 1 130px;
+}
+.input-content > input.ng-dirty.ng-invalid ~ .ln-int .line-inp {
+  background-color: var(--color-red-00);
+}
+.input-content > input.ng-dirty.ng-valid ~ .ln-int .line-inp {
+  background-color: var(--green-color-00);
+}
+.pg {
+  text-align: center;
+  margin-top: 15px;
+}
+.light-mode .invalid-res .mesage-sg-up {
+  background-color: var(--color-red-00);
+}
+.light-mode .valid-res .mesage-sg-up {
+  color: var(--green-color-dark);
+  background-color: var(--green-color-00);
+}
+.dark-mode .valid-res .mesage-sg-up {
+  color: var(--green-color-01);
+  background-color: var(--green-color-dark);
+}
+.dark-mode .invalid-res .mesage-sg-up {
+  background-color: var(--color-red-01);
+}
+.invalid-res .mesage-sg-up {
+  border-radius: 5px;
+}
+.dark-mode .input-content > select:focus-within ~ .ln-int .line-inp {
+  background-color: var(--color-blue-01);
+}
+.light-mode .input-content > select:focus-within ~ .ln-int .line-inp {
+  background-color: var(--color-blue-02);
+}
+.dark-mode .bt-pwd > button:focus-within {
+  border-color: var(--color-blue-01);
+}
+.light-mode .bt-pwd > button:focus-within {
+  border-color: var(--color-blue-02);
+}

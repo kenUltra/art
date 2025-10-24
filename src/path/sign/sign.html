@@ -1,0 +1,566 @@
+<style lang="css">
+  .input-content,
+  .ctr-msh,
+  .main-headline {
+    position: relative;
+  }
+  .wrapper,
+  .line-inp,
+  .pwd-ky,
+  .head-ms,
+  .bt-pwd {
+    position: absolute;
+  }
+  .light-mode .line-inp {
+    background-color: var(--gray-color-02);
+  }
+  .wp-ctx {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .head-ms,
+  .bt-pwd {
+    inset: 0;
+  }
+  .text-pwd > span {
+    font-size: 15px;
+  }
+  .bt-pwd > button {
+    color: inherit;
+    cursor: pointer;
+    border: 1px solid var(--transparent-color);
+    outline: 1px solid var(--transparent-color);
+    background-color: transparent;
+  }
+  .bt-pwd > button {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .dark-mode .line-inp {
+    background-color: var(--gray-color-01);
+  }
+  .line-inp {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+  }
+  .pwd-ky {
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .input-bx {
+    width: 100%;
+  }
+  .wrapper {
+    inset: 0;
+  }
+  .prt-sm {
+    margin: 25px 115px;
+  }
+  .headline-bx > h2 {
+    font-size: 35px;
+  }
+  .wp-ctx {
+    width: 845px;
+    height: 100%;
+    flex-direction: column;
+    margin: var(--zero) var(--auto-text);
+  }
+  .headline-bx {
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .main-in {
+    margin-top: 10px;
+  }
+  .wrap-btn {
+    text-align: center;
+    margin-top: 12px;
+  }
+  .light-mode .wrap-btn > input:hover {
+    border-color: initial;
+    color: var(--color-red-00);
+    background-color: var(--color-light);
+  }
+  .light-mode .wrap-btn > input {
+    background-color: var(--color-red-00);
+    border-color: var(--color-light);
+  }
+  .dark-mode .wrap-btn > input:hover {
+    color: var(--color-red-00);
+    background-color: var(--color-dark);
+  }
+  .dark-mode .wrap-btn > input {
+    background-color: var(--color-red-01);
+  }
+  .wrap-btn > input:hover {
+    transition: background-color 320ms ease, color 420ms ease;
+  }
+  .wrap-btn > input {
+    font-weight: 700;
+    border-radius: 40px;
+    font-size: 23px;
+    cursor: pointer;
+    border: 1px solid;
+    outline: 1px solid var(--transparent-color);
+    padding: 8px 50px;
+  }
+  .input-content > select {
+    width: 100%;
+    height: 37px;
+    font-size: 19px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .input-content > select > option {
+    font-weight: 600;
+    color: color(display-p3 0 0 0);
+  }
+  .input-form:nth-child(8) .label-fm {
+    flex: 1 1 240px;
+  }
+  .notice-bar {
+    margin: 20px 0px;
+  }
+  .notice-bar .notice-txt {
+    font-size: 0px;
+  }
+  .notice-bar .notice-txt > p {
+    font-size: 12px;
+  }
+  .notice-bar {
+    text-align: center;
+  }
+  .input-form:nth-child(7) .input-content,
+  .input-form:nth-child(8) .input-content {
+    padding-right: 35px;
+  }
+  .light-mode .wrap-btn > input:disabled {
+    color: var(--color-light);
+    background-color: var(--gray-color-00);
+  }
+  .dark-mode .wrap-btn > input:disabled {
+    color: var(--color-dark);
+    background-color: var(--gray-color-01);
+  }
+  .wrap-btn > input:disabled {
+    cursor: not-allowed;
+  }
+  .pg > p,
+  .log-btn {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.295px;
+  }
+  .dark-mode .log-btn {
+    color: var(--color-blue-02);
+  }
+  .light-mode .log-btn {
+    color: var(--color-blue-01);
+  }
+  .log-btn {
+    cursor: pointer;
+  }
+  .log-btn:hover {
+    text-decoration: underline;
+  }
+  .mesage-sg-up {
+    text-align: center;
+  }
+  .mesage-sg-up > h5 {
+    font-size: 17px;
+    padding: 15px 20px;
+    margin: 7px auto;
+    text-transform: uppercase;
+  }
+  @media only screen and (max-width: 875px) {
+    .wp-ctx {
+      width: 560px;
+    }
+    .label-fm[_ngcontent-ng-c2393934983] {
+      flex: 1 1 105px;
+    }
+    .headline-bx > h2 {
+      font-size: 26px;
+    }
+    .wrap-btn > input {
+      font-size: 21px;
+      padding: 11px 70px;
+    }
+    .parent-ent {
+      grid-template-columns: repeat(6, minmax(80px, 1fr));
+    }
+    .label-fm > label,
+    .input-content > input {
+      font-size: 14px;
+    }
+    .input-form:nth-child(8) .label-fm {
+      flex: 1 1 200px;
+    }
+    .input-content > select {
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .mesage-sg-up > h5 {
+      font-size: 15px;
+      padding: 10px 10px;
+    }
+  }
+  @media only screen and (max-width: 580px) {
+    .wp-ctx {
+      width: 95%;
+    }
+    .parent-ent {
+      grid-template-columns: repeat(6, minmax(45px, 1fr));
+    }
+    .prt-sm {
+      margin: 5px;
+    }
+    .mesage-sg-up > h5 {
+      font-size: 12px;
+    }
+    .notice-bar {
+      margin: 8px 0px;
+    }
+    .headline-bx > h2 {
+      font-size: 23px;
+    }
+    .wrap-btn > input {
+      width: 100%;
+      font-size: 17px;
+      padding: 10px 0px;
+    }
+    .input-form,
+    .input-form:nth-child(6) {
+      grid-column: span 6 / auto;
+    }
+    .label-fm > label,
+    .input-content > input {
+      font-size: 15px;
+      font-weight: 500;
+    }
+  }
+</style>
+<section [class]="themeClass()">
+  <div class="main parent">
+    <div class="wrapper">
+      <div class="wp-ctx">
+        <div class="headline">
+          <div class="main-headline">
+            <div class="headline-bx">
+              <h2>Creat Account</h2>
+            </div>
+            <div class="mask-head">
+              <div class="head-ms"></div>
+            </div>
+          </div>
+        </div>
+        <div class="msg-wp">
+          <div [class]="serverclass()">
+            <div class="ctr-msh">
+              <div class="msg-ent">
+                <div class="mesage-sg-up">
+                  <h5>{{ serverMessage() }}</h5>
+                </div>
+              </div>
+              <div class="msg-msk">
+                <div class="msk-sm">
+                  <div class="head-ms"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="content">
+          <form
+            method="post"
+            (submit)="createAccount($event)"
+            [formGroup]="formControls"
+            class="form sign-up"
+          >
+            <div class="main-in">
+              <!-- form entry -->
+              <div class="parent-ent">
+                <div class="input-form">
+                  <div class="wrap-bar">
+                    <div class="label-fm">
+                      <label for="firstName">First Name</label>
+                    </div>
+                    <div class="input-bx">
+                      <div class="input-vl">
+                        <div class="wrapper-bx">
+                          <div class="input-content">
+                            <input
+                              type="text"
+                              placeholder="John"
+                              formControlName="firstName"
+                              id="firstName"
+                            />
+                            <div class="ln-int">
+                              <div class="bt-ln">
+                                <div class="line-inp"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-form">
+                  <div class="wrap-bar">
+                    <div class="label-fm">
+                      <label for="lastName">Last Name</label>
+                    </div>
+                    <div class="input-bx">
+                      <div class="input-vl">
+                        <div class="wrapper-bx">
+                          <div class="input-content">
+                            <input
+                              type="text"
+                              placeholder="Terus"
+                              formControlName="lastName"
+                              id="lastName"
+                            />
+                            <div class="ln-int">
+                              <div class="bt-ln">
+                                <div class="line-inp"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-form">
+                  <div class="wrap-bar">
+                    <div class="label-fm">
+                      <label for="userName">User Name</label>
+                    </div>
+                    <div class="input-bx">
+                      <div class="input-vl">
+                        <div class="wrapper-bx">
+                          <div class="input-content">
+                            <input
+                              type="text"
+                              placeholder="j_terus"
+                              formControlName="userName"
+                              id="userName"
+                              autocomplete="on"
+                            />
+                            <div class="ln-int">
+                              <div class="bt-ln">
+                                <div class="line-inp"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-form ag-part">
+                  <div class="wrap-bar">
+                    <div class="label-fm">
+                      <label for="age">Age</label>
+                    </div>
+                    <div class="input-bx">
+                      <div class="input-vl">
+                        <div class="wrapper-bx">
+                          <div class="input-content">
+                            <input
+                              type="number"
+                              placeholder="between 19 to 100"
+                              formControlName="age"
+                              id="age"
+                            />
+                            <div class="ln-int">
+                              <div class="bt-ln">
+                                <div class="line-inp"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-form gd-prt">
+                  <div class="wrap-bar">
+                    <div class="label-fm">
+                      <label for="gender">Gender</label>
+                    </div>
+                    <div class="input-bx">
+                      <div class="input-vl">
+                        <div class="wrapper-bx">
+                          <div class="input-content">
+                            <select formControlName="gender" id="gender">
+                              <option value="Male">Male</option>
+                              <option value="Female">Female</option>
+                            </select>
+                            <div class="ln-int">
+                              <div class="bt-ln">
+                                <div class="line-inp"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-form">
+                  <div class="wrap-bar">
+                    <div class="label-fm">
+                      <label for="email">Email</label>
+                    </div>
+                    <div class="input-bx">
+                      <div class="input-vl">
+                        <div class="wrapper-bx">
+                          <div class="input-content">
+                            <input
+                              type="text"
+                              placeholder="john@example.com"
+                              formControlName="email"
+                              id="email"
+                              autocomplete="email"
+                            />
+                            <div class="ln-int">
+                              <div class="bt-ln">
+                                <div class="line-inp"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-form">
+                  <div class="wrap-bar">
+                    <div class="label-fm">
+                      <label for="password">Password</label>
+                    </div>
+                    <div class="input-bx">
+                      <div class="input-vl">
+                        <div class="wrapper-bx">
+                          <div class="input-content">
+                            <input
+                              [type]="!isPasswordShowed() ? 'password' : 'text'"
+                              placeholder="Your password"
+                              formControlName="password"
+                              id="password"
+                            />
+                            <div class="pwd-ctrls">
+                              <div class="main-pwd">
+                                <div class="pwd-ky">
+                                  <div class="entry-pwd-bt">
+                                    <div class="text-pwd">
+                                      <span>{{ isPasswordShowed() ? 'hide' : 'show' }}</span>
+                                    </div>
+                                    <div class="bt-pwd">
+                                      <button
+                                        (keypress.enter)="showPassBtn(true)"
+                                        (click)="showPassBtn(true)"
+                                        class="pass-key"
+                                      ></button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="ln-int">
+                              <div class="bt-ln">
+                                <div class="line-inp"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-form">
+                  <div class="wrap-bar">
+                    <div class="label-fm">
+                      <label for="confimPass">Confim password</label>
+                    </div>
+                    <div class="input-bx">
+                      <div class="input-vl">
+                        <div class="wrapper-bx">
+                          <div class="input-content">
+                            <input
+                              [type]="!isConfirnPassShowed() ? 'password' : 'text'"
+                              placeholder="Your password"
+                              formControlName="confimPass"
+                              id="confimPass"
+                            />
+                            <div class="pwd-ctrls">
+                              <div class="main-pwd">
+                                <div class="pwd-ky">
+                                  <div class="entry-pwd-bt">
+                                    <div class="text-pwd">
+                                      <span>{{ isConfirnPassShowed() ? 'hide' : 'show' }}</span>
+                                    </div>
+                                    <div class="bt-pwd">
+                                      <button
+                                        (keypress.enter)="showPassBtn()"
+                                        (click)="showPassBtn()"
+                                        class="pass-key"
+                                      ></button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="ln-int">
+                              <div class="bt-ln">
+                                <div class="line-inp"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- ends -->
+            </div>
+
+            <div class="notice-ctx">
+              <div class="notice-bar">
+                <span class="notice-txt">
+                  <p>{{ notice() }} <span>term and condition</span></p>
+                </span>
+              </div>
+            </div>
+            <div class="btn-acc">
+              <div class="wrap-btn">
+                <input
+                  type="submit"
+                  [disabled]="isSubmitBtnActive()"
+                  role="submitter"
+                  value="SIGN UP"
+                />
+              </div>
+            </div>
+          </form>
+          <div class="an-page">
+            <div class="pg">
+              <p>
+                Already have a Art account?
+                <Button (click)="signPage()" class="log-btn">Log in</Button>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
