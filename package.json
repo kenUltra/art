@@ -9,6 +9,9 @@
     "test": "ng test",
     "serve:ssr:art": "node dist/art/server/server.mjs"
   },
+  "engines": {
+  "node": "20.x"
+}
   "prettier": {
     "printWidth": 100,
     "singleQuote": true,
