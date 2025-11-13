@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "scripts": {
      "ng": "ng",
-     "start": "node dist/your-project-name/server/server.mjs",
+     "start": "node dist/art/server/server.mjs",
      "build": "ng build",
      "watch": "ng watch",
      "test": "ng test",
      "build:ssr": "ng build --ssr",
-      "serve:ssr": "node dist/your-project-name/server/server.mjs"
+      "serve:ssr": "node dist/art/server/server.mjs"
   },
   "prettier": {
     "printWidth": 100,
