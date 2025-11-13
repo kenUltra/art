@@ -7,6 +7,7 @@ import { UserPath } from '../path/user/user';
 import { SettingPath } from '../path/setting/setting';
 import { Error } from '../path/error/error.component';
 import { FeedsPage } from '../path/feeds/feeds';
+import WorkPath from '../path/work/work';
 
 export const pageRoute: Routes = [
   {
@@ -90,6 +91,15 @@ export const pageRoute: Routes = [
         path: 'post',
         redirectTo: 'message',
         pathMatch: 'full',
+      },
+      {
+        path: 'employee',
+        redirectTo: 'work',
+        pathMatch: 'full',
+      },
+      {
+        path: 'work',
+        component: WorkPath,
       },
       {
         path: 'message',

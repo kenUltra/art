@@ -1,9 +1,11 @@
 <style lang="css">
   .msk-bg,
+  .trck-content,
   .main-bar {
     position: absolute;
   }
   .msk-bg,
+  .trck-content,
   .main-bar {
     inset: 0;
   }
@@ -59,9 +61,37 @@
   .content {
     margin-top: 6px;
   }
+  .lft-bg {
+    background-size: 65rem;
+    background-repeat: no-repeat;
+    background-position: 100% 0%;
+  }
+  @media only screen and (max-width: 850px) {
+    .title > h1 {
+      font-size: 35px;
+    }
+    .ctrl-pg > button > span {
+      font-size: 14px;
+    }
+    .ctrl-pg > button {
+      height: 40px;
+      padding: 0 30px;
+      padding-inline-start: 15px;
+      padding-inline-end: 40px;
+    }
+  }
+  @media only screen and (max-width: 425px) {
+    .title > h1 {
+      font-size: 25px;
+    }
+    .ctrl-pg {
+      flex-direction: column;
+      gap: 4px;
+    }
+  }
 </style>
 
-<section [class]="themeClass()">
+<section [class]="themeClass()" #sectionRef>
   <div class="whl-bx">
     <div class="container-ent">
       <div class="main-bar">
@@ -75,20 +105,34 @@
           </div>
           <div class="content">
             <div class="ctrl-pg">
-              <button class="pst">
+              <button class="pst lft-bg" (click)="openModal($event)">
                 <span class="tr-cx">
-                  <plus-icon></plus-icon>
+                  <plus-icon inputCls="icon-bs-app"></plus-icon>
                   Check Post
                 </span>
+                <div class="tck-tls">
+                  <div class="trck">
+                    <div class="trck-content" aria-placeholder="post ref">
+                      <div class="n-tracker-btn"></div>
+                    </div>
+                  </div>
+                </div>
               </button>
               <div class="div-sp">
                 <div class="spc-stck"></div>
               </div>
-              <button class="wrk">
+              <button class="wrk" (click)="openModal($event)">
                 <span class="tr-cx">
-                  <plus-icon></plus-icon>
+                  <plus-icon inputCls="icon-bs-app"></plus-icon>
                   Check Work
                 </span>
+                <div class="tck-tls">
+                  <div class="trck">
+                    <div class="trck-content" aria-placeholder="work ref">
+                      <div class="n-tracker-btn"></div>
+                    </div>
+                  </div>
+                </div>
               </button>
             </div>
           </div>
@@ -99,6 +143,22 @@
       <div class="main-msk">
         <div class="msk-bg"></div>
       </div>
+    </div>
+  </div>
+  <div class="modal-pop">
+    <div class="back-ctx">
+      @if (isModalOpen()) {
+      <modal-app
+        [modalData]="modalBaseDt()"
+        [modalControl]="postRef()"
+        (closeModalEvent)="closeModal()"
+        (textTyped)="makePost($event)"
+        [serverMesage]="serverValue()"
+        [hasServerResponse]="hasServerMessage()"
+      ></modal-app>
+      } @else {
+      <div class="modal-ctx"></div>
+      }
     </div>
   </div>
 </section>

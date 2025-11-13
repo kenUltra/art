@@ -1,9 +1,11 @@
 import { Injectable, signal } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'platform',
 })
-export class NoticationSeriive {
+export class NotificationServices {
+  private notificationRef: Notification;
   logicNf = signal<{ title: string; content?: string; tag?: string }>({ title: '' });
   notificationStatus = signal<string>('');
   path = signal<string>('/home');
@@ -15,8 +17,8 @@ export class NoticationSeriive {
     tag: this.logicNf().tag,
     lang: 'en-US',
   };
-  constructor() {
-    new Notification(this.logicNf().title, this.option);
+  constructor(private routerPath: Router) {
+    this.notificationRef = new Notification(this.logicNf().title, this.option);
     this.statusNf();
   }
   async statusNf() {
@@ -30,5 +32,13 @@ export class NoticationSeriive {
     } catch (err) {
       console.error(err);
     }
+  }
+  setttingNotificationPath(path: string): void {
+    this.path.set(path);
+  }
+  openNotification(): void {
+    this.notificationRef.addEventListener('click', () => {
+      this.routerPath.navigate([this.path()]);
+    });
   }
 }

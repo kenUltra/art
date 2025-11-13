@@ -18,23 +18,19 @@
   .art-container {
     position: relative;
   }
+  .light-mode .container-tx .dots-bar {
+    background-color: var(--color-dark);
+  }
+  .dark-mode .container-tx .dots-bar {
+    background-color: var(--color-light);
+  }
+  .light-mode .loading-bg.err,
+  .light-mode .load-lg .err-logo {
+    background-color: var(--color-red-01);
+  }
   .main-nav {
     width: 815px;
     margin: var(--zero) var(--auto-text);
-  }
-  .badge-ent {
-    top: -10px;
-    right: 5px;
-    border-radius: 40px;
-    background-color: var(--color-red-00);
-  }
-  .badge-ent > span {
-    font-size: 0px;
-  }
-  .badge-ent > span > p {
-    font-weight: bold;
-    font-size: 11px;
-    padding: 0px 6px;
   }
   .nav > ul,
   .container-tx > .ui-dt,
@@ -169,16 +165,35 @@
   .light-mode .loading-bg {
     background-color: var(--gray-color-02);
   }
-  @supports ((backdrop-filter: initial) or (-webkit-backdrop-filter: initial)) {
-    .op-mn-ctx .main-lst {
-      backdrop-filter: blur(10px) saturate(115%) brightness(80%);
-      -webkit-backdrop-filter: blur(10px) saturate(115%) brightness(80%);
-      background-color: var(--transparent-color);
-    }
+  .dark-mode .menu-load.error {
+    background-color: var(--color-red-00);
+  }
+  .light-mode .menu-load.error {
+    background-color: var(--color-red-01);
+  }
+  .dark-mode .menu-load {
+    background-color: var(--gray-color-02);
+  }
+  .light-mode .menu-load {
+    background-color: var(--gray-color-00);
+  }
+  .dark-mode .loading-bg.err,
+  .dark-mode .load-lg .err-logo {
+    background-color: var(--color-red-00);
+  }
+  .light-mode .sun-tb > .links-bt {
+    background-color: var(--color-blue-01);
+  }
+  .dark-mode .sun-tb > .links-bt {
+    background-color: var(--color-deep-blue);
   }
   @media only screen and (max-width: 840px) {
     .art-logo {
       width: 85px;
+    }
+    .menu-load {
+      width: 90px;
+      height: 27px;
     }
     .main-nav {
       width: 490px;
@@ -239,6 +254,12 @@
       }
       .nav > ul {
         display: none;
+      }
+      .menu-load {
+        width: 100%;
+        height: 40px;
+        border-radius: 5px;
+        background: var(--gray-color-02) !important;
       }
       .light-mode .focus-page > a {
         color: var(--color-blue-02);
@@ -343,6 +364,7 @@
                 class="li-tab"
                 [routerLinkActive]="nameActiveClass()"
               >
+                @defer (on idle) {
                 <a
                   [routerLink]="nav.path"
                   aria-roledescription="navigation links"
@@ -368,6 +390,12 @@
                     </div>
                   </div>
                 </div>
+                } } @placeholder {
+                <div class="menu-load"></div>
+                }@loading {
+                <div class="menu-load"></div>
+                } @error {
+                <div class="menu-load error"></div>
                 }
               </li>
               }

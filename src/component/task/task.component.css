@@ -50,3 +50,18 @@
   background: linear-gradient(90deg, transparent, lightgreen);
   transition: bottom 1.5s ease;
 }
+.dn-container {
+  border-radius: 40px;
+  z-index: 5;
+}
+.dn-container > span {
+  color: inherit;
+}
+.dark-mode .dn-container {
+  color: var(--green-color-02);
+  background: var(--green-color-dark);
+}
+.light-mode .dn-container {
+  color: var(--green-color-dark);
+  background-color: var(--green-color-02);
+}

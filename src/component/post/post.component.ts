@@ -1,37 +1,36 @@
-import {
-  afterNextRender,
-  Component,
-  ElementRef,
-  inject,
-  input,
-  output,
-  signal,
-  viewChild,
-} from '@angular/core';
-import { ThemeServices } from '../../services/theme.service';
+import { afterNextRender, Component, inject, input, output, signal } from '@angular/core';
+import { DatePipe, UpperCasePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
 import { eTheme } from '../../utils/listEmun';
 import { iComment, iPostDt } from '../../utils/auth';
+import { ThemeServices } from '../../services/theme.service';
 
 @Component({
   selector: 'post-ui',
-  imports: [],
+  imports: [UpperCasePipe, DatePipe, FormsModule],
   templateUrl: './post.component.html',
   styleUrl: './post.component.css',
 })
 export class PostComponent {
+  protected idString: string = 'cmt-vla-14x';
   themeService = inject<ThemeServices>(ThemeServices);
-
   postData = input.required<iPostDt>();
+
+  canBeRemove = input<boolean>(false);
+  stylePost = input<string>('');
+  unicId = input<number>(0);
 
   currentTheme = signal<string>('');
   isCommentOpen = signal<boolean>(false);
+  IsReplyCommentOpen = signal<boolean>(false);
 
-  sendNewComment = output<string>();
+  sendNewComment = output<{ id: string; value: string }>();
   deleteCurrentPost = output<string>();
   likePostEvent = output<string>();
-  parentList = viewChild.required<ElementRef<HTMLElement>>('mainParent');
 
   messageComment = signal<iComment[]>([]);
+  commentValue = signal<string>('');
 
   constructor() {
     afterNextRender({
@@ -45,19 +44,15 @@ export class PostComponent {
   }
 
   showComment(): void {
-    const listBar: HTMLElement = this.parentList().nativeElement;
-    const li: HTMLCollection = listBar.children;
-
     this.isCommentOpen.set(!this.isCommentOpen());
-    if (this.isCommentOpen()) {
-      for (const liRef of li) {
-        liRef.animate({},{})
-      }
-    }
   }
   // server event
-  sendComment(value: string): void {
-    this.sendNewComment.emit(value);
+  sendComment(): void {
+    this.sendNewComment.emit({
+      id: this.postData()._id,
+      value: this.commentValue(),
+    });
+    this.commentValue.set('');
   }
   likePost(): void {
     this.likePostEvent.emit(this.postData()._id);
@@ -65,8 +60,20 @@ export class PostComponent {
   deletePost(): void {
     this.deleteCurrentPost.emit(this.postData()._id);
   }
+  clickCommentBtn(): void {
+    this.IsReplyCommentOpen.set(!this.IsReplyCommentOpen());
+  }
+  // style name
+  commentstyle(idComment: string): Array<string> {
+    const styleValue: string = this.postData().userName == idComment ? 'ow-ms' : 'nt-ms';
+    return ['li-cmt', styleValue];
+  }
   commentCls(baseclass: string = 'main-cmt-prt'): Array<string> {
     const valueComment: string = this.isCommentOpen() ? 'opn-ctx-bx' : '';
-    return [baseclass, valueComment];
+    return [baseclass, valueComment, this.stylePost()];
+  }
+  hiddenCls(baseClass: string): Array<string> {
+    const openVal: string = this.IsReplyCommentOpen() ? 'reply-mdl-open' : '';
+    return [baseClass, openVal];
   }
 }

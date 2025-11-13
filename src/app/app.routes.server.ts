@@ -7,15 +7,7 @@ export const serverRoutes: ServerRoute[] = [
   },
   {
     path: 'task',
-    renderMode: RenderMode.Server,
-  },
-  {
-    path: 'login',
-    renderMode: RenderMode.Server,
-  },
-  {
-    path: 'sign-up',
-    renderMode: RenderMode.Server,
+    renderMode: RenderMode.Prerender,
   },
   {
     path: '**',

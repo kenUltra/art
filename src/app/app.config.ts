@@ -6,7 +6,7 @@ import {
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { provideClientHydration } from '@angular/platform-browser';
+import { provideClientHydration,withEventReplay } from '@angular/platform-browser';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { APP_SETTINGS, appSetting } from './app.setting';
 
@@ -14,7 +14,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
-    provideClientHydration(),
+    provideClientHydration(withEventReplay()),
     provideRouter(routes),
     provideHttpClient(withFetch()),
     { provide: APP_SETTINGS, useValue: appSetting },

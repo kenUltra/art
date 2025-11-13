@@ -1,107 +1,442 @@
 <style lang="css">
-  .dgp {
-    position: fixed;
+  .light-mode .indicator-bg {
+    background-color: var(--color-red-00);
   }
-  .modal-content-lg,
-  .content-ent {
+  .dark-mode .indicator-bg {
+    background-color: var(--color-red-01);
+  }
+  .capsule-slider {
+    --capsule-value: 40px;
+  }
+  .capsule-slider,
+  .controle-slider,
+  .art-md-wrap,
+  .content-ent,
+  .entr-cps > button {
+    position: relative;
+  }
+  .main-btn-hm,
+  .hm-btn,
+  .cross-btn,
+  .hst-btn-cpl,
+  .indicator-bg,
+  .msg-hb,
+  .start-pg::after,
+  .response-ms,
+  .dgp,
+  .controle-slider::after {
     position: absolute;
   }
-  .prt-md {
-    --center-x: 50%;
-    --intial-value: unset;
+  .light-mode .pst button {
+    color: var(--color-blue-01);
+    background-color: var(--color-light);
   }
-  .content-ent {
-    top: 25px;
-    bottom: var(--intial-value);
-    right: var(--intial-value);
-    left: var(--center-x);
-    transform: translate(var(--center-x), calc(var(--center-x) - var(--center-x)));
-    z-index: 850;
+  .pth-pst:hover {
+    transition: background-color 320ms ease, color 210ms ease;
   }
-  .dgp,
-  .modal-content-lg {
-    inset: 0;
+  .dark-mode .head-slider {
+    border-color: var(--gray-color-00);
   }
-  .dgp {
-    --eff-bg: 20px;
-    z-index: 800;
+  .light-mode .head-slider {
+    border-color: var(--gray-color-02);
   }
-  .ui-mdl-bc {
-    display: block;
-    width: 100%;
-    height: 100%;
+  .light-mode .controle-slider::after {
+    background-color: var(--gray-color-00);
   }
-  .ui-mdl-bc {
-    backdrop-filter: blur(var(--eff-bg));
+  .dark-mode .controle-slider::after {
+    background-color: var(--gray-color-02);
   }
-  .ctx-mdl .title h1 {
-    font-size: 25px;
+  .dark-mode .pst button {
+    border-color: var(--color-dark);
+    background-color: var(--color-deep-blue);
   }
-  .ctx-mdl .subtitle h2 {
-    color: lightgray;
+  .dark-mode .main-btn-hm > button:hover {
+    border-color: var(--color-light);
+  }
+  .light-mode .main-btn-hm > button:hover {
+    border-color: var(--color-dark);
+  }
+  .light-mode .cross-btn {
+    background-color: var(--color-dark);
+  }
+  .dark-mode .cross-btn {
+    background-color: var(--color-light);
+  }
+  .dark-mode .pst button:hover {
+    background-color: var(--color-dark);
+    border-color: var(--color-deep-blue);
+  }
+  .dark-mode .msg-pg input[type='checkbox'] {
+    border-color: var(--color-light);
+  }
+  .light-mode .start-pg {
+    color: var(--color-light);
+    background: var(--color-dark);
+  }
+  .light-mode .msg-pg input[type='checkbox'] {
+    border-color: var(--color-dark);
+  }
+  .light-mode .msg-pg input[type='checkbox']:checked {
+    background-color: var(--color-red-01);
+  }
+  .dark-mode .msg-pg input[type='checkbox']:checked {
+    background-color: var(--color-red-00);
+  }
+  .light-mode .pst button:hover {
+    color: var(--color-light);
+    background-color: var(--color-blue-01);
+  }
+  .dark-mode .content-ent {
+    border-color: var(--gray-color-02);
+    background-color: var(--color-dark);
+  }
+  .light-mode .content-ent {
+    border-color: var(--gray-color-00);
+    background-color: var(--color-light);
+  }
+  .dark-mode .type-stl > button:hover {
+    color: var(--color-red-01);
+    background-color: var(--color-dark);
+  }
+  .light-mode .main-btn-hm > button {
+    border-color: var(--transparent-color);
+  }
+  .dark-mode .type-stl > button {
+    background-color: var(--color-red-00);
+  }
+  .light-mode .type-stl > button {
+    color: var(--color-light);
+    background-color: var(--color-red-00);
   }
   .ctx-mdl .content > p {
     font-weight: lighter;
+  }
+  .block > textarea {
+    --spacer-ln: 10px;
+    width: 595px;
+    font-size: 16px;
+    font-weight: 500;
+    color: inherit;
+    field-sizing: content;
+    resize: none;
+    border-radius: var(--spacer-ln);
+    border: 1px solid var(--gray-color-01);
+    background-color: var(--transparent-color);
+  }
+  @media only screen and (max-width: 710px) {
+    .content-ent {
+      font-size: 0;
+      max-width: calc(19rem + 7rem);
+      padding-top: 15px;
+      padding-inline-start: 25px;
+      padding-inline-end: 30px;
+    }
+    .ctx-mdl .title h1 {
+      font-size: 25px;
+    }
+    .head-slider {
+      margin-top: 8px;
+      margin-bottom: 7px;
+    }
+    .entr-cps > button {
+      padding-inline-start: 15px;
+      padding-inline-end: 30px;
+    }
+    .entr-cps > button span {
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .headline-tls > h1 {
+      font-size: 17px;
+    }
+    .block > textarea {
+      width: 390px;
+      max-width: 390px;
+      max-height: 180px;
+      font-size: 15px;
+    }
+    .st-msg span {
+      font-size: 13px;
+    }
+    .msg-hb {
+      top: 30px;
+      transform: translate(-14%, 0%);
+    }
+    .stack-pg > p {
+      font-size: 13px;
+    }
+    .start-pg::after {
+      top: -3px;
+      left: 5px;
+    }
+    .type-stl > button {
+      font-size: 16px;
+      padding: 7px 35px;
+    }
+  }
+  @media only screen and (max-width: 510px) {
+    .content-ent {
+      width: var(--auto-fill);
+      max-width: 85%;
+      padding-top: 10px;
+      padding-inline-start: 15px;
+      padding-inline-end: 20px;
+    }
+    .hm-btn {
+      width: 26px;
+      height: 26px;
+    }
+    .cross-btn {
+      height: 14px;
+    }
+    .ctx-mdl .title h1 {
+      font-size: 20px;
+    }
+    .entr-cps > button {
+      --spacer-btn: 8px;
+      padding-top: var(--spacer-btn);
+      padding-bottom: var(--spacer-btn);
+      padding-inline-start: var(--spacer-btn);
+      padding-inline-end: 20px;
+    }
+    .entr-cps > button span {
+      font-size: 11px;
+    }
+    .headline-tls > h1 {
+      font-size: 14px;
+    }
+    .headline-tls {
+      margin-top: 14px;
+      margin-bottom: 8px;
+    }
+    .block > textarea {
+      width: 95%;
+      max-width: 95%;
+    }
+    .msg-hb {
+      top: 35px;
+      left: 0%;
+      transform: translate(0%, 0%);
+    }
+    .start-pg::after {
+      top: -5px;
+      left: 50%;
+      transform: translateX(37px) rotate(45deg);
+    }
   }
 </style>
 
 <div class="modal-root {{ themeSignal() }}">
   <div class="prt-md {{ customClass() }}">
-    <div class="content-ent">
-      <div class="ctx-mdl">
-        <div class="title">
-          <h1>{{ modalData().title }}</h1>
-        </div>
-        <div class="subtitle">
-          @if (modalData().subtitle) {
-          <h2>{{ modalData().subtitle }}</h2>
-          }
-        </div>
-        <div class="content">
-          <p>
-            {{ modalData().content }}
-          </p>
-        </div>
-        <div class="ctrl">
-          @if (modalData().hasControl) {
-          <div class="contlr">
-            <div class="ctx-head">
-              <div class="til">
-                @if(modalControl()?.title){
-                <h4>{{ modalControl()?.title }}</h4>
-                }
+    <div class="art-md-wrap">
+      <div class="content-ent">
+        <div class="back-btn">
+          <div class="mb-btn">
+            <div class="hm-btn">
+              <div class="entry-stack">
+                <div class="cross-btn"></div>
+                <div class="cross-btn rg-btn-cx"></div>
               </div>
-              <div class="vl-ctrl">
-                <div class="block">
-                  <input
-                    type="text"
-                    [(ngModel)]="inputValue"
-                    [name]="modalControl()?.name ?? ''"
-                    [id]="modalControl()?.id"
-                    [placeholder]="modalControl()?.placeholder"
-                  />
-                </div>
-                <div class="btn-in">
-                  <div class="type-stl">
-                    <button (click)="getInputValue()" class="btn">Send</button>
-                  </div>
+              <div class="btn-home">
+                <div class="main-btn-hm">
+                  <button
+                    class="modale-btn"
+                    (click)="closeModal()"
+                    (keypress.enter)="closeModal()"
+                  ></button>
                 </div>
               </div>
             </div>
           </div>
-          }
+        </div>
+        <div class="ctx-mdl">
+          <div class="title">
+            <div class="headline-container">
+              <h1>{{ modalData().title }}</h1>
+            </div>
+          </div>
+          <div class="subtitle">
+            @if (modalData().subtitle) {
+            <div class="subtitle-container">
+              <h2>{{ modalData().subtitle }}</h2>
+            </div>
+            }
+          </div>
+          <div class="content">
+            <p>
+              {{ modalData().content }}
+            </p>
+          </div>
+          <div class="ctrl">
+            @if (modalData().hasControl) {
+            <div class="contlr">
+              <div class="ctx-head">
+                <div class="slider-caps">
+                  <div class="capsule-slider">
+                    <div class="content-slider">
+                      <div class="head-slider">
+                        <div class="controle-slider">
+                          @for (slide of listCap(); track $index) {
+                          <div class="entr-cps">
+                            <button
+                              (click)="sliderPressed(btnSlider)"
+                              (keydown.enter)="sliderPressed(btnSlider)"
+                              class="cps-btn"
+                              [tabIndex]="$index"
+                              #btnSlider
+                            >
+                              <span>{{ slide }}</span>
+                              <div class="btn-hst">
+                                <div class="hst-btn-cpl"></div>
+                              </div>
+                            </button>
+                          </div>
+                          }
+                        </div>
+                      </div>
+                    </div>
+                    <div class="content-ranget">
+                      <div class="indicator-bg" #refSlder></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="til">
+                  @if(modalControl()?.title){
+                  <h4>{{ modalControl()?.title }}</h4>
+                  }
+                </div>
+                <div class="vl-ctrl">
+                  <div class="wrap-bx-ln">
+                    @switch (trackSilderLocation()) { @case (0) {
+                    <div class="list-ctx-tls">
+                      <div class="healine-tls">
+                        <h1>
+                          {{
+                            postSignal().length == 0
+                              ? "You haven't posted anything yet"
+                              : postSignal().length + ' post in total'
+                          }}
+                        </h1>
+                        <div class="user-pst">
+                          <div class="pst-wp">
+                            @for (posts of postSignal(); track $index) {
+                            <post-ui
+                              [canBeRemove]="true"
+                              [postData]="posts"
+                              stylePost="md-style"
+                              [unicId]="$index"
+                              (sendNewComment)="commentPost($event)"
+                              (deleteCurrentPost)="deleteUserPost($event)"
+                            ></post-ui>
+                            }
+                          </div>
+                        </div>
+                        <div class="dtl-pst">
+                          <div class="dtl-tx">
+                            <div class="post-pth">
+                              <div class="pst">
+                                <button
+                                  (click)="checkPosts()"
+                                  (keypress.enter)="checkPosts()"
+                                  class="pth-pst"
+                                >
+                                  See All Posts
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    } @default {
+                    <div class="headline-tls">
+                      <h1>Share your thought</h1>
+                    </div>
+                    <div class="block">
+                      <textarea
+                        type="text"
+                        [(ngModel)]="inputValue"
+                        [name]="modalControl()?.name ?? ''"
+                        [id]="modalControl()?.id"
+                        [placeholder]="modalControl()?.placeholder"
+                      ></textarea>
+                    </div>
+                    <div class="state">
+                      <div class="st-msg">
+                        <div class="msg-pg">
+                          <span>Mark you post as public</span>
+                          <div class="inpt-np">
+                            <input
+                              type="checkbox"
+                              [(ngModel)]="isCorrectVal"
+                              name="state"
+                              id="checkbox-ctx"
+                            />
+                          </div>
+                          <div class="info-btn">
+                            <div class="outer-info-btn">
+                              <div
+                                class="text-inf-btn"
+                                (mouseenter)="showInfoMessage(info_btn)"
+                                (mouseleave)="leaveInfoMessage(info_btn)"
+                              >
+                                <span>i</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="inf-smg">
+                            <div class="msg-hb" #info_btn>
+                              <div class="start-pg">
+                                <p class="head-str-pg">Info</p>
+                                <p>
+                                  All post that is mark as public will be available to everyone that
+                                  have an account.
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="btn-in">
+                      <div class="type-stl">
+                        <button
+                          (click)="getInputValue()"
+                          (keydown.enter)="getInputValue()"
+                          class="btn"
+                        >
+                          Send
+                        </button>
+                      </div>
+                    </div>
+                    } }
+                  </div>
+                </div>
+              </div>
+            </div>
+            }
+          </div>
+        </div>
+        <div class="msk-tl">
+          <div class="detail-modal">
+            <div class="modal-content-lg"></div>
+          </div>
+        </div>
+        <div [class]="serverStyle()">
+          <div class="post-resp">
+            <div class="response-ms">
+              <div class="res-stk">
+                <h3>{{ serverMesage() }}</h3>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="msk-tl">
-        <div class="detail-modal">
-          <div class="modal-content-lg"></div>
-        </div>
-      </div>
-    </div>
-    <div class="bdp">
-      <div class="rm-bdp">
-        <div class="dgp">
-          <div class="ui-mdl-bc"></div>
+      <div class="bdp">
+        <div class="rm-bdp">
+          <div class="dgp">
+            <div (click)="closeModal()" class="ui-mdl-bc"></div>
+          </div>
         </div>
       </div>
     </div>

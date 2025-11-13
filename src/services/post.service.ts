@@ -1,7 +1,8 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { APP_SETTINGS } from '../app/app.setting';
 import { BehaviorSubject, catchError, map, Observable, tap, throwError } from 'rxjs';
+
+import { APP_SETTINGS } from '../app/app.setting';
 import { BrowserStorageService } from './storage.service';
 import { iPostDt } from '../utils/auth';
 
@@ -51,7 +52,7 @@ export class PostService {
           const conbineValue: iPostDt[] = [...mergeValue, ...publicContent];
 
           this.listMessage.next(conbineValue);
-          return this.listMessage.value;
+          return this.listMessage.getValue();
         }),
         catchError(this.httpError)
       );
@@ -92,18 +93,28 @@ export class PostService {
       })
       .pipe(
         tap((value: any) => {
+          this.getPost().subscribe((value) => {
+            return value;
+          });
           return value;
         }),
         catchError(this.httpError)
       );
   }
   deletePost(postId: string): Observable<any> {
-    return this.http.delete(this.backend + '/posts/' + postId, {
-      headers: {
-        'Content-type': 'application/json',
-        Authentication: 'Bearer ' + this.accessToken(),
-      },
-    });
+    return this.http
+      .delete(this.backend + '/posts/' + postId, {
+        headers: {
+          'Content-type': 'application/json',
+          Authentication: 'Bearer ' + this.accessToken(),
+        },
+      })
+      .pipe(
+        tap((value) => {
+          return value;
+        }),
+        catchError(this.httpError)
+      );
   }
   commentPost(commentValue: string, refMessage: string): Observable<any> {
     const storage = this.readJSON(this.userData.get(this.userToken) ?? '');
@@ -124,6 +135,9 @@ export class PostService {
       )
       .pipe(
         map((value: any) => {
+          this.getPost().subscribe((value) => {
+            return value;
+          });
           return value;
         }),
         catchError(this.httpError)

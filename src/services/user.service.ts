@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
-import { APP_SETTINGS } from '../app/app.setting';
 import { HttpClient, HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { catchError, map, Observable, throwError } from 'rxjs';
+
 import { BrowserStorageService } from './storage.service';
+import { APP_SETTINGS } from '../app/app.setting';
 import { AuthService } from './auth.service';
 
 @Injectable({

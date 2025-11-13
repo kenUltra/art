@@ -123,3 +123,27 @@
 .light-mode .ctx-blk > input[type='checkbox'] {
   border-color: var(--gray-color-02);
 }
+.in-wrap > textarea {
+  color: inherit;
+  margin-top: 6px;
+  min-width: 98%;
+  max-width: 98%;
+  font-weight: 500;
+  font-size: 18px;
+  padding-inline-end: 7px;
+  padding-inline-start: 7px;
+  border: 1px solid var(--transparent-color);
+  outline: 1px solid var(--transparent-color);
+  height: 100px;
+  max-height: 100px;
+  resize: none;
+  background-color: var(--transparent-color);
+}
+.light-mode .in-wrap > textarea:focus ~ .line-wp .btn-ln,
+.light-mode .in-wrap > input:focus ~ .line-wp .btn-ln {
+  background-color: var(--color-blue-01);
+}
+.dark-mode .in-wrap > textarea:focus ~ .line-wp .btn-ln,
+.dark-mode .in-wrap > input:focus ~ .line-wp .btn-ln {
+  background-color: var(--color-deep-blue);
+}

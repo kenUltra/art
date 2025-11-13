@@ -11,6 +11,7 @@
   .tm-entry,
   .parent-ps,
   .rm-wrapper,
+  .msk-wp,
   .task-wp .task,
   .mask-ui .task,
   .rem-dt,
@@ -20,6 +21,7 @@
   .point,
   .update-bt,
   .lg-ui,
+  .dn-container,
   .whole-bar {
     position: absolute;
   }
@@ -32,6 +34,8 @@
   .remove-bt,
   .update-bt,
   .point,
+  .dn-container,
+  .msk-wp,
   .ctr-btn {
     inset: 0;
   }
@@ -114,6 +118,7 @@
     transition: opacity 0.21s cubic-bezier(0.39, 0.575, 0.565, 1);
   }
   .parent-ps,
+  .dn-container,
   .cg-task {
     display: flex;
     align-items: center;
@@ -213,6 +218,9 @@
     right: -100%;
     transition: right 1.5s ease;
     background: linear-gradient(270deg, transparent, lightgreen);
+  }
+  .msk-wp {
+    z-index: 50;
   }
   .lg-ui:nth-child(4) {
     bottom: -100%;
@@ -314,6 +322,15 @@
                   <div class="task"></div>
                 </div>
               </div>
+              <div class="done-bx">
+                <div class="dn-bx">
+                  @if (initialSecond() == 0) {
+                  <div class="dn-container">
+                    <span>Finished</span>
+                  </div>
+                  }
+                </div>
+              </div>
             </div>
           </div>
           <div class="control-bar">
@@ -366,6 +383,13 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+        <div class="wp-dn-h">
+          <div class="hide-msk">
+            @if (initialSecond() == 0) {
+            <div class="msk-wp"></div>
+            }
           </div>
         </div>
       </div>

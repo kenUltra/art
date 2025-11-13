@@ -13,6 +13,10 @@
   .headline-stack {
     pointer-events: none;
   }
+  .light-mode .sub-ui input:disabled,
+  .dark-mode .sub-ui input:disabled {
+    opacity: 0.5;
+  }
   @media only screen and (max-width: 830px) {
     .load-headline {
       width: 330px;
@@ -119,7 +123,12 @@
                       <div class="sub-container">
                         <div class="submit-btn">
                           <div class="sub-ui">
-                            <input role="submitter" type="submit" value="Sign in" />
+                            <input
+                              role="submitter"
+                              [disabled]="submitLinkActive()"
+                              type="submit"
+                              [value]="submitterName()"
+                            />
                           </div>
                         </div>
                       </div>

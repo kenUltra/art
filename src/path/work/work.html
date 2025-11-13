@@ -1,0 +1,88 @@
+<style lang="css">
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 400;
+  }
+  .container-wk-page,
+  .ctx-wk {
+    width: 875px;
+    margin-inline-end: auto;
+    margin-inline-start: auto;
+  }
+  .ctx-wk {
+    display: flex;
+    align-items: center;
+    height: 45px;
+  }
+  .nav-bar .title > h2 {
+    font-size: 18px;
+  }
+  @media only screen and (max-width: 915px) {
+    .container-wk-page,
+    .ctx-wk {
+      width: auto;
+      max-width: 100%;
+      padding-inline-start: 45px;
+      padding-inline-end: 45px;
+    }
+  }
+  @media only screen and (max-width: 660px) {
+    .container-wk-page,
+    .ctx-wk {
+      padding-inline-start: 20px;
+      padding-inline-end: 20px;
+    }
+  }
+</style>
+<section [class]="mainClass()">
+  <div class="srt">
+    <div class="container-wk">
+      <div class="nav-bar">
+        <div class="ctx-wk">
+          <div class="nav-bar">
+            <div class="title">
+              <h2>Work & Budget</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content-wk-str">
+        <div class="ref-wks">
+          <div class="container-wk-page">
+            @if (employeeDetail() == null) {
+            <div class="add-ctx">
+              <div class="wk-pg">
+                <div class="headline-wk-nl">
+                  <h1>We didn't find any work status</h1>
+                </div>
+                <div class="detail-wk-nl">
+                  <p>
+                    To see how can you manage your budget and work like make sure to add the detail
+                    about it.
+                  </p>
+                </div>
+                <div class="add-wk-ln">
+                  <div class="wk-wrap">
+                    <div class="btn-ent">
+                      <button class="btn-sub-wk">Add work detail</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            }@else {
+            <div class="container-wk">
+              <div class="sl-wk">
+                <h1>Will be available soon</h1>
+              </div>
+            </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

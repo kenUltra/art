@@ -8,7 +8,8 @@ import { ThemeServices } from '../../services/theme.service';
 import { AuthService } from '../../services/auth.service';
 
 import { eTheme } from '../../utils/listEmun';
-import { epasswordType } from '../../utils/auth';
+import { epasswordType, iLog } from '../../utils/auth';
+import { UserOSService } from '../../services/useros.service';
 
 @Component({
   selector: 'login-app',
@@ -20,9 +21,13 @@ export class Login {
   formBuilder = inject<FormBuilder>(FormBuilder);
   themeServices = inject<ThemeServices>(ThemeServices);
   authServives = inject<AuthService>(AuthService);
+  userOSUser = inject<UserOSService>(UserOSService);
 
   protected readonly headline = signal<string>('Sign in to Art');
   protected readonly messsageServer = signal<string>('');
+
+  submitLinkActive = signal<Boolean>(true);
+  submitterName = signal<string>('Sign in');
 
   showPassword = signal<boolean>(true);
   themeSignal = signal<string>('');
@@ -57,18 +62,31 @@ export class Login {
         this.themeSignal.set('tm-error');
       },
     });
+    this.formControl.valueChanges.subscribe((value) => {
+      if (!value.email?.match(/\S+@\S+\.\S+/i) || value.password?.length == 0) {
+        this.submitLinkActive.set(true);
+        return;
+      }
+      this.submitLinkActive.set(false);
+    });
     this.messsageServer.set('');
   }
 
   // submit
   loginEntry(subEvent: SubmitEvent): void {
+    if (subEvent.submitter?.role == undefined || subEvent.submitter.role == 'button') {
+      return;
+    }
+    this.submitLinkActive.set(true);
+    this.submitterName.set('Pending...');
+
     const mailReg: RegExp = /\S+@\S+\.\S+/;
     const sub: string | null | undefined = subEvent.submitter?.role,
-      valueForm = {
+      valueForm: iLog = {
         email: this.formControl.value.email ?? '',
         password: this.formControl.value.password ?? '',
+        currentOS: this.userOSUser.getOS(),
       };
-
     if (sub == null || sub == undefined || sub == 'button') {
       return;
     }
@@ -80,16 +98,18 @@ export class Login {
       next: (value: any) => {
         this.messsageServer.set('Success pending to auth data');
         this.hasServerReq.set(true);
-        console.log(value);
-
       },
       error: (err: any) => {
         this.messsageServer.set(err.error?.error);
         this.hasServerReq.set(false);
+        this.submitLinkActive.set(false);
+        this.submitterName.set('Sign in');
       },
       complete: () => {
-        this.messsageServer.set('Close to the end');
+        this.messsageServer.set('Redirect to your account');
         this.router.navigate(['/user-content']);
+        this.submitLinkActive.set(true);
+        this.submitterName.set('Sign in');
       },
     });
     this.formControl.setValue({ email: '', password: '' });

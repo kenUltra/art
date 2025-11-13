@@ -3,6 +3,7 @@ import { formatTime, itask, iTime, taskIconPath } from '../../utils/task';
 import { ThemeServices } from '../../services/theme.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { TaskDirective } from '../../directive/task.directive';
+import { NotificationServices } from '../../services/notification.service';
 
 @Component({
   selector: 'task-app',
@@ -13,7 +14,9 @@ import { TaskDirective } from '../../directive/task.directive';
 export class TaskComponent implements OnInit, OnDestroy {
   protected readonly oneSecond: number = 1000;
   protected readonly playIcon: string = taskIconPath;
+
   private themeServices = inject<ThemeServices>(ThemeServices);
+  private nfService = inject<NotificationServices>(NotificationServices);
 
   currentTheme = toSignal(this.themeServices.themeResolver, { initialValue: null });
 
@@ -67,12 +70,19 @@ export class TaskComponent implements OnInit, OnDestroy {
   // time function
   private startTimeout(): void {
     this.timeref = setTimeout(() => {
+      const todays: Date = new Date();
       const remainingSecond: number = this.initialSecond();
       if (remainingSecond > 0) {
         this.initialSecond.update((value: number) => value - 1);
         this.timer.set(formatTime(remainingSecond / 60));
       }
+      if (remainingSecond == 0) {
+        this.nfService.logicNf.set({
+          title: 'Congrass you have finish a chores',
+          content: this.taskData().title + ' done at ' + todays.getDate(),
+        });
 
+      }
       this.isCountingDown() ? this.startTimeout() : this.clearTimeout();
     }, this.oneSecond);
   }

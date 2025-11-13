@@ -7,10 +7,11 @@ import { PostService } from '../../services/post.service';
 
 import { iPostDt } from '../../utils/auth';
 import { iHeaderLinks } from '../../utils/header';
+import { UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'nav-auth',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, UpperCasePipe],
   templateUrl: 'nav.component.html',
   styleUrl: 'nav.component.css',
 })
@@ -27,12 +28,12 @@ export class NavComponent {
   constructor() {
     this.navList.set([
       {
-        path: '/profile',
-        placeholder: 'Home',
-      },
-      {
         path: 'message',
         placeholder: 'Post',
+      },
+      {
+        path: 'work',
+        placeholder: 'Works',
       },
       {
         path: 'setting',

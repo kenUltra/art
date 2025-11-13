@@ -7,6 +7,7 @@ import { eTheme } from '../../utils/listEmun';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { iuserData } from '../../utils/auth';
+import { UserOSService } from '../../services/useros.service';
 
 export enum Egender {
   notGender = '',
@@ -34,7 +35,9 @@ export class SignPath {
   formBuilder = inject<FormBuilder>(FormBuilder);
   themeServices = inject<ThemeServices>(ThemeServices);
   router = inject<Router>(Router);
+
   authService = inject<AuthService>(AuthService);
+  osUserService = inject<UserOSService>(UserOSService);
 
   formControls = this.formBuilder.group({
     firstName: new FormControl('', [Validators.required]),
@@ -57,6 +60,7 @@ export class SignPath {
         this.currentTheme.set(value);
       });
     });
+
     this.formControls.valueChanges.subscribe((value) => {
       const userAge: number = Number(value.age);
       const allowedAge: boolean = userAge >= 19 || userAge <= 100;
@@ -68,7 +72,7 @@ export class SignPath {
         value.gender !== '' &&
         value.userName?.length !== 0 &&
         value.email?.length !== 0 &&
-        value.password?.length !== 0 &&
+        value.password?.length !== 10 &&
         value.confimPass?.length !== 0
       ) {
         this.isSubmitBtnActive.set(false);
@@ -99,11 +103,18 @@ export class SignPath {
     const ageTyped: number = Number(currentValue.age);
     const passwordMatches: boolean = currentValue.password === currentValue.confimPass;
 
+    console.log(this.osUserService.getOS());
+
     if (submiterBtn == null) {
       return;
     }
     if (ageTyped < 19 || ageTyped > 100) {
       this.serverMessage.set('Invalid age');
+      this.isResponseSuccess.set(false);
+      return;
+    }
+    if (currentValue.password?.length == undefined || currentValue.password.length <= 6) {
+      this.serverMessage.set('The password that you have typed is too smal');
       this.isResponseSuccess.set(false);
       return;
     }
@@ -120,6 +131,8 @@ export class SignPath {
       email: currentValue.email ?? '',
       gender: currentValue.gender ?? '',
       password: currentValue.password ?? '',
+      hostOS: this.osUserService.getOS(),
+      userHardware: this.osUserService.getDeviceType(),
     };
     this.authService.createUser(valueToProccess).subscribe({
       next: (value: any) => {

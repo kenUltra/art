@@ -89,7 +89,7 @@ export class AuthService {
         headers: {
           'Content-type': 'application/json',
         },
-        withCredentials: true,
+        credentials: 'include'
       })
       .pipe(
         tap((value) => {

@@ -1,6 +1,7 @@
 export interface iLog {
   email: string;
   password: string;
+  currentOS: string;
 }
 export interface logToken {
   access: string;
@@ -20,17 +21,21 @@ export interface iuserData {
   email: string;
   gender: string;
   password: string;
+  hostOS: string;
+  userHardware: string;
 }
-export interface iPostDt {
+export interface iPostDt extends iComment {
   _id: string;
   firstName: string;
   lastName: string;
   message: string;
   isPublic: boolean;
   userName: string;
-  comments: Array<any>;
+  comments: Array<iComment>;
+  createdAt: Date;
 }
 export interface iComment {
+  id: string;
   message: string;
   sender: string;
   likes: any;

@@ -1,2 +1,60 @@
+.light-mode .ctrl-pg .lft-bg {
+  background-image: linear-gradient(90deg, #ff670b, #ffff0d, #d312d3, #1313df);
+  border-color: transparent;
+  background-position: 10% 0%;
+}
+.dark-mode .ctrl-pg .lft-bg {
+  background-color: #ff69be;
+  background-image: linear-gradient(
+    45deg,
+    var(--color-red-01),
+    var(--transparent-color),
+    var(--yellow-01)
+  );
+  background-position: 98% 0%;
+}
+.light-mode .ctrl-pg .wrk:hover,
+.light-mode .ctrl-pg .wrk:active {
+  color: var(--color-red-00);
+  background-color: var(--color-light);
+  border-color: var(--color-red-00);
+}
+.light-mode .ctrl-pg .wrk:hover,
+.light-mode .ctrl-pg .wrk:active,
+.dark-mode .ctrl-pg .wrk:active,
+.dark-mode .ctrl-pg .wrk:hover {
+  transition: border-color 207ms cubic-bezier(0.165, 0.84, 0.44, 1),
+    background-color 320ms cubic-bezier(0.6, 0.04, 0.98, 0.335);
+}
+.dark-mode .ctrl-pg .wrk:hover,
+.dark-mode .ctrl-pg .wrk:active {
+  color: var(--color-red-00);
+  background-color: var(--color-dark);
+  border-color: var(--color-red-00);
+}
+.dark-mode .ctrl-pg .wrk:active,
+.dark-mode .ctrl-pg .wrk:hover {
+  color: var(--color-red-00);
+  background-color: var(--color-dark);
+  border-color: var(--color-red-00);
+}
+.dark-mode .ctrl-pg .wrk {
+  background-color: var(--color-red-00);
+}
+.light-mode .ctrl-pg .wrk {
+  background-color: var(--color-red-00);
+  border-color: var(--transparent-color);
+}
+.light-mode .ctrl-pg .lft-bg:hover {
+  background-position: 95% 0% !important;
+}
+.light-mode .ctrl-pg .lft-bg:hover,
+.light-mode .ctrl-pg .lft-bg:active,
+.dark-mode .ctrl-pg .lft-bg:active,
+.dark-mode .ctrl-pg .lft-bg:hover {
+  background-position: 0% 0%;
+  transition-delay: 0.2s;
+  transition: background-position 450ms linear;
+}
 @supports ((backdrop-filter: initial) or (-webkit-backdrop-filter: initial)) {
 }

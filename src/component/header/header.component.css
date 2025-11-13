@@ -40,6 +40,7 @@
 }
 .wrapper {
   padding-top: 5px;
+  backdrop-filter: blur(20px);
 }
 .logo-ent {
   height: 35px;
@@ -60,12 +61,6 @@
 }
 .container-tx > .ui-dt {
   gap: 3px;
-}
-.light-mode .container-tx .dots-bar {
-  background-color: var(--color-dark);
-}
-.dark-mode .container-tx .dots-bar {
-  background-color: var(--color-light);
 }
 .scheme-btn-ent {
   border-radius: 40px;
@@ -170,12 +165,6 @@
   opacity: 1;
   transition-delay: 0.62s, 0.53s, 0.4s;
 }
-.light-mode .sun-tb > .links-bt {
-  background-color: var(--color-blue-01);
-}
-.dark-mode .sun-tb > .links-bt {
-  background-color: var(--color-deep-blue);
-}
 .sun-tb > .links-bt {
   --locaction-idx: var(--location-bx);
   --get-location: var(--locaction-idx);
@@ -216,16 +205,38 @@
   height: 90%;
   border-radius: 40px;
 }
-.light-mode .loading-bg.err,
-.light-mode .load-lg .err-logo {
-  background-color: var(--color-red-01);
-}
-.dark-mode .loading-bg.err,
-.dark-mode .load-lg .err-logo {
-  background-color: var(--color-red-00);
-}
 .loading-bg {
   width: 30px;
   height: 30px;
   border-radius: 50%;
+}
+.menu-load {
+  width: 120px;
+  height: 30px;
+  border-radius: 40px;
+}
+.badge-ent {
+  top: -10px;
+  right: 5px;
+  border-radius: 40px;
+  background-color: var(--color-red-00);
+}
+.badge-ent > span {
+  font-size: 0px;
+}
+.badge-ent > span > p {
+  font-weight: bold;
+  font-size: 11px;
+  padding: 0px 6px;
+}
+@supports ((backdrop-filter: initial) or (-webkit-backdrop-filter: initial)) {
+  .op-mn-ctx .main-lst {
+    backdrop-filter: blur(10px) saturate(115%) brightness(80%);
+    -webkit-backdrop-filter: blur(10px) saturate(115%) brightness(80%);
+    background-color: var(--transparent-color);
+  }
+  .theme-btn-ent {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
 }

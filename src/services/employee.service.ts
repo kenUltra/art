@@ -1,21 +1,23 @@
 import { inject, Injectable } from '@angular/core';
-import { BrowserStorageService } from './storage.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
+
 import { APP_SETTINGS } from '../app/app.setting';
-import { catchError, Observable, tap, throwError } from 'rxjs';
+import { BrowserStorageService } from './storage.service';
 import { iEmployee } from '../utils/empoyee';
 
 @Injectable({ providedIn: 'root' })
 export class EmployeeServices {
   private readonly tokenVl = 'access';
   private readonly backendSetting = inject(APP_SETTINGS);
+  employeeStatus: BehaviorSubject<iEmployee | null> = new BehaviorSubject<iEmployee | null>(null);
 
   private readonly url: string =
     this.backendSetting.apiUrl + '/' + this.backendSetting.backendVersion;
 
   private browserService = inject<BrowserStorageService>(BrowserStorageService);
 
-  private authValue: string = `Bearer ${this.getAccessValue().acToken}}`;
+  private authValue: string = `Bearer ${this.getAccessValue().acToken}`;
   private userID: string = this.getAccessValue().refUuid;
 
   constructor(private http: HttpClient) {}
@@ -33,7 +35,8 @@ export class EmployeeServices {
       })
       .pipe(
         tap((res) => {
-          const detail = res.employeeDetail;
+          const detail: iEmployee = res.employeeDetail;
+          this.employeeStatus.next(detail);
           return detail;
         }),
         catchError(this.httpError)

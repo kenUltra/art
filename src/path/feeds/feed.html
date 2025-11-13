@@ -2,18 +2,372 @@
   .headline > h2 {
     font-size: 17px;
   }
+  .headline,
+  .prt-ctrl-head,
+  .wp-np-pst {
+    display: flex;
+    align-items: center;
+  }
+  .light-mode .container-trl button {
+    color: var(--color-light);
+    background-color: var(--color-red-01);
+  }
+  .dark-mode .container-trl button {
+    color: var(--color-dark);
+    background-color: var(--color-red-01);
+  }
+  .container-trl button {
+    position: relative;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 5px 15px;
+    z-index: 5;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .container-trl {
+    margin-left: 5px;
+  }
+  .headline {
+    position: sticky;
+    top: 0px;
+    padding: 0px 20px;
+    height: 45px;
+    justify-content: space-between;
+    backdrop-filter: blur(10px);
+    z-index: 520;
+  }
+  .feed-root {
+    position: relative;
+  }
+  .post-mdl-part {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .mdl-prt-msk {
+    backdrop-filter: blur(20px) saturate(120%);
+  }
+  .add-pst-opn .post-mdl-part {
+    display: block;
+    z-index: 900;
+  }
+  .mdl-prt-msk,
+  .kp-mask {
+    position: absolute;
+    inset: 0;
+  }
+  .mdl-ref {
+    position: absolute;
+    height: 45px;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  .light-mode.fs-val .headline {
+    background-color: var(--gray-color-03);
+  }
+  .dark-mode.fs-val .headline {
+    background-color: var(--gray-color-02);
+  }
+  .whl-bt-ln {
+    padding: 5px 38px;
+  }
+  .wp-np-pst {
+    position: fixed;
+    inset: 0;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .stl {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  .ln-px {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 16px;
+    width: 3px;
+    border-radius: 10px;
+    transform: translate(-50%, -50%) rotate(45deg);
+    background-color: inherit;
+  }
+  .light-mode .ln-px {
+    background-color: var(--color-dark);
+  }
+  .dark-mode .ln-px {
+    background-color: var(--color-light);
+  }
+  .stl .left {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+  .hm-btn-ln {
+    position: absolute;
+    inset: 0;
+    border: 1px solid;
+    border-radius: 50%;
+    background-color: var(--transparent-color);
+    cursor: pointer;
+  }
+  .mdl-rm {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    width: 30px;
+    height: 30px;
+    border-radius: calc(var(--auto-fill) - 50%);
+  }
+  .headline-no-pst > h1 {
+    font-size: 40px;
+  }
+  .subln > p {
+    font-size: 20px;
+  }
+  .inpt {
+    margin-top: 15px;
+  }
+  .inpt textarea {
+    font-size: 17px;
+    font-weight: 500;
+    width: 95%;
+    padding: 10px 15px;
+    min-height: 165px;
+    max-height: 295px;
+    color: inherit;
+    background-color: var(--transparent-color);
+    field-sizing: content;
+    border-radius: 15px;
+    resize: none;
+  }
+  .light-mode .btn-pst {
+    border-color: var(--color-light);
+    background-color: var(--color-deep-blue);
+  }
+  .dark-mode .btn-pst {
+    background-color: var(--color-blue-02);
+  }
+  .btn-pst {
+    width: 100%;
+    font-size: 18px;
+    font-weight: 800;
+    text-transform: uppercase;
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 11px 0px;
+    cursor: pointer;
+  }
+  .wrapper-ln {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 730px;
+    border-radius: 15px;
+    padding: 10px 20px;
+    border: 1px solid;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+  }
+  .dark-mode .wrapper-ln {
+    color: var(--color-light);
+    border-color: var(--gray-color-01);
+    background-color: var(--color-dark);
+  }
+  .light-mode .wrapper-ln {
+    color: var(--color-dark);
+    border-color: var(--gray-color-02);
+    background-color: var(--color-light);
+  }
+  .res-vl-pl {
+    opacity: 0;
+    width: 0px;
+    transition: width 250ms ease, opacity 210ms ease;
+  }
+  .show-ctx {
+    width: 180px;
+    opacity: 1;
+    transition-delay: 320ms, 105ms;
+  }
+  .srv-ln {
+    width: 100%;
+    border-radius: 40px;
+  }
+  .srv-ln p {
+    padding: 0px;
+  }
+  .show-ctx .srv-ln p {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+  @media only screen and (min-width: 850px) {
+    .headline {
+      padding: 0px 47px;
+    }
+    .whl-bt-ln {
+      width: 785px;
+      padding: 5px 0px;
+      margin-inline-end: auto;
+      margin-inline-start: auto;
+    }
+  }
+  @media only screen and (max-width: 820px) {
+    .wrapper-ln {
+      width: 530px;
+    }
+    .inpt textarea {
+      font-size: 16px;
+    }
+    .title-mdl > h2 {
+      font-size: 16px;
+    }
+    .btn-pst {
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+  @media only screen and (max-width: 880px) {
+    .headline-no-pst > h1 {
+      font-size: 32px;
+    }
+    .subln > p {
+      font-size: 18px;
+    }
+  }
+  @media only screen and (max-width: 590px) {
+    .wrapper-ln {
+      width: 85%;
+    }
+    .inpt textarea {
+      width: 90%;
+    }
+  }
+  @media only screen and (max-width: 430px) {
+    .headline-no-pst > h1 {
+      font-size: 25px;
+    }
+    .subln > p {
+      font-size: 15px;
+    }
+    .whl-bt-ln {
+      padding: 5px 10px;
+    }
+  }
 </style>
-<section class="section">
+<section [class]="classSection()">
   <div class="feed-root">
+    <div class="post-mdl-part">
+      <div class="content-vtx">
+        <div class="wrapper-ln">
+          <div class="content">
+            <div class="title-mdl">
+              <h2>Make new post</h2>
+            </div>
+            <div class="msg-server">
+              <div class="server-res">
+                <div class="res-ctx">
+                  <div [class]="serverResponse()">
+                    <div class="srv-ln">
+                      <p>{{ serverValue() }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ctrl-pst-ent">
+              <div class="snt-pst">
+                <div class="inpt">
+                  <textarea
+                    [(ngModel)]="valuePost"
+                    name="post-nm"
+                    id="post-fld"
+                    placeholder="What's in you mind"
+                  ></textarea>
+                </div>
+                <div class="btn-parent">
+                  <div class="shr-btn">
+                    <button (click)="sendPostBtn()" (keydown.enter)="sendPostBtn()" class="btn-pst">
+                      <span>Send post</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="remove-btn-wp">
+            <div class="mdl-rm">
+              <div class="stl">
+                <div class="ln-px left"></div>
+                <div class="ln-px"></div>
+              </div>
+              <div class="ctnr">
+                <button
+                  (keypress.enter)="backPage()"
+                  (click)="backPage()"
+                  class="hm-btn-ln"
+                ></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="msk">
+        <div class="main-smk">
+          <div class="mdl-prt-msk" (click)="backPage()"></div>
+        </div>
+      </div>
+    </div>
     <div class="headline">
-      <h2>Posts</h2>
+      <h2>Post</h2>
+      <div class="control-head">
+        <div class="vl-pst">
+          <div class="kp-mask"></div>
+        </div>
+        <div class="prt-ctrl-head">
+          <div class="add-post-ctrl">
+            <div class="container-trl">
+              <button (click)="postModalEvent()" class="ln-prt">
+                <span>Add post</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="content">
-      <post-ui [postData]="sample()"></post-ui>
+    <div class="ref-mdl">
+      <div class="mdl-ref" #headlineRef></div>
     </div>
-    <div class="remove-ts">
-      <button (click)="updateValue()">update signal</button>
-      <button (click)="settingValue()">setting signal</button>
+    <div class="content-bx">
+      <div class="parent-bx">
+        <div class="whl-bt-ln">
+          @for (post of postSignal(); track $index) {
+          <post-ui
+            [postData]="post"
+            [stylePost]="postClass"
+            (likePostEvent)="likePost($event)"
+            (sendNewComment)="commentPost($event)"
+            [unicId]="$index"
+          ></post-ui>
+          } @empty {
+          <div class="no-news">
+            <div class="nl-pst">
+              <div class="wp-np-pst">
+                <div class="headline-no-pst">
+                  <h1>No Post Available</h1>
+                </div>
+                <div class="subln">
+                  <p>All post will be display here</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          }
+        </div>
+      </div>
     </div>
   </div>
 </section>

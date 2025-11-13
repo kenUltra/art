@@ -56,7 +56,9 @@
       <ul [class]="badgeClass()">
         @for (navs of navList(); track $index) {
         <li>
-          <a [routerLink]="navs.path" [routerLinkActive]="navVisisted">{{ navs.placeholder }}</a>
+          <a [routerLink]="navs.path" [routerLinkActive]="navVisisted">{{
+            navs.placeholder | uppercase
+          }}</a>
           <div class="control-bx">
             @if (navs.path == 'message') {
             <div class="badge-message">

@@ -19,6 +19,7 @@ html {
 :root {
   --color-dark: color(display-p3 0 0 0);
   --color-light: color(display-p3 1 1 1);
+  --light-gray-cls: color(display-p3 0.83 0.83 0.83);
   --white-color-00: color(display-p3 1 1 1 / 0.6);
   --gray-color-00: color(display-p3 0.8 0.79 0.79);
   --gray-color-01: color(display-p3 0.25 0.25 0.25);
