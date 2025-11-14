@@ -1,0 +1,48 @@
+.nav > ul,
+.container-tx > .ui-dt,
+.menu-mb,
+.load-lg,
+.content-th > .theme-btn-ent,
+.main-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.badge-cmp {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.main-nav {
+  justify-content: space-between;
+}
+.art-container {
+  width: 85px;
+}
+.content-th > .theme-btn-ent {
+  justify-content: flex-start;
+}
+.theme-plc span {
+  font-size: 0px;
+  letter-spacing: 0.0458em;
+}
+.theme-plc span > p {
+  font-size: 11px;
+  font-weight: bold;
+  padding: 1px 8px;
+}
+.menu-mb {
+  flex-direction: column;
+  gap: 4px 0px;
+}
+@supports ((backdrop-filter: initial) or (-webkit-backdrop-filter: initial)) {
+  .op-mn-ctx .main-lst {
+    backdrop-filter: blur(10px) saturate(115%) brightness(80%);
+    -webkit-backdrop-filter: blur(10px) saturate(115%) brightness(80%);
+    background-color: var(--transparent-color);
+  }
+  .theme-btn-ent {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+}

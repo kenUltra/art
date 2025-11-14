@@ -22,6 +22,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   selector: 'feed-page',
   imports: [PostComponent, FormsModule],
   templateUrl: 'feed.html',
+  styleUrl: 'feed.css',
 })
 export class FeedsPage implements AfterViewInit {
   readonly postClass: string = 'fd-pst';
@@ -33,6 +34,7 @@ export class FeedsPage implements AfterViewInit {
   hasServerResponse = signal<boolean>(false);
   serverValue = signal<string>('');
   valuePost = signal<string>('');
+  postState = signal<boolean>(false);
 
   refHeadline = viewChild<ElementRef<HTMLDivElement>>('headlineRef');
 
@@ -116,7 +118,7 @@ export class FeedsPage implements AfterViewInit {
   sendPostBtn(): void {
     const postDt = {
       message: this.valuePost(),
-      isPublic: false,
+      isPublic: this.postState(),
     };
     if (this.valuePost().length <= 6) {
       this.serverValue.set('The value that you enter is too short');
@@ -126,15 +128,17 @@ export class FeedsPage implements AfterViewInit {
     this.hasServerResponse.set(true);
     this.postSerice.sendPost(postDt).subscribe({
       next: (value) => {
-        console.log(value);
+        this.serverValue.set(value.message);
       },
       error: (err: HttpErrorResponse) => {
-        this.openPostModal.set(false);
+        this.openPostModal.set(true);
         this.serverValue.set(err.message);
       },
       complete: () => {
-        this.openPostModal.set(true);
+        this.openPostModal.set(false);
         this.serverValue.set('');
+        this.valuePost.set('');
+        this.postState.set(false);
       },
     });
   }

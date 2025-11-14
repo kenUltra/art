@@ -35,7 +35,7 @@ export class PostService {
     this.userUUID.set(userID);
     this.accessToken.set(token);
   }
-  getPost(): Observable<any> {
+  getPost(getAllPost: boolean = true): Observable<any> {
     const storage = this.readJSON(this.userData.get(this.userToken) ?? '');
 
     return this.http
@@ -50,8 +50,7 @@ export class PostService {
           const mergeValue: Array<iPostDt> = value.content;
           const publicContent: Array<iPostDt> = value.publicMessage;
           const conbineValue: iPostDt[] = [...mergeValue, ...publicContent];
-
-          this.listMessage.next(conbineValue);
+          getAllPost ? this.listMessage.next(conbineValue) : this.listMessage.next(mergeValue);
           return this.listMessage.getValue();
         }),
         catchError(this.httpError)
@@ -111,6 +110,9 @@ export class PostService {
       })
       .pipe(
         tap((value) => {
+          this.getPost().subscribe((res) => {
+            return res;
+          });
           return value;
         }),
         catchError(this.httpError)

@@ -22,7 +22,7 @@ import { AuthService } from '../../services/auth.service';
   selector: 'art-header',
   imports: [RouterLink, RouterLinkActive, UpperCasePipe, NavDirective],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css',
+  styleUrls: ['./header.component.css', 'helperhead.component.css'],
 })
 export class HeaderComponent implements OnInit {
   protected readonly nameActiveClass: WritableSignal<string> = signal<string>('focus-page');

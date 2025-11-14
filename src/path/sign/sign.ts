@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { iuserData } from '../../utils/auth';
 import { UserOSService } from '../../services/useros.service';
+import { NotificationCenter } from '../../utils/notification';
 
 export enum Egender {
   notGender = '',
@@ -103,8 +104,6 @@ export class SignPath {
     const ageTyped: number = Number(currentValue.age);
     const passwordMatches: boolean = currentValue.password === currentValue.confimPass;
 
-    console.log(this.osUserService.getOS());
-
     if (submiterBtn == null) {
       return;
     }
@@ -136,20 +135,31 @@ export class SignPath {
     };
     this.authService.createUser(valueToProccess).subscribe({
       next: (value: any) => {
+        const responseRerver = value.messsage;
         this.isResponseSuccess.set(true);
+        NotificationCenter(
+          responseRerver,
+          'You can log anytine you like.',
+          undefined,
+          '/user-content'
+        );
       },
       error: (err: any) => {
         console.error('Trouble happen in: ', err);
         this.isResponseSuccess.set(false);
-        if (err.error?.error) {
+        if (err.error?.error ) {
           this.serverMessage.set(err.error.error);
+          return;
+        }
+        if (err.error?.message) {
+          this.serverMessage.set(err.error.messsage);
           return;
         }
         this.serverMessage.set(err.name + ' ' + err.statusText);
       },
       complete: () => {
         this.serverMessage.set('Created without any issues');
-        this.router.navigate(['/user-content']);
+        this.router.navigate(['/home']);
       },
     });
     this.formControls.setValue({

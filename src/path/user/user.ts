@@ -77,7 +77,6 @@ export class UserPath {
     };
     this.postService.sendPost(postValue).subscribe({
       next: (value: any) => {
-        console.log(value);
         this.title.setTitle(value.firstName + " you're post is send | Art inc");
       },
       error: (errorStatus: any) => {
@@ -86,8 +85,7 @@ export class UserPath {
         this.title.setTitle('Error occured when posting the message');
       },
       complete: () => {
-        this.title.setTitle(value.firstName + ' ' + value.lastName + '| Art inc');
-        console.log('OK done');
+        this.title.setTitle('Post Added | Art inc');
       },
     });
   }

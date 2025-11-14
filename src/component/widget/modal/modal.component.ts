@@ -59,7 +59,7 @@ export class ModalComponent implements OnInit {
         });
       },
     });
-    this.postSerice.getPost().subscribe({
+    this.postSerice.getPost(false).subscribe({
       next: (response: any) => {
         this.title.setTitle('Threre is ' + response.length + ' sended');
       },

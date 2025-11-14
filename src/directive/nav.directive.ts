@@ -9,7 +9,8 @@ import {
   Renderer2,
   signal,
 } from '@angular/core';
-import { Event, Router } from '@angular/router';
+import { Event, NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Directive({
   selector: '[nav-link-tracker]',
@@ -28,8 +29,6 @@ export class NavDirective implements OnInit, AfterContentInit {
   constructor() {
     afterNextRender(() => {
       this.router.events.subscribe((value: Event) => {
-        this.router.lastSuccessfulNavigation;
-
         if (!this.slierRef) {
           this.slierRef = this.elementRef.nativeElement.querySelector(this.capsuleSelector());
         }
@@ -37,9 +36,12 @@ export class NavDirective implements OnInit, AfterContentInit {
       });
     });
   }
-  ngOnInit(): void {}
-  ngAfterContentInit(): void {
+  ngOnInit(): void {
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event) => {});
   }
+  ngAfterContentInit(): void {}
 
   private updateSliderPosition(): void {
     const activeLink: HTMLElement = this.elementRef.nativeElement.querySelector(

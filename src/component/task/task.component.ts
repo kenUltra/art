@@ -1,9 +1,21 @@
-import { Component, effect, inject, input, OnDestroy, OnInit, output, signal } from '@angular/core';
+import {
+  Component,
+  effect,
+  inject,
+  input,
+  OnDestroy,
+  OnInit,
+  output,
+  signal,
+  viewChild,
+} from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+
 import { formatTime, itask, iTime, taskIconPath } from '../../utils/task';
 import { ThemeServices } from '../../services/theme.service';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { TaskDirective } from '../../directive/task.directive';
-import { NotificationServices } from '../../services/notification.service';
+
+import { NotificationCenter } from '../../utils/notification';
 
 @Component({
   selector: 'task-app',
@@ -16,7 +28,6 @@ export class TaskComponent implements OnInit, OnDestroy {
   protected readonly playIcon: string = taskIconPath;
 
   private themeServices = inject<ThemeServices>(ThemeServices);
-  private nfService = inject<NotificationServices>(NotificationServices);
 
   currentTheme = toSignal(this.themeServices.themeResolver, { initialValue: null });
 
@@ -70,19 +81,21 @@ export class TaskComponent implements OnInit, OnDestroy {
   // time function
   private startTimeout(): void {
     this.timeref = setTimeout(() => {
-      const todays: Date = new Date();
       const remainingSecond: number = this.initialSecond();
       if (remainingSecond > 0) {
         this.initialSecond.update((value: number) => value - 1);
         this.timer.set(formatTime(remainingSecond / 60));
       }
       if (remainingSecond == 0) {
-        this.nfService.logicNf.set({
-          title: 'Congrass you have finish a chores',
-          content: this.taskData().title + ' done at ' + todays.getDate(),
-        });
-
+        this.isCountingDown.set(false);
+        NotificationCenter(
+          'Congrass Task done',
+          'The task: ' + this.taskData().title + ". don't forget other tasks",
+          undefined,
+          '/chores'
+        );
       }
+
       this.isCountingDown() ? this.startTimeout() : this.clearTimeout();
     }, this.oneSecond);
   }

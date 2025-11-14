@@ -4,6 +4,7 @@
   }
   .headline,
   .prt-ctrl-head,
+  .plc-rd,
   .wp-np-pst {
     display: flex;
     align-items: center;
@@ -152,27 +153,7 @@
   .dark-mode .btn-pst {
     background-color: var(--color-blue-02);
   }
-  .btn-pst {
-    width: 100%;
-    font-size: 18px;
-    font-weight: 800;
-    text-transform: uppercase;
-    border: 1px solid;
-    border-radius: 10px;
-    padding: 11px 0px;
-    cursor: pointer;
-  }
-  .wrapper-ln {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 730px;
-    border-radius: 15px;
-    padding: 10px 20px;
-    border: 1px solid;
-    transform: translate(-50%, -50%);
-    z-index: 5;
-  }
+
   .dark-mode .wrapper-ln {
     color: var(--color-light);
     border-color: var(--gray-color-01);
@@ -183,27 +164,7 @@
     border-color: var(--gray-color-02);
     background-color: var(--color-light);
   }
-  .res-vl-pl {
-    opacity: 0;
-    width: 0px;
-    transition: width 250ms ease, opacity 210ms ease;
-  }
-  .show-ctx {
-    width: 180px;
-    opacity: 1;
-    transition-delay: 320ms, 105ms;
-  }
-  .srv-ln {
-    width: 100%;
-    border-radius: 40px;
-  }
-  .srv-ln p {
-    padding: 0px;
-  }
-  .show-ctx .srv-ln p {
-    font-size: 16px;
-    padding: 10px 20px;
-  }
+
   @media only screen and (min-width: 850px) {
     .headline {
       padding: 0px 47px;
@@ -287,6 +248,23 @@
                     id="post-fld"
                     placeholder="What's in you mind"
                   ></textarea>
+                </div>
+                <div class="oth-cp">
+                  <div class="th-ct">
+                    <div class="state-btn">
+                      <div class="plc-rd">
+                        <p>Is the public?</p>
+                        <div class="rd-th">
+                          <input
+                            type="checkbox"
+                            [(ngModel)]="postState"
+                            name="state-pst"
+                            id="post-md-ref"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div class="btn-parent">
                   <div class="shr-btn">

@@ -229,14 +229,4 @@
   font-size: 11px;
   padding: 0px 6px;
 }
-@supports ((backdrop-filter: initial) or (-webkit-backdrop-filter: initial)) {
-  .op-mn-ctx .main-lst {
-    backdrop-filter: blur(10px) saturate(115%) brightness(80%);
-    -webkit-backdrop-filter: blur(10px) saturate(115%) brightness(80%);
-    background-color: var(--transparent-color);
-  }
-  .theme-btn-ent {
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-  }
-}
+
