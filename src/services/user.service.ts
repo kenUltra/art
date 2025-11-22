@@ -40,16 +40,24 @@ export class UserService {
   }
   changeUserName(newName: string): Observable<any> {
     const userStoreId = JSON.parse(this.localStr.get(this.localStorageRef) ?? '');
-    return this.http.patch<any>(
-      this.backendURl + '/pages/' + userStoreId.refUuid,
-      { userName: newName },
-      {
+    const name = { userName: newName };
+    return this.http
+      .patch<any>(this.urlServer + '/pages/' + userStoreId.refUuid, name, {
         headers: {
           Authentication: `Bearer ${this.authService.accessPage()}`,
+          'Content-type': 'application/json',
         },
         withCredentials: true,
-      }
-    );
+      })
+      .pipe(
+        map((res) => {
+          this.getUserData().subscribe((value) => {
+            return value;
+          });
+          return res;
+        }),
+        catchError(this.httpErrorHandle)
+      );
   }
   private httpErrorHandle(error: HttpErrorResponse) {
     let response: string = '';

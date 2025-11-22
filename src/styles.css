@@ -35,6 +35,7 @@ html {
   --yellow-02: color(display-p3 1 0.93 0);
   --color-red-01: color(display-p3 0.95 0.23 0.23);
   --transparent-color: color(display-p3 1 1 1 / 0);
+  --dark-transparent: color(display-p3 0 0 0 / 0.29);
   --green-color-00: color(display-p3 0.34 0.99 0.46);
   --green-color-01: color(display-p3 0.34 0.99 0.46);
   --green-color-02: color(display-p3 0.31 1 0.59);
@@ -51,6 +52,10 @@ a:active,
 a:link,
 a:visited {
   text-decoration: none;
+}
+.html.mn-nv-opn {
+  overflow: hidden;
+  height: 100%;
 }
 .html a {
   color: inherit;

@@ -4,12 +4,13 @@ import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
 
 import { APP_SETTINGS } from '../app/app.setting';
 import { BrowserStorageService } from './storage.service';
-import { iEmployee } from '../utils/empoyee';
+import { iEmployee } from '../utils/empoyee_lst';
 
 @Injectable({ providedIn: 'root' })
 export class EmployeeServices {
   private readonly tokenVl = 'access';
   private readonly backendSetting = inject(APP_SETTINGS);
+
   employeeStatus: BehaviorSubject<iEmployee | null> = new BehaviorSubject<iEmployee | null>(null);
 
   private readonly url: string =

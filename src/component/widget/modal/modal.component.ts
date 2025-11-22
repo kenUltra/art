@@ -29,7 +29,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class ModalComponent implements OnInit {
   themeService = inject<ThemeServices>(ThemeServices);
-  postSerice = inject<PostService>(PostService);
+  postServices = inject<PostService>(PostService);
 
   sliderRef = viewChild<ElementRef<HTMLDivElement>>('refSlder');
 
@@ -47,9 +47,10 @@ export class ModalComponent implements OnInit {
   listCap = signal<string[]>([]);
   isCorrectVal = signal<boolean>(false);
 
-  postSignal = toSignal(this.postSerice.listMessage, { initialValue: [] });
+  postSignal = toSignal(this.postServices.listMessage, { initialValue: [] });
   trackSilderLocation = signal<number>(0);
   countPost = signal<number>(0);
+  sliderPress = output<boolean>();
 
   constructor(private title: Title, private route: Router) {
     afterNextRender({
@@ -59,7 +60,7 @@ export class ModalComponent implements OnInit {
         });
       },
     });
-    this.postSerice.getPost(false).subscribe({
+    this.postServices.getPost(false).subscribe({
       next: (response: any) => {
         this.title.setTitle('Threre is ' + response.length + ' sended');
       },
@@ -79,7 +80,7 @@ export class ModalComponent implements OnInit {
     this.textTyped.emit({ message: this.inputValue(), isMessagePublic: this.isCorrectVal() });
     this.inputValue.set('');
     this.isCorrectVal.set(false);
-    this.postSerice.getPost();
+    this.postServices.getPost(false);
   }
   showInfoMessage(elToshow: HTMLDivElement): void {
     elToshow.style.setProperty('--show-line', '1');
@@ -94,6 +95,7 @@ export class ModalComponent implements OnInit {
     if (ref == null) {
       return;
     }
+    this.sliderPress.emit(this.hasServerResponse() ?? false);
     const { offsetLeft } = btn;
     const width: number = btn.getBoundingClientRect().width;
     const tabLoc: number = Number(btn.getAttribute('tabindex'));
@@ -111,7 +113,7 @@ export class ModalComponent implements OnInit {
     }
   }
   deleteUserPost(uuid: string): void {
-    this.postSerice.deletePost(uuid).subscribe({
+    this.postServices.deletePost(uuid).subscribe({
       next: (value: any) => {
         console.log(value);
       },
@@ -126,9 +128,9 @@ export class ModalComponent implements OnInit {
   commentPost(value: { id: string; value: string }): void {
     const commentData: { commentValue: string; refMessage: string } = {
       commentValue: value.value,
-      refMessage: value.value,
+      refMessage: value.id,
     };
-    this.postSerice.commentPost(commentData.commentValue, commentData.refMessage).subscribe({
+    this.postServices.commentPost(commentData.commentValue, commentData.refMessage, false).subscribe({
       next: (value: any) => {
         console.log(value);
       },

@@ -34,6 +34,7 @@ export class HeaderComponent implements OnInit {
     capsuleSelector: '.links-bt',
   });
   navLinks: WritableSignal<iHeaderLinks[]> = listNav;
+  navigationRef = viewChild<ElementRef<HTMLElement | undefined>>('navigationBar');
 
   isModalOpen: WritableSignal<boolean> = signal<boolean>(false);
   isMenuShow: WritableSignal<boolean> = signal<boolean>(false);
@@ -48,6 +49,9 @@ export class HeaderComponent implements OnInit {
 
   constructor() {
     afterNextRender(() => {
+      const navEl: HTMLElement | undefined = this.navigationRef()?.nativeElement;
+      navEl == undefined ? null : this.resizeAPI(navEl);
+
       this.themeServices.themeResolver.subscribe((value: eTheme) => {
         this.themeSignal.set(value);
       });
@@ -90,7 +94,17 @@ export class HeaderComponent implements OnInit {
     this.isModalOpen.set(!this.isModalOpen());
   }
   openMenuBtn(): void {
+    const html: HTMLHtmlElement = document.querySelector('html') as HTMLHtmlElement;
+
+    const menuopen = (addStyle: boolean = true) => {
+      addStyle ? html.classList.add('mn-nv-opn') : html.classList.remove('mn-nv-opn');
+    };
+
     this.isMenuShow.set(!this.isMenuShow());
+    this.isMenuShow() ? menuopen() : menuopen(false);
+  }
+  mobileLink(): void {
+    this.isMenuShow.set(false);
   }
   closeMenuBtn(): void {
     this.isMenuShow.set(false);
@@ -110,4 +124,14 @@ export class HeaderComponent implements OnInit {
   }
 
   // logic
+  resizeAPI(target: Element): ResizeObserver {
+    const funcResize = (entries: ResizeObserverEntry[]) => {
+      const entry: ResizeObserverEntry = entries[0];
+      this.isMenuShow.set(false);
+    };
+    const entryApi = new ResizeObserver(funcResize);
+
+    entryApi.observe(target);
+    return entryApi;
+  }
 }

@@ -54,8 +54,6 @@ export class AuthService {
   }
 
   getContent(): Observable<any> {
-    const tokenRef = this.readJSON(this.storageService.get(this.tokenRef) ?? '');
-
     return this.http.get<any>(this.url + '/refresh', { credentials: 'include' }).pipe(
       tap((value: any) => {
         return value;

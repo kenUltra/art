@@ -24,6 +24,9 @@ export class App {
       mixedReadWrite: () => {
         const mainRoot = document.querySelector<'html'>('html') as HTMLElement;
         this.themeService.getTheme();
+        Notification.requestPermission((permissionNf: NotificationPermission) => {
+          return permissionNf;
+        });
 
         this.themeService.themeResolver.pipe().subscribe({
           next: (value: eTheme) => {

@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { NavComponent } from '../../component/nav/nav.component';
 import { Title } from '@angular/platform-browser';
+
+import { AuthService } from '../../services/auth.service';
 import { BrowserStorageService } from '../../services/storage.service';
+import { NavComponent } from '../../component/nav/nav.component';
 
 @Component({
   selector: 'auth-page',
@@ -30,9 +31,12 @@ export class AuthPath {
       error: (error: any) => {
         console.error(error.name + ' ' + error.statusText);
         if (!error.ok) {
+          this.authService.logout().subscribe((value: any) => {
+            return value;
+          });
           this.authService.isLoggedIn.next(false);
           this.storage.remove(this.tokenValue);
-          this.router.navigate(['/home'], { skipLocationChange: true });
+          this.router.navigate(['/home']);
         }
       },
     });

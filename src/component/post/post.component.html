@@ -6,9 +6,14 @@
   .snd-ng::before,
   .snd-ng::after,
   .rm-ui .top,
+  .current-st,
   .rm-ui .top::after,
   .cmt-ctrl {
     position: absolute;
+  }
+  .current-st {
+    right: 15px;
+    bottom: 15px;
   }
   .rm-ui .top {
     top: 7px;
@@ -375,20 +380,20 @@
       </div>
       <div class="status-ct">
         <div class="msg-status">
-          <div class="wrapper-ln-stk">
-            @if (canBeRemove()) {
-            <div class="sts-stack">
-              <div class="current-st">
-                <div class="ftr-prg">
-                  <span
-                    >{{
-                      (postData().isPublic == true ? 'Public' : 'Private') | uppercase
-                    }}
-                    Message</span
-                  >
-                </div>
+          @if (canBeRemove()) {
+          <div class="sts-stack">
+            <div class="current-st {{ postData().isPublic == true ? 'tr-msg' : 'fs-msg' }}">
+              <div class="ftr-prg">
+                <span
+                  >{{
+                    (postData().isPublic == true ? 'Public' : 'Private') | uppercase
+                  }}
+                  MESSAGE</span
+                >
               </div>
             </div>
+          </div>
+          <div class="wrapper-ln-stk">
             <div class="remove-btn">
               <div class="rm-vx">
                 <div class="remove-ln-pop">
@@ -402,14 +407,18 @@
                   </div>
                   <div class="ctrl-vpx">
                     <div class="vx-prt">
-                      <button (keypress.enter)="deletePost()" (click)="deletePost()" class="remove-tls"></button>
+                      <button
+                        (keypress.enter)="deletePost()"
+                        (click)="deletePost()"
+                        class="remove-tls"
+                      ></button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            }
           </div>
+          }
         </div>
       </div>
     </div>

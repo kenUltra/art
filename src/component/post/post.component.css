@@ -126,6 +126,20 @@
   visibility: visible;
   transition-delay: 120ms, 420ms;
 }
+.ftr-prg {
+  font-size: 15px;
+  font-weight: 500;
+}
+.ftr-prg > span {
+  padding: 7px 15px;
+  border-radius: 40px;
+}
+.dark-mode .ul-ls .nt-ms .cmt-vm p {
+  background-color: var(--color-deep-blue);
+}
+.light-mode .ul-ls .nt-ms .cmt-vm p {
+  background-color: var(--color-blue-01);
+}
 .fld-pst {
   opacity: 0;
   visibility: hidden;
@@ -149,12 +163,25 @@
   font-size: 16px;
   font-weight: 100;
 }
+.md-style .ln-mn > p {
+  padding: 8px 0px;
+}
+.fs-msg span {
+  background: var(--color-red-00);
+}
+.tr-msg span {
+  color: var(--green-color-dark);
+  background-color: var(--green-color-00);
+}
 @media only screen and (max-width: 790px) {
   .headline-nl-ls > h4 {
     font-size: 17px;
   }
   .subln-ns > p {
     font-size: 15px;
+  }
+  .ftr-prg {
+    font-size: 14px;
   }
 }
 @media only screen and (max-width: 540px) {
@@ -186,5 +213,8 @@
 @media only screen and (max-width: 450px) {
   .md-style .cmt-vm {
     font-size: 14px;
+  }
+  .ftr-prg {
+    font-size: 12px;
   }
 }

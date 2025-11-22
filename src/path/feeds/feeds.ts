@@ -119,6 +119,7 @@ export class FeedsPage implements AfterViewInit {
     const postDt = {
       message: this.valuePost(),
       isPublic: this.postState(),
+      seeALLResponse: true,
     };
     if (this.valuePost().length <= 6) {
       this.serverValue.set('The value that you enter is too short');

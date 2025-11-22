@@ -1,8 +1,10 @@
-export interface iEmployee {
+import { FormGroup } from '@angular/forms';
+
+export interface iEmployeeValue {
   position: string;
   phoneNumber: number;
   hiredDate: Date;
-  salary: DoubleRange;
+  salary: number;
   curreny: eCurrency;
   companyName: string;
   headQ: string;
@@ -13,4 +15,15 @@ export enum eCurrency {
   Dollar = 'USD',
   Euro = 'EUR',
   SterlingPound = 'GDP',
+}
+export interface inputWork {
+  type: string | number;
+  placeholder: string;
+  id: string;
+  isMenu: boolean;
+  name: string;
+  formName: string;
+  label?: string;
+  autoComplte?: string;
+  entryForm: FormGroup<any>;
 }

@@ -1,0 +1,55 @@
+.load-pg .wp-txt > h2,
+.err-lds .wp-txt > h2 {
+  font-size: 55px;
+}
+.wp-txt > h2 {
+  color: var(--transparent-color);
+  background-image: linear-gradient(
+    45deg,
+    var(--color-deep-blue),
+    var(--color-deep-blue),
+    var(--transparent-color),
+    var(--color-blue-02, var(--color-blue-02))
+  );
+  background-clip: text;
+  background-size: 50rem;
+  background-position: 0% 0%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+}
+.err-lds .wp-txt > h2 {
+  background-image: linear-gradient(
+    45deg,
+    var(--color-red-01),
+    var(--color-red-01),
+    var(--yellow-02)
+  );
+  background-size: 30rem;
+  font-size: 30px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .wp-txt > h2,
+  .err-lds .wp-txt > h2 {
+    animation: 1.5s alternate 750ms infinite cubic-bezier(0.77, 0, 0.175, 1);
+  }
+  .err-lds .wp-txt > h2 {
+    animation-name: load_slider;
+  }
+  .err-lds .wp-txt > h2 {
+    animation-name: error_load;
+  }
+}
+@keyframes load_slider {
+  to {
+    background-position: 100%;
+  }
+  from {
+    background-position: 0%;
+  }
+}
+@media only screen and (max-width: 490px) {
+  .err-lds .wp-txt > h2 {
+    font-size: 23px;
+  }
+}

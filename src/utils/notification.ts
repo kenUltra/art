@@ -16,7 +16,5 @@ export const NotificationCenter = (
   mainNotification.addEventListener('click', (e: Event) => {
     document.location.href = document.location.origin + (pathTag ?? '/home');
   });
-  mainNotification.addEventListener('error', (event: Event) => {
-    document.location.href = document.location.origin + '/not-found';
-  });
+
 };

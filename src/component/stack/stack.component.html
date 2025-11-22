@@ -7,8 +7,40 @@
   .pen-ctx,
   .thg-btn,
   .leading-pn,
+  .bd-pnc,
+  .ctn-bn,
+  .head-pnc,
+  .mdl-on .back-modal,
+  .smg-rs,
+  .cross-e,
+  .btn-back-crl,
+  .wrapper-xrl,
   .msk-ctx {
     position: absolute;
+  }
+  .cirle-tr {
+    padding: 1px 1px;
+  }
+  .btn-back-crl,
+  .mdl-on .back-modal {
+    inset: 0;
+  }
+  .smg-rs {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+  }
+  .mdl-on {
+    position: fixed;
+    inset: 0;
+    backdrop-filter: blur(15px) saturate(150%) brightness(100%);
+    z-index: 800;
+  }
+  .mdl-on {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .thg-btn {
     z-index: 5;
@@ -37,6 +69,12 @@
   .pn-br {
     position: relative;
   }
+  .mdl-on .stack-bx {
+    display: none;
+  }
+  .back-modal {
+    z-index: 20;
+  }
   .stack-bx {
     height: 100%;
     border-radius: 10px;
@@ -58,9 +96,17 @@
   .pen-ctx {
     top: 5px;
     right: 10px;
-    width: 27px;
-    height: 27px;
+    width: 31px;
+    height: 31px;
     border-radius: 50%;
+  }
+  .nt-ml .ctn-bn {
+    opacity: 0;
+    visibility: hidden;
+  }
+  .mdl-on .ctn-bn {
+    opacity: 1;
+    visibility: visible;
   }
   .thg-btn > button {
     border: 1px solid;
@@ -69,45 +115,167 @@
     cursor: pointer;
     background-color: var(--transparent-color);
   }
+  .light-mode .head-pnc,
+  .dark-mode .ctn-bn,
+  .light-mode .bd-pnc {
+    background-color: var(--color-dark);
+  }
+  .dark-mode .head-pnc,
+  .light-mode .ctn-bn,
+  .dark-mode .bd-pnc {
+    background-color: var(--color-light);
+  }
+  .dark-mode .ctn-bn {
+    border-color: var(--color-light);
+  }
+  .light-mode .ctn-bn {
+    border-color: var(--gray-color-02);
+  }
+
+  .head-pnc {
+    top: 6px;
+    right: 5px;
+    width: 8px;
+    height: 5px;
+    transform: rotate(45deg);
+    z-index: -1;
+  }
+  .bd-pnc {
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 14px;
+    border-radius: 10px 10px 10px 10px;
+    transform: translate(-50%, -50%) rotate(45deg);
+    z-index: -1;
+  }
+  .dark-mode .thg-btn > button {
+    border-color: var(--color-light);
+  }
 </style>
 
 <div [class]="mainTheme()">
-  <div class="parent-stack">
-    <div class="content-st">
-      <div class="headline">
-        <h2>{{ stackValue().headline }}</h2>
-      </div>
-      <div class="ctrl-bx">
-        <div class="container-ctrl">
-          @if(stackValue().isEditable) {
-          <div class="pen-ctx">
-            <div class="pn-br">
-              <div class="wrap-br">
-                <div class="leading-pn"></div>
-                <div class="content-pn"></div>
+  <div [class]="modalClass('prt-bx')">
+    <div class="b-hm">
+      <div class="back-modal" (click)="backHome()"></div>
+    </div>
+    <div (click)="stackCLicked()" [class]="mainTheme()">
+      <div class="parent-stack">
+        <div class="content-st">
+          <div class="headline">
+            <h2>{{ stackValue().headline }}</h2>
+          </div>
+          <div class="ctrl-bx">
+            <div class="container-ctrl">
+              @if(stackValue().isEditable) {
+              <div class="pen-ctx">
+                <div class="pn-br">
+                  <div class="wrap-br">
+                    <div class="leading-pn"></div>
+                    <div class="content-pn"></div>
+                  </div>
+                  <div class="ctr-container">
+                    <div class="cm-bx">
+                      <div class="thg-btn">
+                        <div class="edit-ctrls">
+                          <div class="head-pnc"></div>
+                          <div class="bd-pnc"></div>
+                        </div>
+                        <button (click)="stackCLicked()" class="control-ln"></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="ctr-container">
-                <div class="cm-bx">
-                  <div class="thg-btn">
-                    <button class="control-ln"></button>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="stack-bg">
+        <div class="bg-msk">
+          <div class="msk-ctx"></div>
+        </div>
+      </div>
+      <div [class]="modalClass('md-pn')">
+        <div class="cn-modal">
+          <div class="mdl-parnt">
+            <div class="mn-part"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content-ml">
+      <div class="ctn-bn">
+        <div class="wp-bn">
+          <div class="thg-hrl">
+            <div class="content-msl">
+              <div class="headline">
+                <h1>{{ healine() }}</h1>
+              </div>
+              <div class="parent-mdl-px">
+                <div class="ld-vls">
+                  @if (stackValue().valueToChange == 'userName') {
+                  <h4>Your old user name: {{ oldValue()?.replace('@', '') }}</h4>
+                  }
+                </div>
+                <div class="txt-bx">
+                  <div [class]="boxVal()">
+                    <input
+                      [type]="stackValue().valueToChange == 'userName' ? 'text' : 'password'"
+                      name="changer"
+                      id="new-name"
+                      [(ngModel)]="newValue"
+                      [placeholder]="
+                        stackValue().valueToChange == 'userName' ? 'New user name' : 'New Password'
+                      "
+                    />
+                  </div>
+                </div>
+                <div class="sv-res">
+                  <div class="res-wp">
+                    <div [class]="serverStyle()">
+                      <div class="smg-rs">
+                        @if (userChangeName() == null) {
+                        <div class="ns"></div>
+                        } @else {
+                        <p>{{ userChangeName()?.message }}</p>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="new-vl-sb">
+                  <div class="btn-sbm">
+                    <button
+                      (click)="changeOldValue()"
+                      (keydown.enter)="changeOldValue()"
+                      class="btn-ln"
+                    >
+                      Change
+                    </button>
+                  </div>
+                </div>
+                <div class="bck-p">
+                  <div class="wrapper-xrl">
+                    <div class="cirle-tr">
+                      <div class="cross-e"></div>
+                      <div class="cross-e"></div>
+                    </div>
+                    <div class="cte-ent">
+                      <button
+                        (click)="backHome()"
+                        (keypress.enter)="backHome()"
+                        class="btn-back-crl"
+                      ></button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          }
         </div>
       </div>
-    </div>
-  </div>
-  <div class="stack-bg">
-    <div class="bg-msk">
-      <div class="msk-ctx"></div>
-    </div>
-  </div>
-  <div class="md-pn">
-    <div class="cn-modal">
-      <div class="back-modal"></div>
     </div>
   </div>
 </div>

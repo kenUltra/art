@@ -31,6 +31,7 @@ export interface iPostDt extends iComment {
   message: string;
   isPublic: boolean;
   userName: string;
+  user: string;
   comments: Array<iComment>;
   createdAt: Date;
 }

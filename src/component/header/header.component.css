@@ -35,19 +35,6 @@
   width: var(--auto-fill);
   height: var(--auto-fill);
 }
-.logo-ent > svg {
-  transform: scale(1.6);
-}
-.wrapper {
-  padding-top: 5px;
-  backdrop-filter: blur(20px);
-}
-.logo-ent {
-  height: 35px;
-}
-.art-logo {
-  width: 150px;
-}
 .light-mode .links .nav > ul > li > a:hover {
   color: var(--gray-color-02);
 }
@@ -126,9 +113,11 @@
 }
 .light-mode .content-th > .theme-btn-ent {
   border-color: var(--gray-color-00);
+  background-color: var(--color-light);
 }
 .dark-mode .content-th > .theme-btn-ent {
   border-color: var(--gray-color-01);
+  background-color: var(--color-dark);
 }
 .light-mode .toggle-theme > .wrapper-theme {
   background-color: var(--gray-color-00);

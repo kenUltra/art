@@ -1,0 +1,114 @@
+.add-ctx {
+  text-align: center;
+  width: 750px;
+  max-width: 750px;
+  margin: 0 var(--auto-text);
+}
+.headline-wk-nl > h1 {
+  font-size: 35px;
+}
+.detail-wk-nl p {
+  font-size: 20px;
+}
+.detail-wk-nl {
+  width: 70%;
+}
+.btn-ent {
+  margin-top: 7px;
+}
+.btn-ent .btn-sub-wk {
+  position: relative;
+  font-size: 20px;
+  padding: 10px 20px;
+  font-weight: 500;
+  border: 1px solid;
+  color: inherit;
+  background-color: var(--transparent-color);
+  text-transform: capitalize;
+  cursor: pointer;
+  z-index: 5;
+}
+.sv-bar {
+  backdrop-filter: blur(20px);
+  border-radius: 45px;
+  background-color: var(--transparent-color);
+}
+.dt-ln > input {
+  width: 65%;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 30px;
+  text-transform: uppercase;
+  border: 1px solid var(--transparent-color);
+  outline: 1px solid var(--transparent-color);
+  background-color: var(--transparent-color);
+}
+.light-mode .dt-ln > input {
+  color: var(--color-dark);
+}
+.dark-mode .dt-ln > input {
+  color: var(--color-light);
+}
+.btn-ent .btn-sub-wk:hover {
+  transition: background-color 270ms cubic-bezier(0.165, 0.84, 0.44, 1),
+    color 210ms cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.wk-ln {
+  display: none;
+}
+.container-mtx {
+  padding: 10px 20px;
+  border-radius: 25px;
+  max-height: 580px;
+}
+.wrp-rms {
+  height: 560px;
+  overflow: hidden auto;
+}
+.sh-mdl {
+  display: block;
+}
+.dark-mode .ln-bx-px {
+  background-color: var(--white-color-00);
+}
+.light-mode .ln-bx-px {
+  background-color: var(--gray-color-02);
+}
+.dark-mode .inpt-wk > select {
+  color: var(--color-light);
+  background-color: var(--color-dark);
+}
+.inpt-wk > select,
+.ln-bx-px {
+  width: 66%;
+}
+.dt-ln > input:hover {
+  background-color: var(--gray-color-02);
+}
+.inpt-wk > select {
+  color: inherit;
+  font-weight: 500;
+  font-size: 18px;
+  height: 32px;
+  border: 1px solid var(--transparent-color);
+  outline: 1px solid var(--transparent-color);
+  padding: 0px 7px;
+  background-color: var(--transparent-color);
+}
+.ln-bx-px {
+  height: 1px;
+  bottom: 0;
+}
+.nk-wks-ng > input:hover {
+  transition: background-color 370ms cubic-bezier(0.165, 0.84, 0.44, 1),
+    color 230ms cubic-bezier(1, 0, 0, 1);
+}
+.nk-wks-ng > input {
+  font-size: 17px;
+  padding: 10px 35px;
+  margin-bottom: 10px;
+  font-weight: 700;
+  border-radius: 40px;
+  border: 1px solid;
+  cursor: pointer;
+}

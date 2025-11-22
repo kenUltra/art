@@ -28,23 +28,11 @@
   .light-mode .load-lg .err-logo {
     background-color: var(--color-red-01);
   }
-  .main-nav {
-    width: 815px;
-    margin: var(--zero) var(--auto-text);
-  }
-
   .light-mode .logo-ent > svg {
     fill: var(--color-dark);
   }
   .dark-mode .logo-ent > svg {
     fill: var(--color-light);
-  }
-  .badge-ent > span {
-    display: block;
-    width: 100%;
-    height: 100%;
-    border-radius: 40px;
-    text-align: center;
   }
   .nav > ul {
     list-style: none;
@@ -84,7 +72,8 @@
   }
   .op-mn-ctx .main-lst {
     position: fixed;
-    height: 100%;
+    height: 70rem;
+    z-index: 2;
   }
   .op-mn-ctx .menu-mb > .controls:nth-child(1) {
     transform: translate(0px, 7px) rotate(45deg);
@@ -106,6 +95,7 @@
     align-items: flex-start;
     gap: 2px 0px;
     transform: translate(-50%, 0%);
+    z-index: 10;
   }
   .op-mn-ctx ul > li {
     width: 100%;
@@ -182,63 +172,67 @@
       width: 20px;
       height: 20px;
     }
-    @media only screen and (max-width: 505px) {
-      .sun-tb {
-        display: none;
-      }
-      .main-nav {
-        width: 95%;
-      }
-      .mb-content {
-        display: block;
-      }
-      .things-br > .show-ctx .theme,
-      .container-tx {
-        position: fixed;
-        top: unset;
-        right: 15px;
-      }
-      .badge-cmp {
-        top: 50%;
-        transform: translate(0%, -50%);
-      }
-      .container-tx {
-        bottom: 25px;
-      }
-      .badge-ent {
-        top: 0;
-        right: 10px;
-      }
-      .badge-ent > span > p {
-        font-size: 17px;
-        padding: 0px 10px;
-      }
-      .things-br > .show-ctx .theme {
-        bottom: 80px;
-      }
-      .nav > ul {
-        display: none;
-      }
-      .menu-load {
-        width: 100%;
-        height: 40px;
-        border-radius: 5px;
-        background: var(--gray-color-02) !important;
-      }
-      .light-mode .focus-page > a {
-        color: var(--color-blue-02);
-        background-color: var(--color-deep-blue);
-      }
-      .dark-mode .focus-page > a {
-        color: var(--color-blue-01);
-        background-color: var(--color-deep-blue);
-      }
+  }
+  /* O */
+  @media only screen and (max-width: 505px) {
+    .sun-tb {
+      display: none;
+    }
+    .main-nav {
+      width: 95%;
+    }
+    .mb-content {
+      display: block;
+    }
+    .things-br > .show-ctx .theme,
+    .container-tx {
+      position: fixed;
+      top: unset;
+      right: 15px;
+    }
+    .badge-cmp {
+      top: 50%;
+      transform: translate(0%, -50%);
+    }
+    .dark-mode .links .nav > ul > li {
+      color: var(--color-light);
+    }
+    .container-tx {
+      bottom: 25px;
+    }
+    .badge-ent {
+      top: 0;
+      right: 10px;
+    }
+    .badge-ent > span > p {
+      font-size: 17px;
+      padding: 0px 10px;
+    }
+    .things-br > .show-ctx .theme {
+      bottom: 80px;
+    }
+    .nav > ul {
+      display: none;
+    }
+    .menu-load {
+      width: 100%;
+      height: 40px;
+      border-radius: 5px;
+      background: var(--gray-color-02) !important;
+    }
+    .light-mode .focus-page > a {
+      color: var(--color-blue-02);
+      background-color: var(--color-deep-blue);
+    }
+    .dark-mode .focus-page > a {
+      color: var(--color-blue-01);
+      background-color: var(--color-deep-blue);
     }
   }
 </style>
-<header [class]="schemeClass()">
+<header [class]="schemeClass()" #navigationBar>
   <div
-    class="wrapper"
+    [class]="menuclass('wrapper')"
     nav-link-tracker
     [capsuleSelector]="sliderNavConfig().capsuleSelector"
     [linkSelector]="sliderNavConfig().linkSelector"
@@ -333,11 +327,16 @@
                   [routerLink]="nav.path"
                   aria-roledescription="navigation links"
                   role="navigation"
+                  (click)="mobileLink()"
                   >{{ nav.placeholder }}</a
                 >
                 @if (nav.path == '/task') {
                 <div class="badge-prt">
-                  <div class="badge-cmp">
+                  <div
+                    class="badge-cmp {{
+                      badgeCount() > 10 ? '' : badgeCount() == 0 ? '' : 'crl-bg-ln'
+                    }}"
+                  >
                     <div class="content-db">
                       <div class="badge-container">
                         <div class="badge-ent">

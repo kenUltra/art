@@ -93,6 +93,7 @@
 
 <section [class]="themeClass()" #sectionRef>
   <div class="whl-bx">
+    @defer (on idle) {
     <div class="container-ent">
       <div class="main-bar">
         <div class="main-pg">
@@ -144,6 +145,13 @@
         <div class="msk-bg"></div>
       </div>
     </div>
+    } @placeholder {
+    <load-art [loadCls]="loadClassName"></load-art>
+    } @loading {
+    <load-art [loadCls]="loadClassName"></load-art>
+    } @error {
+    <load-art [loadCls]="errorLoadCls" [loadText]="'Error Occured. Please  reload'"></load-art>
+    }
   </div>
   <div class="modal-pop">
     <div class="back-ctx">
@@ -155,6 +163,7 @@
         (textTyped)="makePost($event)"
         [serverMesage]="serverValue()"
         [hasServerResponse]="hasServerMessage()"
+        (sliderPress)="trackSider()"
       ></modal-app>
       } @else {
       <div class="modal-ctx"></div>

@@ -8,6 +8,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { UserService } from '../../services/user.service';
 import { ThemeServices } from '../../services/theme.service';
@@ -15,10 +16,11 @@ import { PlusComponent } from '../../component/widget/plus-icon/plus.component';
 import { ModalComponent } from '../../component/widget/modal/modal.component';
 import { iModal, iModalInput } from '../../utils/modal';
 import { iPostValue, PostService } from '../../services/post.service';
+import { LoadComponent } from '../../component/widget/load/load.component';
 
 @Component({
   selector: 'user',
-  imports: [PlusComponent, ModalComponent],
+  imports: [PlusComponent, ModalComponent, LoadComponent],
   templateUrl: 'user.html',
   styleUrl: 'user.css',
 })
@@ -26,6 +28,8 @@ export class UserPath {
   userService = inject<UserService>(UserService);
   themeService = inject<ThemeServices>(ThemeServices);
   postService = inject<PostService>(PostService);
+  loadClassName = 'load-pg';
+  errorLoadCls = 'err-lds';
 
   mainRefApi = viewChild<ElementRef<HTMLElement>>('sectionRef');
 
@@ -59,7 +63,7 @@ export class UserPath {
       next: (value: any) => {
         this.userName.set(value.firstName + ' ' + value.lastName);
       },
-      error: (err: any) => {
+      error: (err: HttpErrorResponse) => {
         console.error(err);
       },
       complete: () => {
@@ -74,10 +78,13 @@ export class UserPath {
     const postValue: iPostValue = {
       message: value.message,
       isPublic: value.isMessagePublic,
+      seeALLResponse: false,
     };
     this.postService.sendPost(postValue).subscribe({
       next: (value: any) => {
         this.title.setTitle(value.firstName + " you're post is send | Art inc");
+        this.hasServerMessage.set(true);
+        this.serverValue.set('Your post was sent');
       },
       error: (errorStatus: any) => {
         this.hasServerMessage.set(true);
@@ -86,6 +93,7 @@ export class UserPath {
       },
       complete: () => {
         this.title.setTitle('Post Added | Art inc');
+        this.isModalOpen.set(false);
       },
     });
   }
@@ -98,7 +106,12 @@ export class UserPath {
     this.isModalOpen.set(true);
     if (refBtn.match(/work ref/i)) {
       this.modalBaseDt.update((value: iModal) => {
-        return { ...value, title: 'The Work summary', hasControl: false, subtitle: 'Hey subtitle' };
+        return {
+          ...value,
+          title: 'The Work summary',
+          hasControl: false,
+          subtitle: 'Check out on the work path how can you manage your currrent work progress',
+        };
       });
       this.postRef.set({
         id: '',
@@ -117,6 +130,10 @@ export class UserPath {
         value: 'value',
       });
     }
+  }
+  trackSider(): void {
+    this.hasServerMessage.set(false);
+    this.serverValue.set('');
   }
   closeModal(): void {
     this.isModalOpen.set(false);

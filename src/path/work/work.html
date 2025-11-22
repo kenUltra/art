@@ -6,16 +6,132 @@
     right: 0;
     z-index: 400;
   }
+  .mask-pop {
+    position: fixed;
+  }
+  .dt-ln,
+  .lbl-conent {
+    position: relative;
+  }
+  .main-trs,
+  .ln-bx-px,
+  .container-server,
+  .add-ctx {
+    position: absolute;
+  }
+  .mask-pop,
+  .add-ctx {
+    inset: 0;
+  }
+  .container-server {
+    top: 15px;
+    left: 50%;
+    width: 75%;
+    text-align: center;
+    transform: translate(-50%, 0%);
+    z-index: 20;
+  }
+  .sv-bar {
+    border-radius: 45px;
+    backdrop-filter: blur(9px) saturate(150%);
+    background-color: var(--transparent-color);
+  }
+  .wk-pg {
+    width: 100%;
+    height: 100%;
+  }
+  .wrap-ctx-sr > p {
+    padding: 10px 20px;
+  }
+  .n-crt-rs .sv-bar p {
+    color: var(--color-red-01);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
   .container-wk-page,
   .ctx-wk {
     width: 875px;
     margin-inline-end: auto;
     margin-inline-start: auto;
   }
+  .container-mtx {
+    position: relative;
+  }
+  .ctx-wk {
+    height: 45px;
+  }
+  .container-brx {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 650px;
+    backdrop-filter: blur(18px) saturate(150%);
+    padding: 0px 25px;
+    line-height: 46px;
+    background: var(--transparent-color);
+  }
+  .wk-pg {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .pwk-mdl {
+    width: 100%;
+    border-radius: 15px;
+    height: auto;
+  }
+  .light-mode .container-mtx {
+    border: 1px solid var(--gray-color-02);
+    background-color: var(--gray-color-03);
+  }
+  .container-brx > h4 {
+    font-size: 27px;
+  }
+  .dark-mode .container-mtx {
+    color: inherit;
+    background-color: var(--color-dark);
+  }
+  .light-mode .sh-msk .mask-pop {
+    background-color: var(--transparent-color);
+  }
+  .dark-mode .sh-msk .mask-pop {
+    background-color: var(--gray-color-02);
+  }
+  .dark-mode .nk-wks-ng > input:hover,
+  .dark-mode .btn-sub-wk:hover {
+    color: var(--color-dark);
+    background-color: var(--color-light);
+  }
+  .light-mode .nk-wks-ng > input:hover,
+  .light-mode .btn-sub-wk:hover {
+    color: var(--color-light);
+    background-color: var(--color-dark);
+  }
+  .main-trs {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 800;
+  }
+  .sh-msk .mask-pop {
+    backdrop-filter: blur(10px) saturate(120%);
+    -webkit-backdrop-filter: blur(10px) saturate(120%);
+    z-index: 770;
+  }
+  .mn-wk-ts {
+    margin-top: 10px;
+  }
+  .lbl-ctx {
+    margin-bottom: 5px;
+  }
+  .lbl-ctx > label {
+    font-size: 19px;
+    font-weight: 500;
+  }
+  .wk-pg,
   .ctx-wk {
     display: flex;
     align-items: center;
-    height: 45px;
   }
   .nav-bar .title > h2 {
     font-size: 18px;
@@ -29,11 +145,78 @@
       padding-inline-end: 45px;
     }
   }
+  @media only screen and (max-width: 785px) {
+    .add-ctx {
+      width: 505px;
+    }
+    .headline-wk-nl > h1 {
+      font-size: 25px;
+    }
+    .detail-wk-nl p {
+      font-size: 17px;
+    }
+    .btn-ent .btn-sub-wk {
+      position: relative;
+      font-size: 17px;
+    }
+  }
+  .spr-bar {
+    height: 10px;
+  }
+  @media only screen and (max-width: 775px) {
+    .container-brx {
+      width: 440px;
+    }
+  }
   @media only screen and (max-width: 660px) {
     .container-wk-page,
     .ctx-wk {
       padding-inline-start: 20px;
       padding-inline-end: 20px;
+    }
+  }
+  @media only screen and (max-width: 570px) {
+    .container-brx {
+      width: 235px;
+    }
+    .container-brx > h4 {
+      font-size: 16px;
+    }
+    .lbl-ctx > label {
+      font-size: 15px;
+    }
+    .inpt-wk > select,
+    .ln-bx-px {
+      width: 90%;
+    }
+    .dt-ln > input {
+      width: 90%;
+      font-size: 15px;
+    }
+    .inpt-wk > select {
+      font-size: 15px;
+      padding: 0;
+    }
+    .nk-wks-ng > input {
+      font-size: 15px;
+      padding: 8px 100px;
+    }
+  }
+  @media only screen and (max-width: 535px) {
+    .add-ctx {
+      width: 95%;
+    }
+  }
+  @media only screen and (max-width: 390px) {
+    .headline-wk-nl > h1 {
+      font-size: 19px;
+    }
+    .detail-wk-nl p {
+      font-size: 15px;
+    }
+    .btn-ent .btn-sub-wk {
+      font-size: 15px;
+      padding: 8px 15px;
     }
   }
 </style>
@@ -67,9 +250,20 @@
                 <div class="add-wk-ln">
                   <div class="wk-wrap">
                     <div class="btn-ent">
-                      <button class="btn-sub-wk">Add work detail</button>
+                      <button
+                        (keypress.enter)="addWorkDetail()"
+                        (click)="addWorkDetail()"
+                        class="btn-sub-wk"
+                      >
+                        Add work detail
+                      </button>
                     </div>
                   </div>
+                </div>
+              </div>
+              <div class="sm-pnx">
+                <div class="msk-ln">
+                  <div class="mask-pop"></div>
                 </div>
               </div>
             </div>
@@ -82,6 +276,119 @@
             }
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="mdl-wk">
+    <div [class]="modalCls()">
+      <div class="main-trs">
+        <div class="pwk-mdl">
+          <div class="container-mtx">
+            <div class="wrp-rms">
+              <div class="container-brx">
+                <h4>Budget and Work information</h4>
+              </div>
+              <div class="content-msk">
+                <div [class]="serverClassName()">
+                  <div class="container-server">
+                    <div class="sv-bar">
+                      @if (serverResponse().hasResponse) {
+                      <div class="wrap-ctx-sr">
+                        <p>{{ serverResponse().message }}</p>
+                      </div>
+                      } @else {
+                      <div class="n-vl"></div>
+                      }
+                    </div>
+                  </div>
+                </div>
+                <div class="mn-wk-ts">
+                  <form [formGroup]="employeeForm">
+                    <div class="sub-wks">
+                      <div class="thg-wk">
+                        <div class="wrap-work-inf">
+                          @for (input of employeeCtrl(); track $index) {
+                          <input-ui
+                            [inputClass]="baseInputCls"
+                            [detailInput]="input"
+                            [themeValue]="currentScheme() ?? ''"
+                          ></input-ui>
+                          }
+                          <div class="oth-cm">
+                            <div class="wp">
+                              <div class="crc-wk">
+                                <div class="lbl-ctx">
+                                  <label for="currency">The currency you use</label>
+                                </div>
+                                <div class="lbl-conent">
+                                  <div class="inpt-wk">
+                                    <select
+                                      name="currency-value"
+                                      id="currency"
+                                      formControlName="currency"
+                                    >
+                                      <option value="USD">Dollar</option>
+                                      <option value="EUR">Euro</option>
+                                      <option value="GDP">SterlingPound</option>
+                                    </select>
+                                  </div>
+                                  <div class="work-ln">
+                                    <div class="ln-bx-px"></div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="dt-wp">
+                                <div class="wrapper-dt">
+                                  <div class="dt-line-bx">
+                                    <div class="lbl-ctx">
+                                      <label for="date-hided">When did you get hired</label>
+                                    </div>
+                                    <div class="date-wp">
+                                      <div class="dt-ln">
+                                        <input
+                                          type="datetime-local"
+                                          name="date"
+                                          id="date-hided"
+                                          formControlName="hiredDate"
+                                          role="date-picker"
+                                        />
+                                        <div class="work-ln">
+                                          <div class="ln-bx-px"></div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="spr-nx">
+                        <div class="spr-bar"></div>
+                      </div>
+                      <div class="nk-wks-ng">
+                        <input
+                          role="submitter"
+                          type="submit"
+                          [value]="submmitTxt().toLocaleUpperCase()"
+                          (click)="submitingValue()"
+                          (keypress.enter)="submitingValue()"
+                          [disabled]="buttonDisable()"
+                        />
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mks-px">
+      <div [class]="maskClass()">
+        <div (click)="removeModal()" (keypress.enter)="removeModal()" class="mask-pop"></div>
       </div>
     </div>
   </div>

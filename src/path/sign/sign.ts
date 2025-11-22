@@ -66,15 +66,20 @@ export class SignPath {
       const userAge: number = Number(value.age);
       const allowedAge: boolean = userAge >= 19 || userAge <= 100;
 
+      function pwdlenght(target: undefined | number): boolean {
+        const res: boolean = target == undefined ? false : target >= 8;
+        return res;
+      }
+
       if (
         value.firstName?.length !== 0 &&
         value.lastName?.length !== 0 &&
         allowedAge &&
         value.gender !== '' &&
         value.userName?.length !== 0 &&
-        value.email?.length !== 0 &&
-        value.password?.length !== 10 &&
-        value.confimPass?.length !== 0
+        pwdlenght(value.password?.length) &&
+        pwdlenght(value.confimPass?.length) &&
+        value.email?.length !== 0
       ) {
         this.isSubmitBtnActive.set(false);
         return;
@@ -147,7 +152,7 @@ export class SignPath {
       error: (err: any) => {
         console.error('Trouble happen in: ', err);
         this.isResponseSuccess.set(false);
-        if (err.error?.error ) {
+        if (err.error?.error) {
           this.serverMessage.set(err.error.error);
           return;
         }
@@ -159,7 +164,7 @@ export class SignPath {
       },
       complete: () => {
         this.serverMessage.set('Created without any issues');
-        this.router.navigate(['/home']);
+        this.router.navigate(['/user-content']);
       },
     });
     this.formControls.setValue({

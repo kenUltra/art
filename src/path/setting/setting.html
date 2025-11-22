@@ -5,7 +5,7 @@
       <div class="navigation-bg">
         <div class="line-head">
           <div class="stg-nv" #navTitle>
-            <h1>Setting</h1>
+            <h1>Profile Setting</h1>
           </div>
         </div>
         <div class="msk-bg">
@@ -83,7 +83,12 @@
               <div class="wp-rf-lst">
                 <div class="ctr-lst-stk">
                   <stack-app
-                    [stackValue]="{ headline: 'change user Name', isEditable: true }"
+                    [stackValue]="changeNameValue()"
+                    [oldValue]="oldValue()"
+                    (changeValue)="updateValue($event)"
+                    (openStack)="stackClicked(changeNameValue())"
+                    (backToSetting)="backToSetting($event)"
+                    [userChangeName]="changeValue()"
                   ></stack-app>
                 </div>
               </div>

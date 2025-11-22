@@ -1,12 +1,13 @@
 export interface iEmployee {
-  position: listEmployee;
+  position: string;
   companyName: string;
   webiste: string;
   headQuarter: string;
   salary: number;
-  phoneNumber: number;
+  phoneNumber: string;
   coworker?: Array<string>;
   currency: listCurrency;
+  hiredDate: Date;
 }
 
 export enum listEmployee {
@@ -19,7 +20,7 @@ export enum listEmployee {
   basicEmployee = 'Employee',
 }
 export enum listCurrency {
-  dollar = 'USB',
+  dollar = 'USD',
   euro = 'EUR',
   pound = 'GDP',
 }

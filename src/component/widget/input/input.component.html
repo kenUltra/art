@@ -1,0 +1,59 @@
+<style lang="css">
+  .btn-line {
+    position: absolute;
+  }
+  .btn-line {
+    bottom: 0;
+    height: 1px;
+  }
+  .dark-mode .btn-line {
+    background-color: var(--gray-color-00);
+  }
+  .light-mode .btn-line {
+    background-color: var(--gray-color-02);
+  }
+  @media only screen and (max-width: 570px) {
+    .bx-txt .lbl > label {
+      font-size: 16px;
+    }
+    .bx-txt .int-et > input {
+      min-height: 30px;
+      font-size: 15px;
+      padding: 0px 0px;
+    }
+    .bx-txt .int-et > input,
+    .btn-line {
+      width: 90%;
+    }
+  }
+</style>
+
+<div [class]="themeValue()">
+  <div class="fld-bx {{ inputClass() }}">
+    <div class="containre-fld" [formGroup]="detailInput().entryForm">
+      <div class="lbl">
+        @if (detailInput().label !== null) {
+        <label [for]="detailInput().id">{{ detailInput().label }}</label>
+        }
+      </div>
+      <div class="inpt-ln">
+        <div class="container-pop">
+          <div class="int-et">
+            @if (!detailInput().isMenu) {
+            <input
+              [type]="detailInput().type"
+              [name]="detailInput().name"
+              [id]="detailInput().id"
+              [formControlName]="detailInput().formName"
+              [placeholder]="detailInput().placeholder"
+              [autocomplete]="detailInput().autoComplte ?? 'off'"
+
+            />
+            }
+          </div>
+          <div class="btn-line"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

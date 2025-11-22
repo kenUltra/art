@@ -9,6 +9,7 @@ import { iPostDt } from '../utils/auth';
 export interface iPostValue {
   message: string;
   isPublic: boolean;
+  seeALLResponse: boolean;
 }
 
 @Injectable({
@@ -38,6 +39,7 @@ export class PostService {
   getPost(getAllPost: boolean = true): Observable<any> {
     const storage = this.readJSON(this.userData.get(this.userToken) ?? '');
 
+    // console.log(getAllPost);
     return this.http
       .get<any>(this.backend + '/posts/' + this.userUUID(), {
         headers: {
@@ -50,16 +52,31 @@ export class PostService {
           const mergeValue: Array<iPostDt> = value.content;
           const publicContent: Array<iPostDt> = value.publicMessage;
           const conbineValue: iPostDt[] = [...mergeValue, ...publicContent];
-          getAllPost ? this.listMessage.next(conbineValue) : this.listMessage.next(mergeValue);
+          /*
+          const filterValue: Array<iPostDt> = mergeValue.filter(
+            (value: iPostDt) => value.user == this.userUUID()
+          );
+          */
+
+          // getAllPost ? this.listMessage.next(conbineValue) : this.listMessage.next(filterValue);
+          this.listMessage.next(conbineValue);
           return this.listMessage.getValue();
         }),
+        tap((post: iPostDt[]) => {
+          const value = post.filter((value: iPostDt) => {
+            return value.user == storage.refUuid;
+          });
+          getAllPost ? this.listMessage.next(post) : this.listMessage.next(value);
+          return this.listMessage.getValue();
+        }),
+
         catchError(this.httpError)
       );
   }
   sendPost(value: iPostValue): Observable<any> {
     const storage = this.readJSON(this.userData.get(this.userToken) ?? '');
     return this.http
-      .post(this.backend + '/posts/' + this.userUUID(), value, {
+      .post(this.backend + '/posts/' + storage.refUuid, value, {
         headers: {
           'Content-type': 'application/json',
           Authentication: 'Bearer ' + storage.acToken,
@@ -68,7 +85,7 @@ export class PostService {
       })
       .pipe(
         tap((data: any) => {
-          this.getPost().subscribe((value) => {
+          this.getPost(value.seeALLResponse).subscribe((value) => {
             this.listMessage.next(value);
           });
           return data;
@@ -110,7 +127,7 @@ export class PostService {
       })
       .pipe(
         tap((value) => {
-          this.getPost().subscribe((res) => {
+          this.getPost(false).subscribe((res) => {
             return res;
           });
           return value;
@@ -118,12 +135,16 @@ export class PostService {
         catchError(this.httpError)
       );
   }
-  commentPost(commentValue: string, refMessage: string): Observable<any> {
+  commentPost(
+    commentValue: string,
+    refMessage: string,
+    showAllPost: boolean = true
+  ): Observable<any> {
     const storage = this.readJSON(this.userData.get(this.userToken) ?? '');
 
     return this.http
       .post(
-        this.backend + '/comment/' + this.userUUID(),
+        this.backend + '/comment/' + storage.refUuid,
         { comment: commentValue },
         {
           headers: {
@@ -137,7 +158,7 @@ export class PostService {
       )
       .pipe(
         map((value: any) => {
-          this.getPost().subscribe((value) => {
+          this.getPost(showAllPost).subscribe((value) => {
             return value;
           });
           return value;

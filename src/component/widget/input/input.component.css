@@ -1,0 +1,43 @@
+.bx-txt .lbl > label {
+  font-size: 19px;
+  font-weight: 500;
+}
+.bx-txt .int-et > input,
+.btn-line {
+  width: 65%;
+}
+.bx-txt .int-et > input {
+  min-height: 35px;
+  font-size: 17px;
+  font-weight: 600;
+  padding: 0px 7px;
+}
+.container-pop {
+  position: relative;
+}
+.int-et > input::selection  ~ .btn-line {
+  background-color: pink;
+}
+.int-et > input {
+  color: inherit;
+  border: 1px solid var(--transparent-color);
+  outline: 1px solid var(--transparent-color);
+  background-color: var(--transparent-color);
+}
+.int-et > input[type='text']:focus,
+.int-et > input[type='text']:-ms-keyboard-active,
+.int-et > input[type='text']::-webkit-keygen-select {
+  color: inherit;
+}
+.int-et > input[type='text']:active {
+  color: var(--color-deep-blue);
+}
+.bx-txt .int-et > input[type='number'] {
+  appearance: none;
+  -moz-appearance: none;
+}
+.bx-txt .int-et > input[type='number']::-webkit-inner-spin-button,
+.bx-txt .int-et > input[type='number']::-webkit-outer-spin-button {
+  appearance: none;
+  -webkit-appearance: none;
+}
