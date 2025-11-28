@@ -33,8 +33,7 @@ export const pageRoute: Routes = [
   {
     path: 'login',
     loadComponent: async () => {
-      const location = await import('../path/login/login');
-      return location.Login;
+      return import('../path/login/login').then((res) => res.Login);
     },
     canActivate: [logGuard],
   },
@@ -46,16 +45,14 @@ export const pageRoute: Routes = [
   {
     path: 'sign-up',
     loadComponent: async () => {
-      const signPath = await import('../path/sign/sign');
-      return signPath.SignPath;
+      return import('../path/sign/sign').then((res) => res.SignPath);
     },
     canActivate: [logGuard],
   },
   {
     path: 'task',
     loadComponent: async () => {
-      const location = await import('../path/tasks/ui/taskui');
-      return location.TaskUI;
+      return import('../path/tasks/ui/taskui').then((res) => res.TaskUI);
     },
   },
   {
@@ -66,8 +63,7 @@ export const pageRoute: Routes = [
   {
     path: 'show-case',
     loadComponent: async () => {
-      const taskComponent = await import('../path/tasks/controls/taskcontrol');
-      return taskComponent.TaskControl;
+      return import('../path/tasks/controls/taskcontrol').then((res) => res.TaskControl);
     },
   },
   {
@@ -78,8 +74,7 @@ export const pageRoute: Routes = [
   {
     path: 'user-content',
     loadComponent: async () => {
-      const res = await import('../path/auth/auth');
-      return res.AuthPath;
+      return import('../path/auth/auth').then((res) => res.AuthPath);
     },
     canActivate: [authGuard],
     children: [

@@ -59,7 +59,8 @@ export class EmployeeServices {
         }
       )
       .pipe(
-        tap((res) => {
+        tap((res: any) => {
+          this.employeeStatus.next(res);
           return res;
         }),
         catchError(this.httpError)

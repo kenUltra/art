@@ -56,6 +56,13 @@
 .wk-ln {
   display: none;
 }
+.light-mode .nk-wks-ng > input:disabled:hover,
+.dark-mode .nk-wks-ng > input:disabled:hover {
+  opacity: 0.2;
+}
+.nk-wks-ng > input:disabled {
+  cursor: not-allowed;
+}
 .container-mtx {
   padding: 10px 20px;
   border-radius: 25px;
@@ -94,6 +101,10 @@
   outline: 1px solid var(--transparent-color);
   padding: 0px 7px;
   background-color: var(--transparent-color);
+}
+.n-crt-rs .sv-bar p::selection {
+  color: #ffffff;
+  background: #d54545;
 }
 .ln-bx-px {
   height: 1px;

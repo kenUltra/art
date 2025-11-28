@@ -10,6 +10,7 @@ import { UserService } from '../../services/user.service';
 
 import { serverStatus, StackComponent } from '../../component/stack/stack.component';
 import { iStack } from '../../utils/stack';
+import { PostService } from '../../services/post.service';
 
 export interface iUserValue {
   email: string;
@@ -29,6 +30,7 @@ export interface iUserValue {
 export class SettingPath {
   authServices = inject<AuthService>(AuthService);
   userServices = inject<UserService>(UserService);
+  postService = inject<PostService>(PostService);
 
   themeServices = inject<ThemeServices>(ThemeServices);
 
@@ -92,6 +94,12 @@ export class SettingPath {
     this.userServices.changeUserName(newValue).subscribe({
       next: (value: any) => {
         this.titleStack.setTitle('Changing user name');
+        this.postService.updateUserNamePost('person').subscribe((value) => {
+          return value;
+        });
+        this.postService.updateCommentName(this.oldValue()).subscribe((res) => {
+          return res;
+        });
       },
       error: (err: HttpErrorResponse) => {
         this.titleStack.setTitle('Error happen | Art inc');

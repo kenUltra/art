@@ -1,4 +1,4 @@
-import { afterNextRender, Component, inject, input, output, signal } from '@angular/core';
+import { afterNextRender, Component, computed, inject, input, output, signal } from '@angular/core';
 import { DatePipe, UpperCasePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -31,6 +31,11 @@ export class PostComponent {
 
   messageComment = signal<iComment[]>([]);
   commentValue = signal<string>('');
+  countLike = computed(() => {
+    this.postData();
+    const count = Object.keys(this.postData().likes).length;
+    return count;
+  });
 
   constructor() {
     afterNextRender({

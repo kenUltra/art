@@ -12,10 +12,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import { UserService } from '../../services/user.service';
 import { ThemeServices } from '../../services/theme.service';
+import { iPostValue, PostService } from '../../services/post.service';
+
 import { PlusComponent } from '../../component/widget/plus-icon/plus.component';
 import { ModalComponent } from '../../component/widget/modal/modal.component';
 import { iModal, iModalInput } from '../../utils/modal';
-import { iPostValue, PostService } from '../../services/post.service';
 import { LoadComponent } from '../../component/widget/load/load.component';
 
 @Component({
@@ -28,6 +29,7 @@ export class UserPath {
   userService = inject<UserService>(UserService);
   themeService = inject<ThemeServices>(ThemeServices);
   postService = inject<PostService>(PostService);
+
   loadClassName = 'load-pg';
   errorLoadCls = 'err-lds';
 
@@ -121,7 +123,13 @@ export class UserPath {
       });
     } else {
       this.modalBaseDt.update((value: iModal) => {
-        return { ...value, title: 'Post value', hasControl: true };
+        return {
+          ...value,
+          title: 'Post value',
+          hasControl: true,
+          subtitle:
+            "Remove or add some your current post posts. Also see the status of your post if it's a private or public.",
+        };
       });
       this.postRef.set({
         id: 'post-message',

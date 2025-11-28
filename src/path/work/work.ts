@@ -2,6 +2,7 @@ import { Component, inject, signal, Signal } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { ThemeServices } from '../../services/theme.service';
@@ -10,7 +11,7 @@ import { eTheme } from '../../utils/listEmun';
 import { iEmployee, listCurrency } from '../../utils/empoyee_lst';
 import { Inputcomponent } from '../../component/widget/input/input.component';
 import { inputWork } from '../../utils/employee';
-import { Router } from '@angular/router';
+import { LoadComponent } from '../../component/widget/load/load.component';
 
 export interface serverValue {
   hasResponse: null | boolean;
@@ -20,7 +21,7 @@ export interface serverValue {
 
 @Component({
   selector: 'work-path',
-  imports: [ReactiveFormsModule, Inputcomponent],
+  imports: [ReactiveFormsModule, Inputcomponent, LoadComponent],
   templateUrl: 'work.html',
   styleUrl: 'work.css',
 })
@@ -28,9 +29,11 @@ export class WorkPath {
   themeServive = inject<ThemeServices>(ThemeServices);
   workSerice = inject<EmployeeServices>(EmployeeServices);
   employeeBuilder = inject<FormBuilder>(FormBuilder);
+
   baseInputCls = 'bx-txt';
+  loadText = "Loading...";
   employeeCtrl = signal<Array<inputWork>>([]);
-  buttonDisable = signal<boolean>(true)
+  buttonDisable = signal<boolean>(true);
 
   currentScheme: Signal<eTheme | undefined> = toSignal<eTheme>(
     this.themeServive.themeResolver.asObservable(),
@@ -46,10 +49,9 @@ export class WorkPath {
   });
 
   isModalOpen = signal<boolean>(false);
-  employeeDetail: Signal<iEmployee | null> = toSignal(
-    this.workSerice.employeeStatus.asObservable(),
-    { initialValue: null }
-  );
+  employeeDetail: Signal<iEmployee | null> = toSignal(this.workSerice.employeeStatus, {
+    initialValue: null,
+  });
 
   employeeForm = this.employeeBuilder.group({
     companyName: new FormControl<string>('', [Validators.required]),
@@ -79,11 +81,26 @@ export class WorkPath {
     });
     this.employeeForm.valueChanges.subscribe((vlChange) => {
       const phoneNumb: string = vlChange.phoneNumber ?? '';
+      const rangeSalary: number = Number(vlChange.phoneNumber);
 
       this.serverResponse.set({ hasResponse: null, isSuccess: false, message: '' });
+
+      if (
+        vlChange.headQ?.length == 0 ||
+        vlChange.companyName?.length == 0 ||
+        vlChange.website?.length == 0 ||
+        vlChange.position?.length == 0 ||
+        vlChange.salary?.length == 0 ||
+        vlChange.website?.length == 0 ||
+        vlChange.hiredDate == null
+      ) {
+        this.buttonDisable.set(true);
+        return;
+      }
+
       if (phoneNumb.length !== 0) {
         const notAllowed: string[] = [
-          ...'qwertyuiop[]asdfghjkl;\'\\zxcvbnm,./QWERTYUIOP{}ASDFGHJKL:"|ZXCVBNM<>?!@#$%^&*()*/-._=',
+          ...'qwertyuiop[]asdfghjkl;\'\\zxcvbnm,./QWERTYUIOP{}ASDFGHJKL:"|ZXCVBNM<>?!@#$%^&*()*/._=',
         ];
         for (const check of notAllowed) {
           if (phoneNumb.includes(check)) {
@@ -92,9 +109,19 @@ export class WorkPath {
               isSuccess: false,
               message: 'Only a valid phone number',
             });
+            return this.buttonDisable.set(true);
           }
         }
       }
+      if (rangeSalary < 0) {
+        this.serverResponse.set({
+          hasResponse: true,
+          isSuccess: false,
+          message: "Don't enter a negative value on your salary",
+        });
+        return this.buttonDisable.set(true);
+      }
+      return this.buttonDisable.set(false);
     });
 
     this.employeeCtrl.set([
@@ -102,7 +129,7 @@ export class WorkPath {
         id: 'position',
         isMenu: false,
         name: 'user-position',
-        placeholder: 'Your current position',
+        placeholder: 'AI enginner',
         type: 'text',
         label: 'Your current position',
         formName: 'position',
@@ -192,27 +219,29 @@ export class WorkPath {
   submitingValue(): void {
     const typedValue = this.employeeForm.getRawValue();
     const money = () => {
+      let res: listCurrency;
       switch (typedValue.currency) {
-        case 'Euro':
-          listCurrency.euro;
+        case 'EUR':
+          res = listCurrency.euro;
           break;
-        case 'SterlingPound':
-          listCurrency.pound;
+        case 'GDP':
+          res = listCurrency.pound;
           break;
         default:
-          listCurrency.euro;
+          res = listCurrency.euro;
           break;
       }
-      return listCurrency.euro;
+      return res;
     };
+
     const value: iEmployee = {
+      position: typedValue.position ?? '',
       companyName: typedValue.companyName ?? '',
       currency: money(),
       headQuarter: typedValue.headQ ?? '',
-      phoneNumber: typedValue.phoneNumber?.replaceAll(' ', '_poth_') ?? '' ,
-      position: typedValue.position ?? '',
+      phoneNumber: typedValue.phoneNumber?.replaceAll(' ', '_pth_') ?? '',
       salary: Number(typedValue.salary),
-      webiste: typedValue.website ?? '',
+      website: typedValue.website ?? '',
       coworker: [],
       hiredDate: new Date(typedValue.hiredDate ?? '') ?? new Date(),
     };
@@ -221,6 +250,9 @@ export class WorkPath {
     this.workSerice.createEmployee(value).subscribe({
       next: (res) => {
         console.log(res);
+        this.workSerice.getEmployee().subscribe((content) => {
+          return content;
+        });
       },
       error: (err: HttpErrorResponse) => {
         console.error(err);

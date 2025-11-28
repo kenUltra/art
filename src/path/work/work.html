@@ -16,12 +16,22 @@
   .main-trs,
   .ln-bx-px,
   .container-server,
+  .sl-wk,
   .add-ctx {
     position: absolute;
   }
+  .sl-wk,
   .mask-pop,
   .add-ctx {
     inset: 0;
+  }
+  .sl-wk {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sl-wk > h1 {
+    font-size: 40px;
   }
   .container-server {
     top: 15px;
@@ -159,6 +169,9 @@
       position: relative;
       font-size: 17px;
     }
+    .sl-wk > h1 {
+      font-size: 30px;
+    }
   }
   .spr-bar {
     height: 10px;
@@ -193,6 +206,9 @@
       width: 90%;
       font-size: 15px;
     }
+    .sl-wk > h1 {
+      font-size: 25px;
+    }
     .inpt-wk > select {
       font-size: 15px;
       padding: 0;
@@ -222,6 +238,7 @@
 </style>
 <section [class]="mainClass()">
   <div class="srt">
+    @defer (on idle) {
     <div class="container-wk">
       <div class="nav-bar">
         <div class="ctx-wk">
@@ -278,6 +295,14 @@
         </div>
       </div>
     </div>
+    } @placeholder {
+    <load-art [loadText]="loadText"></load-art>
+  } @loading {
+    <load-art [loadText]="loadText"></load-art>
+    } @error {
+    <load-art [loadText]="'Error'"></load-art>
+
+    }
   </div>
   <div class="mdl-wk">
     <div [class]="modalCls()">

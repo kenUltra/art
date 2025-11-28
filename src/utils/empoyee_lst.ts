@@ -1,7 +1,7 @@
 export interface iEmployee {
   position: string;
   companyName: string;
-  webiste: string;
+  website: string;
   headQuarter: string;
   salary: number;
   phoneNumber: string;

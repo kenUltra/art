@@ -44,7 +44,7 @@ export class UserService {
     return this.http
       .patch<any>(this.urlServer + '/pages/' + userStoreId.refUuid, name, {
         headers: {
-          Authentication: `Bearer ${this.authService.accessPage()}`,
+          Authentication: `Bearer ${userStoreId.acToken}`,
           'Content-type': 'application/json',
         },
         withCredentials: true,

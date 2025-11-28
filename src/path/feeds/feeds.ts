@@ -80,11 +80,10 @@ export class FeedsPage implements AfterViewInit {
   protected likePost(idPost: string): void {
     this.postSerice.likePost(idPost).subscribe({
       next: (res: any) => {
-        console.log(res);
         this.headTitle.setTitle('Load likes... | Art inc');
         this.postSerice.getPost();
       },
-      error: (err: any) => {
+      error: (err: HttpErrorResponse) => {
         console.error(err);
       },
       complete: () => {
@@ -101,7 +100,7 @@ export class FeedsPage implements AfterViewInit {
       next: (response: any) => {
         console.log(response);
       },
-      error: (error: any) => {
+      error: (error: HttpErrorResponse) => {
         this.headTitle.setTitle("Post can't be send | Art inc");
       },
       complete: () => {

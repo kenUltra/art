@@ -39,9 +39,8 @@ export class PostService {
   getPost(getAllPost: boolean = true): Observable<any> {
     const storage = this.readJSON(this.userData.get(this.userToken) ?? '');
 
-    // console.log(getAllPost);
     return this.http
-      .get<any>(this.backend + '/posts/' + this.userUUID(), {
+      .get<any>(this.backend + '/post/' + storage.refUuid, {
         headers: {
           Authentication: `Bearer ${storage.acToken}`,
         },
@@ -52,13 +51,7 @@ export class PostService {
           const mergeValue: Array<iPostDt> = value.content;
           const publicContent: Array<iPostDt> = value.publicMessage;
           const conbineValue: iPostDt[] = [...mergeValue, ...publicContent];
-          /*
-          const filterValue: Array<iPostDt> = mergeValue.filter(
-            (value: iPostDt) => value.user == this.userUUID()
-          );
-          */
 
-          // getAllPost ? this.listMessage.next(conbineValue) : this.listMessage.next(filterValue);
           this.listMessage.next(conbineValue);
           return this.listMessage.getValue();
         }),
@@ -76,7 +69,7 @@ export class PostService {
   sendPost(value: iPostValue): Observable<any> {
     const storage = this.readJSON(this.userData.get(this.userToken) ?? '');
     return this.http
-      .post(this.backend + '/posts/' + storage.refUuid, value, {
+      .post(this.backend + '/post/' + storage.refUuid, value, {
         headers: {
           'Content-type': 'application/json',
           Authentication: 'Bearer ' + storage.acToken,
@@ -93,6 +86,30 @@ export class PostService {
         catchError(this.httpError)
       );
   }
+  updateUserNamePost(newName: string) {
+    const storage = this.readJSON(this.userData.get(this.userToken) ?? '');
+    return this.http
+      .patch(
+        this.backend +
+          '/post/' +
+          storage.refUuid +
+          '?applychange=true&key=485ct87r578tcd&maxValue=23',
+        { apply: newName },
+        {
+          headers: {
+            'Content-type': 'application/json',
+            Authentication: 'Bearer ' + storage.acToken,
+          },
+          withCredentials: true,
+        }
+      )
+      .pipe(
+        tap((response: any) => {
+          return response;
+        }),
+        catchError(this.httpError)
+      );
+  }
   likePost(postID: string): Observable<any> {
     const likeRef = {
       postId: postID,
@@ -100,7 +117,7 @@ export class PostService {
     const storage = this.readJSON(this.userData.get(this.userToken) ?? '');
 
     return this.http
-      .patch(this.backend + '/posts/' + this.userUUID(), likeRef, {
+      .patch(this.backend + '/post/like/' + storage.refUuid, likeRef, {
         withCredentials: true,
         headers: {
           'Content-type': 'application/json',
@@ -118,11 +135,13 @@ export class PostService {
       );
   }
   deletePost(postId: string): Observable<any> {
+    const storage = this.readJSON(this.userData.get(this.userToken) ?? '');
+
     return this.http
-      .delete(this.backend + '/posts/' + postId, {
+      .delete(this.backend + '/post/' + postId, {
         headers: {
           'Content-type': 'application/json',
-          Authentication: 'Bearer ' + this.accessToken(),
+          Authentication: 'Bearer ' + storage.acToken,
         },
       })
       .pipe(
@@ -161,6 +180,27 @@ export class PostService {
           this.getPost(showAllPost).subscribe((value) => {
             return value;
           });
+          return value;
+        }),
+        catchError(this.httpError)
+      );
+  }
+  updateCommentName(oldName: string) {
+    const storage = this.readJSON(this.userData.get(this.userToken) ?? '');
+    return this.http
+      .patch(
+        this.backend + '/comment/person/' + storage.refUuid,
+        { action: 'change value', oldName: oldName },
+        {
+          headers: {
+            'Content-type': 'application/json',
+            Authentication: 'Bearer ' + storage.acToken,
+          },
+          withCredentials: true,
+        }
+      )
+      .pipe(
+        tap((value) => {
           return value;
         }),
         catchError(this.httpError)
