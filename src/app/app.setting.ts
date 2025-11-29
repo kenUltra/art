@@ -11,7 +11,7 @@ export const appSetting: AppSettings = {
   title: 'Art, inc',
   version: '1.0.0',
   backendVersion: 'v1',
-  apiUrl: 'http://localhost:4100/api',
+  apiUrl: 'https://art-backend-yegv.onrender.com/api',
 };
 
 export const APP_SETTINGS = new InjectionToken<AppSettings>('app.setting');

@@ -24,7 +24,6 @@
             ],
             "styles": ["src/styles.css"],
             "server": "src/main.server.ts",
-            "prerender": true,
             "outputMode": "server",
             "ssr": {
               "entry": "src/server.ts"
@@ -44,7 +43,9 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": true
             },
             "development": {
               "optimization": false,
