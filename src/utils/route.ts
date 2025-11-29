@@ -8,6 +8,11 @@ import { SettingPath } from '../path/setting/setting';
 import { Error } from '../path/error/error.component';
 import { FeedsPage } from '../path/feeds/feeds';
 import { WorkPath } from '../path/work/work';
+import { Login } from '../path/login/login';
+import { SignPath } from '../path/sign/sign';
+import { TaskUI } from '../path/tasks/ui/taskui';
+import { TaskControl } from '../path/tasks/controls/taskcontrol';
+import { AuthPath } from '../path/auth/auth';
 
 export const pageRoute: Routes = [
   {
@@ -32,9 +37,7 @@ export const pageRoute: Routes = [
   },
   {
     path: 'login',
-    loadComponent: async () => {
-      return import('../path/login/login').then((res) => res.Login);
-    },
+    component: Login,
     canActivate: [logGuard],
   },
   {
@@ -44,16 +47,12 @@ export const pageRoute: Routes = [
   },
   {
     path: 'sign-up',
-    loadComponent: async () => {
-      return import('../path/sign/sign').then((res) => res.SignPath);
-    },
+    component: SignPath,
     canActivate: [logGuard],
   },
   {
     path: 'task',
-    loadComponent: async () => {
-      return import('../path/tasks/ui/taskui').then((res) => res.TaskUI);
-    },
+    component: TaskUI,
   },
   {
     path: 'add-task',
@@ -62,9 +61,7 @@ export const pageRoute: Routes = [
   },
   {
     path: 'show-case',
-    loadComponent: async () => {
-      return import('../path/tasks/controls/taskcontrol').then((res) => res.TaskControl);
-    },
+    component: TaskControl,
   },
   {
     path: 'profile',
@@ -73,9 +70,7 @@ export const pageRoute: Routes = [
   },
   {
     path: 'user-content',
-    loadComponent: async () => {
-      return import('../path/auth/auth').then((res) => res.AuthPath);
-    },
+    component: AuthPath,
     canActivate: [authGuard],
     children: [
       {
