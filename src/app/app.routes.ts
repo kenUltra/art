@@ -12,7 +12,7 @@ import { WorkPath } from '../path/work/work';
 import { TaskUI } from '../path/tasks/ui/taskui';
 import { SignPath } from '../path/sign/sign';
 
-export const routes: Routes = [
+export const routes: Routes[] = [
   {
     path: '',
     component: HomePage,
