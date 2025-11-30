@@ -44,8 +44,7 @@
                 }
               ],
               "outputHashing": "all",
-              "optimization": true,
-              "sourceMap": true
+              "optimization": true
             },
             "development": {
               "optimization": false,

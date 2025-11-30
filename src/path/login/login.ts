@@ -1,8 +1,8 @@
+import { afterNextRender, Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { UpperCasePipe } from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { afterNextRender, Component, inject, signal } from '@angular/core';
 
 import { ThemeServices } from '../../services/theme.service';
 import { AuthService } from '../../services/auth.service';

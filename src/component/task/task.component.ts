@@ -94,6 +94,7 @@ export class TaskComponent implements OnInit, OnDestroy {
           undefined,
           '/chores'
         );
+        this.updateTimer.emit(0);
       }
 
       this.isCountingDown() ? this.startTimeout() : this.clearTimeout();

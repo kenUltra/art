@@ -13,13 +13,13 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { ThemeServices } from '../../../services/theme.service';
 import { PostService } from '../../../services/post.service';
 import { eTheme } from '../../../utils/listEmun';
 import { iModal, iModalInput } from '../../../utils/modal';
 import { PostComponent } from '../../post/post.component';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'modal-app',
@@ -130,15 +130,29 @@ export class ModalComponent implements OnInit {
       commentValue: value.value,
       refMessage: value.id,
     };
-    this.postServices.commentPost(commentData.commentValue, commentData.refMessage, false).subscribe({
+    this.postServices
+      .commentPost(commentData.commentValue, commentData.refMessage, false)
+      .subscribe({
+        next: (value: any) => {
+          return value;
+        },
+        error: (err: HttpErrorResponse) => {
+          this.title.setTitle('Error happen during posting your comment | Art  inc');
+        },
+        complete: () => {
+          this.title.setTitle('Your comment has been added | Art inc');
+        },
+      });
+  }
+  likePost(idPost: string): void {
+    const postId: string = idPost;
+    this.postServices.likePost(postId).subscribe({
       next: (value: any) => {
-        console.log(value);
+        return value;
       },
       error: (err: HttpErrorResponse) => {
-        this.title.setTitle('Error happen during posting your comment | Art  inc');
-      },
-      complete: () => {
-        this.title.setTitle('Your comment has been added | Art inc');
+        console.error(err.message);
+        this.title.setTitle("Can't process to your requirest");
       },
     });
   }

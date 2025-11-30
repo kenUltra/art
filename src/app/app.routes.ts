@@ -4,13 +4,14 @@ import { logGuard } from '../guard/log-guard';
 import { authGuard } from '../guard/auth-guard';
 import { AuthPath } from '../path/auth/auth';
 import { UserPath } from '../path/user/user';
+import { TaskUI } from '../path/tasks/ui/taskui';
 import { TaskControl } from '../path/tasks/controls/taskcontrol';
 import { Login } from '../path/login/login';
 import { SettingPath } from '../path/setting/setting';
 import { FeedsPage } from '../path/feeds/feeds';
 import { WorkPath } from '../path/work/work';
-import { TaskUI } from '../path/tasks/ui/taskui';
 import { SignPath } from '../path/sign/sign';
+import { ErrorPath } from '../path/error/error.component';
 
 export const routes: Routes = [
   {
@@ -25,7 +26,12 @@ export const routes: Routes = [
   },
   {
     path: 'chores',
-    redirectTo: 'task',
+    redirectTo: 'todo-list',
+    pathMatch: 'full',
+  },
+  {
+    path: 'task',
+    redirectTo: 'todo-list',
     pathMatch: 'full',
   },
   {
@@ -49,13 +55,13 @@ export const routes: Routes = [
     canActivate: [logGuard],
   },
   {
-    path: 'task',
-    component: TaskUI,
-  },
-  {
     path: 'add-task',
     redirectTo: 'show-case',
     pathMatch: 'full',
+  },
+  {
+    path: 'todo-list',
+    component: TaskUI,
   },
   {
     path: 'show-case',
@@ -101,6 +107,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    component: Error,
+    component: ErrorPath,
   },
 ];

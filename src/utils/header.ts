@@ -3,7 +3,7 @@ import { signal } from '@angular/core';
 export const listNav = signal<iHeaderLinks[]>([
   {
     placeholder: 'Task',
-    path: '/task',
+    path: '/todo-list',
   },
   {
     placeholder: 'Add Task',

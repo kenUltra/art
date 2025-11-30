@@ -45,7 +45,7 @@ export class HeaderComponent implements OnInit {
 
   refLiNav = viewChild<ElementRef[]>('linksParent');
 
-  themeServices: ThemeServices = inject<ThemeServices>(ThemeServices);
+  themeServices = inject<ThemeServices>(ThemeServices);
 
   constructor() {
     afterNextRender(() => {

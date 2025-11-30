@@ -8,7 +8,7 @@ import { Title } from '@angular/platform-browser';
   templateUrl: './error.component.html',
   styleUrl: './error.component.css',
 })
-export class Error {
+export class ErrorPath {
   protected readonly mainMessage = signal<string>('Something went wrong');
   protected typePath = signal<string>('');
 
