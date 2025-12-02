@@ -1,4 +1,4 @@
-import { afterRenderEffect, Component, inject, signal } from '@angular/core';
+import { afterNextRender, Component, inject, signal } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { RouterOutlet } from '@angular/router';
 import { ThemeServices } from '../services/theme.service';
@@ -20,29 +20,27 @@ export class App {
 
   constructor(private titleApp: Title) {
     this.titleApp.setTitle('Art | home page');
-    afterRenderEffect({
-      mixedReadWrite: () => {
-        const mainRoot = document.querySelector<'html'>('html') as HTMLElement;
-        this.themeService.getTheme();
-        Notification.requestPermission((permissionNf: NotificationPermission) => {
-          return permissionNf;
-        });
+    afterNextRender(() => {
+      const mainRoot = document.querySelector<'html'>('html') as HTMLElement;
+      this.themeService.getTheme();
+      Notification.requestPermission((permissionNf: NotificationPermission) => {
+        return permissionNf;
+      });
 
-        this.themeService.themeResolver.pipe().subscribe({
-          next: (value: eTheme) => {
-            if (value == eTheme.darkMode) {
-              mainRoot.classList.add(eTheme.darkMode);
-              mainRoot.classList.remove(eTheme.lightMode);
-            } else {
-              mainRoot.classList.add(eTheme.lightMode);
-              mainRoot.classList.remove(eTheme.darkMode);
-            }
-          },
-          error: (err: any) => {
-            console.error('Something went wrong');
-          },
-        });
-      },
+      this.themeService.themeResolver.pipe().subscribe({
+        next: (value: eTheme) => {
+          if (value == eTheme.darkMode) {
+            mainRoot.classList.add(eTheme.darkMode);
+            mainRoot.classList.remove(eTheme.lightMode);
+          } else {
+            mainRoot.classList.add(eTheme.lightMode);
+            mainRoot.classList.remove(eTheme.darkMode);
+          }
+        },
+        error: (err: any) => {
+          console.error('Something went wrong');
+        },
+      });
     });
   }
 }
