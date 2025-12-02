@@ -1,7 +1,6 @@
-import { inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { isPlatformBrowser } from '@angular/common';
 
 import { BrowserStorageService } from './storage.service';
 import { APP_SETTINGS } from '../app/app.setting';
@@ -13,26 +12,20 @@ import { AuthService } from './auth.service';
 export class UserService {
   private readonly localStorageRef: string = 'access';
   private readonly backendURl = inject(APP_SETTINGS);
-  private platform = inject(PLATFORM_ID);
-
   private readonly urlServer: string =
     this.backendURl.apiUrl + '/' + this.backendURl.backendVersion;
 
-  private localStr: BrowserStorageService | undefined;
+  private localStr = inject<BrowserStorageService>(BrowserStorageService);
   private authService = inject<AuthService>(AuthService);
 
-  constructor(private http: HttpClient) {
-    if (isPlatformBrowser(this.platform)) {
-      this.localStr = inject<BrowserStorageService>(BrowserStorageService);
-    }
-  }
+  constructor(private http: HttpClient) {}
   getUserData(): Observable<any> {
     const storageValue =
       this.localStr == undefined
         ? null
         : JSON.parse(this.localStr?.get(this.localStorageRef) ?? '');
 
-    this.authService.accessPage.set(storageValue?.acToken || '');
+    this.authService?.accessPage.set(storageValue?.acToken || '');
     return this.http
       .get<any>(this.urlServer + '/pages/' + storageValue.refUuid, {
         headers: {
@@ -89,6 +82,7 @@ export class UserService {
         response = 'Unkown error';
         break;
     }
+    console.error(response);
     return throwError(() => error);
   }
 }

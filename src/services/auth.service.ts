@@ -1,6 +1,6 @@
 import { BehaviorSubject, catchError, map, Observable, tap, throwError } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
-import { inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
+import { afterNextRender, inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { APP_SETTINGS } from '../app/app.setting';
 import { iLog, iuserData, logToken } from '../utils/auth';
@@ -24,10 +24,12 @@ export class AuthService {
   private readonly url: string = this.backendURL.apiUrl + '/' + this.backendURL.backendVersion;
 
   constructor(private http: HttpClient) {
-    if (isPlatformBrowser(this.platform)) {
-      const contentRef: string | null = this.storageService.get(this.tokenRef);
-      contentRef == null ? this.isLoggedIn.next(false) : this.isLoggedIn.next(true);
-    }
+    afterNextRender(() => {
+      if (isPlatformBrowser(this.platform)) {
+        const contentRef: string | null = this.storageService.get(this.tokenRef);
+        contentRef == null ? this.isLoggedIn.next(false) : this.isLoggedIn.next(true);
+      }
+    });
   }
   logUser(logValue: iLog): Observable<logToken> {
     return this.http

@@ -1,6 +1,6 @@
 {
   "name": "art",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -8,7 +8,8 @@
     "build:ssr": "ng build && npm run serve:ssr:art",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:art": "node dist/art/server/server.mjs"
+    "serve:ssr:art": "node dist/art/server/server.mjs",
+    "start:ssr": "node dist/art/server/server.mjs"
   },
   "prettier": {
     "printWidth": 100,

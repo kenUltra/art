@@ -32,18 +32,22 @@ app.use(
     maxAge: '1y',
     index: false,
     redirect: false,
-  }),
+  })
 );
 
 /**
  * Handle all other requests by rendering the Angular application.
  */
 app.use((req, res, next) => {
+  const protocol = req.headers['x-forwarded-proto'] || req.protocol || 'http';
+  const host = req.headers.host;
+  const fullUrl = `${protocol}://${host}${req.originalUrl}`;
+
+  (req as any).url = fullUrl;
+
   angularApp
     .handle(req)
-    .then((response) =>
-      response ? writeResponseToNodeResponse(response, res) : next(),
-    )
+    .then((response) => (response ? writeResponseToNodeResponse(response, res) : next()))
     .catch(next);
 });
 
@@ -52,8 +56,11 @@ app.use((req, res, next) => {
  * The server listens on the port defined by the `PORT` environment variable, or defaults to 4000.
  */
 if (isMainModule(import.meta.url)) {
-  const port = process.env['PORT'] || 4000;
-  app.listen(port, (error) => {
+  const rawPort = process.env['PORT'] || 4000;
+  const port = parseInt(rawPort as string, 10);
+  const host = '0.0.0.0';
+
+  app.listen(port, host, (error) => {
     if (error) {
       throw error;
     }
