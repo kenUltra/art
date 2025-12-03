@@ -6,8 +6,8 @@ import {
   OnDestroy,
   OnInit,
   output,
+  PLATFORM_ID,
   signal,
-  viewChild,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 
@@ -16,6 +16,7 @@ import { ThemeServices } from '../../services/theme.service';
 import { TaskDirective } from '../../directive/task.directive';
 
 import { NotificationCenter } from '../../utils/notification';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'task-app',
@@ -26,6 +27,7 @@ import { NotificationCenter } from '../../utils/notification';
 export class TaskComponent implements OnInit, OnDestroy {
   protected readonly oneSecond: number = 1000;
   protected readonly playIcon: string = taskIconPath;
+  private platform = inject(PLATFORM_ID);
 
   private themeServices = inject<ThemeServices>(ThemeServices);
 
@@ -58,7 +60,9 @@ export class TaskComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy(): void {
-    this.clearTimeout();
+    if (isPlatformBrowser(this.platform)) {
+      this.clearTimeout();
+    }
   }
 
   ngOnInit(): void {
@@ -94,7 +98,7 @@ export class TaskComponent implements OnInit, OnDestroy {
           undefined,
           '/chores'
         );
-        this.updateTimer.emit(0);
+        this.updateTimer.emit(remainingSecond);
       }
 
       this.isCountingDown() ? this.startTimeout() : this.clearTimeout();

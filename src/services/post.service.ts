@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject, catchError, map, Observable, tap, throwError } from 'rxjs';
 
 import { APP_SETTINGS } from '../app/app.setting';
@@ -17,6 +18,7 @@ export interface iPostValue {
 })
 export class PostService {
   private readonly userToken: string = 'access';
+  private platform = inject(PLATFORM_ID);
 
   private readonly userData = inject(BrowserStorageService);
   private readonly backendUrl = inject(APP_SETTINGS).apiUrl;
@@ -30,11 +32,13 @@ export class PostService {
   accessToken = signal<string>('');
 
   constructor(private http: HttpClient) {
-    const storageValue = this.readJSON(this.userData.get(this.userToken) ?? '');
-    const userID: string = storageValue.refUuid;
-    const token: string = storageValue.acToken;
-    this.userUUID.set(userID);
-    this.accessToken.set(token);
+    if (isPlatformBrowser(this.platform)) {
+      const storageValue = this.readJSON(this.userData.get(this.userToken) ?? '');
+      const userID: string = storageValue.refUuid;
+      const token: string = storageValue.acToken;
+      this.userUUID.set(userID);
+      this.accessToken.set(token);
+    }
   }
   getPost(getAllPost: boolean = true): Observable<any> {
     const storage = this.readJSON(this.userData.get(this.userToken) ?? '');

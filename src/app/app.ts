@@ -1,4 +1,4 @@
-import { afterNextRender, Component, inject, signal } from '@angular/core';
+import { afterNextRender, Component, inject, PLATFORM_ID, signal } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { RouterOutlet } from '@angular/router';
 import { ThemeServices } from '../services/theme.service';
@@ -7,6 +7,7 @@ import { FooterComponent } from '../component/footer/footer.component';
 import { HeaderComponent } from '../component/header/header.component';
 
 import { eTheme } from '../utils/listEmun';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -15,17 +16,18 @@ import { eTheme } from '../utils/listEmun';
   styleUrl: './app.css',
 })
 export class App {
+  private platform = inject(PLATFORM_ID);
   protected readonly title = signal('art');
   themeService: ThemeServices = inject<ThemeServices>(ThemeServices);
 
   constructor(private titleApp: Title) {
     this.titleApp.setTitle('Art | home page');
     afterNextRender(() => {
-      const mainRoot = document.querySelector<'html'>('html') as HTMLElement;
       this.themeService.getTheme();
-      Notification.requestPermission((permissionNf: NotificationPermission) => {
-        return permissionNf;
-      });
+    });
+
+    if (isPlatformBrowser(this.platform)) {
+      const mainRoot = document.querySelector<'html'>('html') as HTMLElement;
 
       this.themeService.themeResolver.pipe().subscribe({
         next: (value: eTheme) => {
@@ -41,6 +43,9 @@ export class App {
           console.error('Something went wrong');
         },
       });
-    });
+      Notification.requestPermission((permissionNf: NotificationPermission) => {
+        return permissionNf;
+      });
+    }
   }
 }

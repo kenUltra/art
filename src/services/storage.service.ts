@@ -1,14 +1,17 @@
-import { afterNextRender, Injectable } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BrowserStorageService {
   private storage!: Storage;
+  private platform = inject(PLATFORM_ID);
+
   constructor() {
-    afterNextRender(() => {
+    if (isPlatformBrowser(this.platform)) {
       this.storage = localStorage;
-    });
+    }
   }
   get(key: string): string | null {
     return this.storage.getItem(key);

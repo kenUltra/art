@@ -1,8 +1,9 @@
-import { afterNextRender, inject, Injectable, signal } from '@angular/core';
+import { BehaviorSubject, catchError, map, Observable, tap, throwError } from 'rxjs';
+import { isPlatformBrowser } from '@angular/common';
+import { inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { APP_SETTINGS } from '../app/app.setting';
 import { iLog, iuserData, logToken } from '../utils/auth';
-import { BehaviorSubject, catchError, map, Observable, tap, throwError } from 'rxjs';
 import { BrowserStorageService } from './storage.service';
 
 @Injectable({
@@ -10,6 +11,7 @@ import { BrowserStorageService } from './storage.service';
 })
 export class AuthService {
   private readonly tokenRef: string = 'access';
+  private platform = inject(PLATFORM_ID);
 
   isLoggedIn = new BehaviorSubject<boolean>(false);
 
@@ -22,10 +24,10 @@ export class AuthService {
   private readonly url: string = this.backendURL.apiUrl + '/' + this.backendURL.backendVersion;
 
   constructor(private http: HttpClient) {
-    afterNextRender(() => {
+    if (isPlatformBrowser(this.platform)) {
       const contentRef: string | null = this.storageService.get(this.tokenRef);
       contentRef == null ? this.isLoggedIn.next(false) : this.isLoggedIn.next(true);
-    });
+    }
   }
   logUser(logValue: iLog): Observable<logToken> {
     return this.http
@@ -87,7 +89,7 @@ export class AuthService {
         headers: {
           'Content-type': 'application/json',
         },
-        credentials: 'include'
+        credentials: 'include',
       })
       .pipe(
         tap((value) => {

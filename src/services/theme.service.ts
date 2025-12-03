@@ -1,14 +1,16 @@
-import { afterNextRender, inject, Injectable } from '@angular/core';
+import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 import { eTheme } from '../utils/listEmun';
 import { BrowserStorageService } from './storage.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ThemeServices {
   private readonly storageTheme: string = 'os-scheme';
+  private plaform = inject(PLATFORM_ID);
 
   private osTheme!: MediaQueryList;
 
@@ -17,9 +19,9 @@ export class ThemeServices {
   themeResolver = new BehaviorSubject<eTheme>(eTheme.darkMode);
 
   constructor() {
-    afterNextRender(() => {
+    if (isPlatformBrowser(this.plaform)) {
       this.osTheme = window.matchMedia('(prefers-color-scheme: dark)');
-    });
+    }
   }
 
   getTheme(): string {

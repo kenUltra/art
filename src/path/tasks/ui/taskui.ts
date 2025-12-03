@@ -1,15 +1,17 @@
 import { afterNextRender, Component, inject, OnInit, signal } from '@angular/core';
 import { UpperCasePipe } from '@angular/common';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { Title } from '@angular/platform-browser';
+
 import { TaskServices } from '../../../services/task.service';
 import { itask } from '../../../utils/task';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { TaskComponent } from '../../../component/task/task.component';
 import { ThemeServices } from '../../../services/theme.service';
+import { LoadComponent } from '../../../component/widget/load/load.component';
 
 @Component({
   selector: 'task-ui',
-  imports: [TaskComponent, UpperCasePipe],
+  imports: [TaskComponent, UpperCasePipe, LoadComponent],
   templateUrl: 'taskui.html',
   styleUrl: 'taskui.css',
 })
@@ -44,6 +46,13 @@ export class TaskUI implements OnInit {
     afterNextRender(() => {
       this.taskServices.getAllTask();
       this.themeServies.getTheme();
+      this.taskServices.showCaseTracker.subscribe((value: itask[]) => {
+        if (value.length <= 1) {
+          this.listCtrl.set(['edit task', 'exit']);
+        } else {
+          this.listCtrl.set(this.mainList);
+        }
+      });
     });
   }
   ngOnInit(): void {
@@ -79,6 +88,7 @@ export class TaskUI implements OnInit {
         if (this.taskTracker().length == 0) {
           this.body.set("There's no emegency task. Please reload to see all of your task");
         }
+        this.showItemCtx.set(false);
         break;
       case 'completed task':
         this.taskTracker.update((done: itask[]) => {
@@ -95,6 +105,8 @@ export class TaskUI implements OnInit {
             return newList !== 'completed task';
           });
         });
+        this.showItemCtx.set(false);
+
         break;
       case 'base value':
         this.taskTracker.set(this.taskServices.getAllTask());

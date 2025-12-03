@@ -4,6 +4,7 @@ import {
   computed,
   ElementRef,
   inject,
+  PLATFORM_ID,
   signal,
   viewChild,
 } from '@angular/core';
@@ -18,6 +19,8 @@ import { PlusComponent } from '../../component/widget/plus-icon/plus.component';
 import { ModalComponent } from '../../component/widget/modal/modal.component';
 import { iModal, iModalInput } from '../../utils/modal';
 import { LoadComponent } from '../../component/widget/load/load.component';
+import { isPlatformBrowser } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'user',
@@ -26,6 +29,7 @@ import { LoadComponent } from '../../component/widget/load/load.component';
   styleUrl: 'user.css',
 })
 export class UserPath {
+  private plaform = inject(PLATFORM_ID);
   userService = inject<UserService>(UserService);
   themeService = inject<ThemeServices>(ThemeServices);
   postService = inject<PostService>(PostService);
@@ -50,28 +54,31 @@ export class UserPath {
   serverValue = signal<string>('');
   hasServerMessage = signal<boolean>(false);
 
-  constructor(private title: Title) {
+  constructor(private title: Title, private routePage: Router) {
     this.title.setTitle('loading... | Art inc');
-    afterNextRender({
-      read: () => {
-        const wholeBar = this.mainRefApi()?.nativeElement;
-        wholeBar == undefined ? null : this.reizePage(wholeBar);
-        this.themeService.themeResolver.subscribe((value) => {
-          this.themeSignal.set(value);
-        });
-      },
+    afterNextRender(() => {
+      const wholeBar: HTMLElement | undefined = this.mainRefApi()?.nativeElement;
+      wholeBar == undefined ? null : this.reizePage(wholeBar);
+
+      this.userService.getUserData().subscribe({
+        next: (value: any) => {
+          this.userName.set(value.firstName + ' ' + value.lastName);
+        },
+        error: (err: HttpErrorResponse) => {
+          console.error(err);
+          this.routePage.navigate(['home']);
+        },
+        complete: () => {
+          this.title.setTitle(this.userName() + ' | Art inc');
+        },
+      });
     });
-    this.userService.getUserData().subscribe({
-      next: (value: any) => {
-        this.userName.set(value.firstName + ' ' + value.lastName);
-      },
-      error: (err: HttpErrorResponse) => {
-        console.error(err);
-      },
-      complete: () => {
-        this.title.setTitle(this.userName() + ' | Art inc');
-      },
-    });
+
+    if (isPlatformBrowser(this.plaform)) {
+      this.themeService.themeResolver.subscribe((value) => {
+        this.themeSignal.set(value);
+      });
+    }
   }
   themeClass(): Array<string> {
     return ['entry', this.themeSignal()];

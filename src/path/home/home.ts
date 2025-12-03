@@ -1,7 +1,8 @@
-import { afterNextRender, Component, inject, signal } from '@angular/core';
-import { ThemeServices } from '../../services/theme.service';
-import { UpperCasePipe } from '@angular/common';
+import { afterNextRender, Component, inject, PLATFORM_ID, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { isPlatformBrowser, UpperCasePipe } from '@angular/common';
+
+import { ThemeServices } from '../../services/theme.service';
 import { ButtomDirective } from '../../directive/button.directive';
 
 @Component({
@@ -11,6 +12,7 @@ import { ButtomDirective } from '../../directive/button.directive';
   styleUrl: 'home.css',
 })
 export class HomePage {
+  private platform = inject(PLATFORM_ID);
   themeServices: ThemeServices = inject<ThemeServices>(ThemeServices);
   themSignal = signal<string>('');
 
@@ -19,11 +21,13 @@ export class HomePage {
   constructor(private router: Router) {
     this.timeofDay();
     afterNextRender(() => {
-      this.themeServices.getTheme();
       this.themeServices.themeResolver.subscribe((value) => {
         this.themSignal.set(value);
       });
     });
+    if (isPlatformBrowser(this.platform)) {
+      this.themeServices.getTheme();
+    }
   }
 
   clickTaskUI(): void {

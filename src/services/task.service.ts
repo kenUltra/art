@@ -1,12 +1,21 @@
-import { afterNextRender, inject, Injectable, signal, WritableSignal } from '@angular/core';
+import {
+  afterNextRender,
+  inject,
+  Injectable,
+  PLATFORM_ID,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { itask, iTaskResp } from '../utils/task';
 import { BrowserStorageService } from './storage.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskServices {
+  private plaform = inject(PLATFORM_ID);
   private readonly chore: string = 'chores';
 
   showCaseTracker = new BehaviorSubject<itask[]>([]);
@@ -14,9 +23,9 @@ export class TaskServices {
   browserStorage: BrowserStorageService = inject<BrowserStorageService>(BrowserStorageService);
 
   constructor() {
-    afterNextRender(() => {
+    if (isPlatformBrowser(this.plaform)) {
       this.getAllTask();
-    });
+    }
   }
 
   getAllTask(): Array<itask> {

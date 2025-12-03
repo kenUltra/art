@@ -217,6 +217,7 @@
 <section [class]="themeClass()">
   <div class="main">
     <div class="content">
+      @defer(on idle){
       <div class="entry-stack">
         @if (taskTracker().length !== 0) {
         <div class="leading-ber">
@@ -301,6 +302,13 @@
         </div>
         }
       </div>
+      } @placeholder {
+      <load-art></load-art>
+      } @loading {
+      <load-art></load-art>
+      } @error {
+      <load-art [loadText]="'Error text'"></load-art>
+      }
     </div>
   </div>
 </section>

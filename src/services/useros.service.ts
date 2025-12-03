@@ -1,21 +1,21 @@
-import { afterNextRender, Injectable, signal } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import {  inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserOSService {
+  private platform = inject(PLATFORM_ID);
   private userAgent = signal<string>('');
   private hardwareCPUcore = signal<number | undefined>(undefined);
   private osUser = signal<string>('');
   private userDevice = signal<string>('');
 
   constructor() {
-    afterNextRender({
-      write: () => {
-        this.userAgent.set(window.navigator.userAgent);
-        this.hardwareCPUcore.set(navigator.hardwareConcurrency);
-      },
-    });
+    if (isPlatformBrowser(this.platform)) {
+      this.userAgent.set(window.navigator.userAgent);
+      this.hardwareCPUcore.set(navigator.hardwareConcurrency);
+    }
   }
   getOS(): string {
     if (this.userAgent().match(/Windows/i)) {
